@@ -10,5 +10,5 @@ export function get(obj, path, defaultValue) {
       return defaultValue;
     }
   }
-  return result ?? defaultValue;
+  return result || defaultValue; // ??
 }
