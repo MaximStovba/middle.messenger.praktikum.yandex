@@ -2,10 +2,11 @@
   "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main. Название pull request может быть любое.",
-  "main": "index.js",
+  "default": "index.html",
   "scripts": {
+    "start": "nodemon server.js",
     "dev": "./node_modules/.bin/parcel index.html",
-    "build": "./node_modules/.bin/parcel build index.html"
+    "build": "rm -rf dist && ./node_modules/.bin/parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,10 @@
   },
   "homepage": "https://github.com/MaximStovba/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "nodemon": "^2.0.13",
     "parcel": "^2.0.0-rc.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
