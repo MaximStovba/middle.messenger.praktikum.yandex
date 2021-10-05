@@ -1,7 +1,7 @@
 import { testTempl } from './home.tmpl';
 import { Templator } from '../../utils/templator';
 
-(function Home() {
+(function Render() {
   function handleClick() {
     console.log('запуск handleClick!');
   }
@@ -22,7 +22,6 @@ import { Templator } from '../../utils/templator';
   const root = document.querySelector('.root');
 
   root.innerHTML = `
-    <p>Результат после нажатия виден в консоли:</p>
     ${renderedTemplate}
   `;
   return renderedTemplate;

@@ -1,6 +1,10 @@
 module.exports = {
   plugins: [
-    require('precss'),
+    require('postcss-import'),
+    require('postcss-mixins'),
     require('autoprefixer'),
+    require('precss'),
+    require('postcss-simple-vars'),
+    require('postcss-nested'),
   ]
 }

@@ -1,21 +1,53 @@
+@import '../_vars.css';
+@import '../_type.css';
+
 .home {
-  background-color: #EFF2F7;
-  padding-top: 100vh;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $light-blue;
+  height: 100vh;
 }
 
-.chats {
-  background-color: #000;
-  height: 150px;
+.home__modal {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 280px;
+  height: 280px;
+  background: $white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 }
 
-.text {
-  margin-top: 50px;
-  font-family: 'Open Sans';
+.home__title {
+  font-family: $font-sans;
   font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 36px;
-  /* Темно-синий */
-  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  @mixin heading-4;
+  color: $dark-blue;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.home__links {
+  margin: 0;
+  margin-left: 15px;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.home__link {
+  margin: 0;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 32px;
+  text-decoration-line: underline;
+  @mixin text-link-1;
+  color: $dark-blue;
 }
