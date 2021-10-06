@@ -23,16 +23,11 @@
   },
   "homepage": "https://github.com/MaximStovba/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
     "autoprefixer": "^10.3.7",
     "nodemon": "^2.0.13",
     "parcel": "^2.0.0-rc.0",
-    "postcss": "^8.3.9",
-    "postcss-mixins": "^8.1.0",
-    "postcss-modules": "^3.2.2",
-    "postcss-nested": "^5.0.6",
-    "postcss-simple-vars": "^6.0.3",
-    "postcss-use": "^3.0.0",
-    "precss": "^4.0.0"
+    "postcss": "^8.3.9"
   },
   "dependencies": {
     "esm": "^3.2.25",
