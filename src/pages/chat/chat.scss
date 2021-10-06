@@ -1,0 +1,33 @@
+@import "../vars";
+@import "../type";
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.chat__modal {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 380px;
+  }
+
+.chat__text {
+  @include heading-4;
+  margin-top: 12px;
+  color: $dark-blue;
+  text-align: center;
+}
+
+.chat__link {
+  color: #f89735;
+  @include caption;
+  margin-top: 45px;
+  text-align: center;
+  text-decoration: none;
+}
+
