@@ -40,3 +40,13 @@
   font-size: 12px;
   line-height: 16px;
 }
+
+/* Button Text */
+@mixin button-text {
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}

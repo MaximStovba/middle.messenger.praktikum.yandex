@@ -1,0 +1,46 @@
+@import "../../pages/vars";
+@import "../../pages/type";
+
+.popup__btn-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup__btn {
+  margin: 30px auto 0;
+  padding: 16px 20px;
+  border-width: 0;
+  width: 288px;
+  /* Темно-синий */
+  background: $dark-blue;
+  /* Text */
+  border-radius: 4px;
+  @include button-text;
+  /* Белый */
+  color: $white;
+  text-align: center;
+  height: 48px;
+  pointer-events: initial;
+  cursor: pointer;
+}
+
+.popup__btn:hover {
+  cursor: pointer;
+}
+
+.popup__btn-error {
+  margin: 1px 51px 0px 51px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: $red;
+  text-align: center;
+  visibility: visible;
+}
+
+.popup__btn-error_hidden {
+  visibility: hidden;
+}
