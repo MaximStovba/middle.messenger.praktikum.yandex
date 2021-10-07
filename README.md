@@ -11,10 +11,10 @@
 
 **Netlify**
 
-* [Ссылка на проектную работу] (https://---)
+* [Ссылка на проектную работу] (https://compassionate-volhard-95a8be.netlify.app)
 
 ## Установка
 - `npm run start` — запуск версии для разработчика,
 - `npm run build` — сборка
 
-* [Ссылка на pull request] (https://---)
+* [Ссылка на pull request] (https://---/---)
