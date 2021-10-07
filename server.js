@@ -9,7 +9,7 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(express.static(`${__dirname}/static`));
+app.use(express.static(`${__dirname}/dist`));
 
 // app.engine('html', function (filePath, options, callback) {
 //   // define the template engine
