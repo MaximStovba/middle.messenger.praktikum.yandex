@@ -10,7 +10,7 @@
     "server": "nodemon -r esm server.js",
     "start": "./node_modules/.bin/parcel ./static/index.html -p 3000",
     "dev": "./node_modules/.bin/parcel ./static/index.html",
-    "build": "rm -rf dist && ./node_modules/.bin/parcel build ./static/index.html"
+    "build": "./node_modules/.bin/parcel build ./static/index.html"
   },
   "repository": {
     "type": "git",
