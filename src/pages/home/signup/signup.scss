@@ -1,5 +1,7 @@
 @import "../../vars";
 @import "../../type";
+@import '../../../components/button/button.scss';
+@import '../../../components/input/input.scss';
 
 .signin {
   background: $light-blue;

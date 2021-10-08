@@ -1,0 +1,65 @@
+.profile__input-title {
+  margin: 0;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  color: #909090;
+}
+
+.profile__input-title_fixed {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.profile__input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__text {
+  margin: 0;
+  width: 100%;
+  background: #ffffff;
+  text-align: right;
+  /* Темно-серый */
+  border: 0;
+  border-bottom: 1px solid #09293A;
+  box-sizing: border-box;
+  /* Text */
+  padding: 0 0 6px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  /* Черный */
+  color: #000000;
+  outline: none;
+}
+.profile__text::-moz-placeholder {
+  /* Темно-серый */
+  color: #909090;
+}
+.profile__text::-webkit-input-placeholder {
+  /* Темно-серый */
+  color: #909090;
+}
+
+.profile__text-error {
+  margin: 0 30px 0 30px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 8px;
+  color: #FF2D55;
+  opacity: 0;
+}
+
+.profile__text-error_active {
+  opacity: 1;
+}

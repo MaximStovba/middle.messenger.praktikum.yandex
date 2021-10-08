@@ -1,5 +1,3 @@
-import '../../../components/button/button.scss';
-import '../../../components/input/input.scss';
 import './signup.scss';
 
 import { signupTempl } from './signup.tmpl';

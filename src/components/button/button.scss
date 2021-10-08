@@ -44,3 +44,14 @@
 .popup__btn-error_hidden {
   visibility: hidden;
 }
+
+.popup__text_btn {
+  margin-top: 6px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.popup__text_btn-exit {
+  border: 0;
+  color: #F89735;
+}

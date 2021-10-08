@@ -20,6 +20,16 @@
   line-height: 24px;
 }
 
+@mixin heading-5 {
+  /* Heading 4 */
+  margin: 0;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 /* Text Link 1 */
 @mixin text-link-1 {
   margin: 0;
