@@ -1,4 +1,5 @@
 # Веб-приложение: Чат
+[![Netlify Status](https://api.netlify.com/api/v1/badges/069c7db3-cf78-4d21-ba46-e5cb740969b9/deploy-status)](https://app.netlify.com/sites/inspiring-babbage-e5a8ec/deploys)
 
 ### Обзор
 *Сервис обмена сообщениями в реальном времени,*
@@ -11,7 +12,7 @@
 
 **Netlify**
 
-* [Ссылка на проектную работу] (https://compassionate-volhard-95a8be.netlify.app)
+* [Ссылка на проектную работу] (https://inspiring-babbage-e5a8ec.netlify.app)
 
 ## Установка
 - `npm run start` — запуск версии для разработчика,
