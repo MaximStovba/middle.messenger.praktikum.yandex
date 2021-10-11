@@ -11,12 +11,9 @@
   padding: 16px 20px;
   border-width: 0;
   width: 288px;
-  /* Темно-синий */
   background: $dark-blue;
-  /* Text */
   border-radius: 4px;
   @include button-text;
-  /* Белый */
   color: $white;
   text-align: center;
   height: 48px;
@@ -29,8 +26,8 @@
 }
 
 .popup__btn-error {
-  margin: 1px 51px 0px 51px;
-  font-family: 'Open Sans';
+  margin: 1px 51px 0px;
+  font-family: $font-sans;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -53,5 +50,5 @@
 
 .popup__text_btn-exit {
   border: 0;
-  color: #F89735;
+  color: $orange;
 }

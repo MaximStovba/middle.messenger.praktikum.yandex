@@ -1,11 +1,13 @@
+@import "../../pages/vars";
+
 .profile__input-title {
   margin: 0;
-  font-family: 'Open Sans';
+  font-family: $font-sans;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
-  color: #909090;
+  color: $dark-grey;
 }
 
 .profile__input-title_fixed {
@@ -23,40 +25,35 @@
 .profile__text {
   margin: 0;
   width: 100%;
-  background: #ffffff;
+  background: $white;
   text-align: right;
-  /* Темно-серый */
   border: 0;
-  border-bottom: 1px solid #09293A;
+  border-bottom: 1px solid $dark-blue;
   box-sizing: border-box;
-  /* Text */
   padding: 0 0 6px;
-  font-family: 'Open Sans';
+  font-family: $font-sans;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
-  /* Черный */
-  color: #000000;
+  color: $dark;
   outline: none;
 }
 .profile__text::-moz-placeholder {
-  /* Темно-серый */
-  color: #909090;
+  color: $dark-grey;
 }
 .profile__text::-webkit-input-placeholder {
-  /* Темно-серый */
-  color: #909090;
+  color: $dark-grey;
 }
 
 .profile__text-error {
-  margin: 0 30px 0 30px;
-  font-family: 'Open Sans';
+  margin: 0 30px 0;
+  font-family: $font-sans;
   font-style: normal;
   font-weight: normal;
   font-size: 8px;
   line-height: 8px;
-  color: #FF2D55;
+  color: $red;
   opacity: 0;
 }
 

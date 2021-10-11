@@ -23,7 +23,7 @@
 
 .home__title {
   @include heading-4;
-  color: #09293a;
+  color: $dark-blue;
   margin: 15px 0 10px;
   text-align: center;
 }
@@ -37,5 +37,5 @@
 
 .home__link {
   @include text-link-1;
-  color: #09293a;
+  color: $dark-blue;
 }

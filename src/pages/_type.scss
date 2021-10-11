@@ -60,3 +60,12 @@
   line-height: 16px;
   letter-spacing: 0.5px;
 }
+
+/* Placeholder */
+@mixin placeholder {
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+}
