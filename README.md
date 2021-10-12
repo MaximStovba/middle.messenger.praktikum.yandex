@@ -12,10 +12,10 @@
 
 **Netlify**
 
-* [Ссылка на проектную работу] (https://inspiring-babbage-e5a8ec.netlify.app)
+* [Ссылка на проектную работу](https://inspiring-babbage-e5a8ec.netlify.app)
 
 ## Установка
 - `npm run start` — запуск версии для разработчика,
 - `npm run build` — сборка
 
-* [Ссылка на pull request] (https://github.com/MaximStovba/middle.messenger.praktikum.yandex/pull/1#issue-1021472280)
+* [Ссылка на pull request](https://github.com/MaximStovba/middle.messenger.praktikum.yandex/pull/1#issue-1021472280)
