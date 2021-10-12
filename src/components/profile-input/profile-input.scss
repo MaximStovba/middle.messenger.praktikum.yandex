@@ -1,0 +1,62 @@
+@import "../../pages/vars";
+
+.profile__input-title {
+  margin: 0;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  color: $dark-grey;
+}
+
+.profile__input-title_fixed {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.profile__input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__text {
+  margin: 0;
+  width: 100%;
+  background: $white;
+  text-align: right;
+  border: 0;
+  border-bottom: 1px solid $dark-blue;
+  box-sizing: border-box;
+  padding: 0 0 6px;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: $dark;
+  outline: none;
+}
+.profile__text::-moz-placeholder {
+  color: $dark-grey;
+}
+.profile__text::-webkit-input-placeholder {
+  color: $dark-grey;
+}
+
+.profile__text-error {
+  margin: 0 30px 0;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 8px;
+  color: $red;
+  opacity: 0;
+}
+
+.profile__text-error_active {
+  opacity: 1;
+}
