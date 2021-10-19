@@ -1,6 +1,6 @@
-// signin.tmpl.js
+// signin.tmpl.ts
 
-export const signinTempl = `
+export const signinTempl: string = `
 <section class="signin">
     <div class="signin__modal">
       <p class="signin__title">Вход</p>

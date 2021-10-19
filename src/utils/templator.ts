@@ -2,16 +2,17 @@ import { get } from './get';
 
 export class Templator {
   TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
+  private _template: string;
 
-  constructor(template) {
+  constructor(template: string) {
     this._template = template;
   }
 
-  compile(ctx) {
+  compile(ctx: object) {
     return this._compileTemplate(ctx);
   }
 
-  _compileTemplate = (ctx) => {
+  _compileTemplate = (ctx: object) => {
     let tmpl = this._template;
     let dataArray = null;
     const regExp = this.TEMPLATE_REGEXP;

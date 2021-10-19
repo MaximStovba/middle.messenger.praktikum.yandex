@@ -1,16 +1,18 @@
-import './signup.scss';
+import './profile-date.scss';
 
-import { signupTempl } from './signup.tmpl';
+import { profileDateTempl } from './profile-date.tmpl';
 import { Templator } from '../../../utils/templator';
 
 const context = {
-  title: 'signin',
+  title: 'profile',
 };
 
-const tmpl = new Templator(signupTempl);
+const tmpl = new Templator(profileDateTempl);
 const renderedTemplate = tmpl.compile(context);
 const root = document.querySelector('.root');
 
-root.innerHTML = `
+if (root) {
+  root.innerHTML = `
   ${renderedTemplate}
 `;
+}

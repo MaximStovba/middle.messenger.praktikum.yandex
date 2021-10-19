@@ -14,6 +14,8 @@ const tmpl = new Templator(signinTempl);
 const renderedTemplate = tmpl.compile(context);
 const root = document.querySelector('.root');
 
-root.innerHTML = `
+if (root) {
+  root.innerHTML = `
   ${renderedTemplate}
 `;
+}

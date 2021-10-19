@@ -1,6 +1,6 @@
-// password.tmpl.js
+// password.tmpl.ts
 
-export const passwordTempl = `
+export const passwordTempl: string = `
 <section class="profile">
   <div class="profile__block-left">
     <a href="/"><button type='button' class='profile_btn-back'></button></a>
@@ -11,7 +11,7 @@ export const passwordTempl = `
         <button type='button' class='profile_btn-avatar'></button>
         <p class='profile_name'>Иван</p>
       </div>
-      
+
       <div class="profile__password">
         <div class="profile__input">
           <span

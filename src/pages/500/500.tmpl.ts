@@ -1,6 +1,6 @@
-// err500.tmpl.js
+// err500.tmpl.ts
 
-export const err500Templ = `
+export const err500Templ: string = `
 <section class="page-500">
   <div class="page-500__modal">
     <h2 class="page-500__title">5**</h2>

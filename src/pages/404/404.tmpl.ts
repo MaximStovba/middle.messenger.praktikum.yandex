@@ -1,6 +1,6 @@
-// err404.tmpl.js
+// err404.tmpl.ts
 
-export const err404Templ = `
+export const err404Templ: string = `
 <section class="page-404">
   <div class="page-404__modal">
     <h2 class="page-404__title">404</h2>

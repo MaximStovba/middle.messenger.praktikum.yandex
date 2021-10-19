@@ -1,6 +1,6 @@
-// profile.tmpl.js
+// profile-date.tmpl.js
 
-export const profileTempl = `
+export const profileDateTempl: string = `
 <section class="profile">
   <div class="profile__block-left">
     <a href="/"><button type='button' class='profile_btn-back'></button></a>
@@ -138,12 +138,9 @@ export const profileTempl = `
           </span>
         </div>
       </div>
-
-      <div class="profile__change">
-        <button type='button' class='profile__text popup__text_btn'>Изменить данные</button>
-        <button type='button' class='profile__text popup__text_btn'>Изменить пароль</button>
-        <button type='button' class='profile__text popup__text_btn popup__text_btn-exit'>Выйти</button>
-      </div>
+      <button type='button' class='popup__btn'>
+        Сохранить
+      </button>
     </div>
   </div>
 </section>

@@ -12,6 +12,8 @@ const tmpl = new Templator(err404Templ);
 const renderedTemplate = tmpl.compile(context);
 const root = document.querySelector('.root');
 
-root.innerHTML = `
+if (root) {
+  root.innerHTML = `
   ${renderedTemplate}
 `;
+}

@@ -1,17 +1,19 @@
-import './500.scss';
-import './500.tmpl';
+import './chat.scss';
+import './chat.tmpl';
 
-import { err500Templ } from './500.tmpl';
+import { chatTempl } from './chat.tmpl';
 import { Templator } from '../../utils/templator';
 
 const context = {
-  title: '500',
+  title: 'Chat',
 };
 
-const tmpl = new Templator(err500Templ);
+const tmpl = new Templator(chatTempl);
 const renderedTemplate = tmpl.compile(context);
 const root = document.querySelector('.root');
 
-root.innerHTML = `
+if (root) {
+  root.innerHTML = `
   ${renderedTemplate}
 `;
+}

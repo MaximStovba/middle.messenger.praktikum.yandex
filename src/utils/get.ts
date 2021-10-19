@@ -7,7 +7,7 @@
 // "defaultValue" - значение по умолчанию, возвращается, если возвращяемое значение
 // не определено (по умолчанию undefined, можно задать другое)
 
-export function get(obj, path, defaultValue) {
+export function get(obj: object, path: string, defaultValue?: string): any {
   const keys = path.split('.');
   let result = obj;
   for (let key of keys) {
