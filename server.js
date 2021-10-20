@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // server.js
 
 import express from 'express';

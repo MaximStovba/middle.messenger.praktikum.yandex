@@ -13,7 +13,9 @@
   width: 288px;
   background: $dark-blue;
   border-radius: 4px;
+
   @include button-text;
+
   color: $white;
   text-align: center;
   height: 48px;
@@ -26,7 +28,7 @@
 }
 
 .popup__btn-error {
-  margin: 1px 51px 0px;
+  margin: 1px 51px 0;
   font-family: $font-sans;
   font-style: normal;
   font-weight: normal;
@@ -34,7 +36,6 @@
   line-height: 16px;
   text-align: center;
   color: $red;
-  text-align: center;
   visibility: visible;
 }
 

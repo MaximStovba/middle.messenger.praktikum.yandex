@@ -39,9 +39,11 @@
   color: $dark;
   outline: none;
 }
+
 .profile__text::-moz-placeholder {
   color: $dark-grey;
 }
+
 .profile__text::-webkit-input-placeholder {
   color: $dark-grey;
 }

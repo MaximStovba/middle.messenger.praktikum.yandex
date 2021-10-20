@@ -14,16 +14,18 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 180px;
-  }
+}
 
 .page-404__title {
   @include heading-2;
+
   color: $dark-blue;
   text-align: center;
 }
 
 .page-404__text {
   @include heading-4;
+
   margin-top: 12px;
   color: $dark-blue;
   text-align: center;
@@ -31,7 +33,9 @@
 
 .page-404__link {
   color: $orange;
+
   @include caption;
+
   margin-top: 45px;
   text-align: center;
   text-decoration: none;

@@ -1,6 +1,6 @@
 // profile-date.tmpl.js
 
-export const profileDateTempl: string = `
+export const profileDateTempl = `
 <section class="profile">
   <div class="profile__block-left">
     <a href="/"><button type='button' class='profile_btn-back'></button></a>

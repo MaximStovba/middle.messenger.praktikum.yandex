@@ -14,13 +14,17 @@
   border-bottom: 1px solid $dark-blue;
   box-sizing: border-box;
   padding: 0 0 6px;
+
   @include placeholder;
+
   color: $dark;
   outline: none;
 }
+
 .popup__text::-moz-placeholder {
   color: $dark-grey;
 }
+
 .popup__text::-webkit-input-placeholder {
   color: $dark-grey;
 }

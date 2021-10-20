@@ -1,6 +1,6 @@
 // profile.tmpl.ts
 
-export const profileTempl: string = `
+export const profileTempl = `
 <section class="profile">
   <div class="profile__block-left">
     <a href="/"><button type='button' class='profile_btn-back'></button></a>

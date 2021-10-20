@@ -1,6 +1,6 @@
 // signup.tmpl.js
 
-export const signupTempl: string = `
+export const signupTempl = `
 <section class="signin">
     <div class="signin__modal">
       <p class="signin__title">Регистрация</p>

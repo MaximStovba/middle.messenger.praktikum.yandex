@@ -1,6 +1,6 @@
 // home.tmpl.ts
 
-export const homeTempl: string = `
+export const homeTempl = `
 <section class="home">
   <div class="home__modal">
     <p class="home__title">{{title}}</p>
