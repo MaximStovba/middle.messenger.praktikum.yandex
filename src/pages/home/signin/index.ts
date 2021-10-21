@@ -1,21 +1,35 @@
 import './signin.scss';
-import '../../../components/button/button.scss';
 import '../../../components/input/input.scss';
-
 
 import { signinTempl } from './signin.tmpl';
 import { Templator } from '../../../utils/templator';
+import { Block } from '../../../utils/block';
+import { Button } from '../../../components/button/button';
 
-const context = {
-  title: 'signin',
-};
+export class Signin extends Block {
+  constructor() {
+    super('div', {
+      name: 'Вход!)',
+      button: new Button({
+        text: 'Войти!)',
+      }),
+    });
+  }
 
-const tmpl = new Templator(signinTempl);
-const renderedTemplate = tmpl.compile(context);
+  render() {
+    const tmpl = new Templator(signinTempl);
+    return tmpl.compile({
+      pageName: this.props.name,
+      button: this.props.button.render(),
+    });
+  }
+}
+
+const signin = new Signin();
 const root = document.querySelector('.root');
 
 if (root) {
   root.innerHTML = `
-  ${renderedTemplate}
+  ${signin.render()}
 `;
 }

@@ -3,7 +3,7 @@
 export const signupTempl = `
 <section class="signin">
     <div class="signin__modal">
-      <p class="signin__title">Регистрация</p>
+      <p class="signin__title">{{ pageName }}</p>
       <div class='popup__btn-container'>
         <span class='popup__btn-error popup__btn-error_hidden'>
           Не верный пароль!
@@ -131,10 +131,7 @@ export const signupTempl = `
             Неверный пароль
           </span>
         </div>
-
-        <button type='button' class='popup__btn'>
-          Зарегистрироваться
-        </button>
+        {{ button }}
       </div>
       <a class="signin__link" href="/">Войти</a>
     </div>

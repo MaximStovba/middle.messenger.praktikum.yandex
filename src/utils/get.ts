@@ -1,12 +1,10 @@
-// утилита "get"
-// возвращяет значение определенного свойства объекта
-// на вход принимает:
-// "obj" (первый параметр) - объект, в котором будет осуществляться поиск
-// "path" (второй параметр) - путь для обращения к свойствам, используется
-// запись «через точку» (например, user.name)
-// "defaultValue" - значение по умолчанию, возвращается, если возвращяемое значение
-// не определено (по умолчанию undefined, можно задать другое)
-
+/** JSDoc
+   * @param {Object} obj
+   * @param {string} path
+   * @param {string} defaultValue
+   *
+   * @returns {any}
+   */
 export function get(obj: object, path: string, defaultValue?: string): unknown {
   const keys = path.split('.');
   let result = obj;

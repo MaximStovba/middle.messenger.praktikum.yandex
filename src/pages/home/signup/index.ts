@@ -2,17 +2,33 @@ import './signup.scss';
 
 import { signupTempl } from './signup.tmpl';
 import { Templator } from '../../../utils/templator';
+import { Block } from '../../../utils/block';
+import { Button } from '../../../components/button/button';
 
-const context = {
-  title: 'signin',
-};
+export class Signup extends Block {
+  constructor() {
+    super('div', {
+      name: 'Регистрация!)',
+      button: new Button({
+        text: 'Зарегистрироваться!)',
+      }),
+    });
+  }
 
-const tmpl = new Templator(signupTempl);
-const renderedTemplate = tmpl.compile(context);
+  render() {
+    const tmpl = new Templator(signupTempl);
+    return tmpl.compile({
+      pageName: this.props.name,
+      button: this.props.button.render(),
+    });
+  }
+}
+
+const signup = new Signup();
 const root = document.querySelector('.root');
 
 if (root) {
   root.innerHTML = `
-  ${renderedTemplate}
+  ${signup.render()}
 `;
 }
