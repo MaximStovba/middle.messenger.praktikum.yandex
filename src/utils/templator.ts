@@ -1,38 +1,40 @@
-import { get } from './get';
+import { get } from "./get";
+
+export type Context = Record<string, any>;
 
 export class Templator {
-  TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
+  static TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
   private _template: string;
 
   constructor(template: string) {
     this._template = template;
   }
 
-  compile(ctx: object) {
+  public compile(ctx: Context): string {
     return this._compileTemplate(ctx);
   }
 
-  _compileTemplate = (ctx: object) => {
+  private _compileTemplate(ctx: Context): string {
     let tmpl = this._template;
     let dataArray = null;
-    const regExp = this.TEMPLATE_REGEXP;
-
+    const regExp = Templator.TEMPLATE_REGEXP;
+    /*eslint no-cond-assign: "error"*/
     while ((dataArray = regExp.exec(this._template)) !== null) {
       if (dataArray[1]) {
         const tmplValue = dataArray[1].trim();
-        const data = get(ctx, tmplValue);
+        const data: any = get(ctx, tmplValue);
 
-        if (typeof data === 'function') {
+        if (typeof data === "function") {
           tmpl = tmpl.replace(
-            new RegExp(dataArray[0], 'gi'),
+            new RegExp(dataArray[0], "gi"),
             `${dataArray[1].trim()}()`
           );
           continue;
         }
 
-        tmpl = tmpl.replace(new RegExp(dataArray[0], 'gi'), data);
+        tmpl = tmpl.replace(new RegExp(dataArray[0], "gi"), data);
       }
     }
     return tmpl;
-  };
+  }
 }

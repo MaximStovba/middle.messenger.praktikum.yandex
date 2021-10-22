@@ -1,123 +1,73 @@
-import {EventBus} from './event-bus';
+import { EventBus } from "./event-bus";
+
+export type Property = Record<string, any>;
 
 export class Block {
+  eventBus: () => EventBus;
+
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_CDU: "flow:component-did-update",
     FLOW_RENDER: "flow:render"
   };
+  _tagName: string;
+  _element: HTMLElement | null = null;
+  props: Property;
+  tamplate: string | undefined;
 
-  _element = null;
-  _meta: any = null;
-  props: any;
-  eventBus: () => EventBus;
-
-  /** JSDoc
-   * @param {string} tagName
-   * @param {Object} props
-   *
-   * @returns {void}
-   */
-  constructor(tagName: string = "div", props: object = {}): void {
+  constructor(tagName = "div", props: Property, tamplate?: string) {
     const eventBus = new EventBus();
-    this._meta = {
-      tagName,
-      props
-    };
-
-    this.props = this._makePropsProxy(props);
-
     this.eventBus = () => eventBus;
-
     this._registerEvents(eventBus);
-    eventBus.emit(Block.EVENTS.INIT);
+    this._tagName = tagName;
+    this.props = this._makePropsProxy(props);
+    this.tamplate = tamplate;
   }
 
-  _registerEvents(eventBus: EventBus) {
+  private _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+  private _createDocumentElement(tagName: string) {
+    return document.createElement(tagName);
   }
 
-  init() {
-    this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  private _createResources() {
+    this._element = this._createDocumentElement(this._tagName);
   }
 
-  _componentDidMount() {
+  private _componentDidMount() {
     this.componentDidMount();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  componentDidMount() {}
-
-  _componentDidUpdate(oldProps: any, newProps: any) {
+  private _componentDidUpdate(oldProps: Property, newProps: Property) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
     }
-    this._render();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps: any, newProps: any) {
-    return true;
-  }
-
-  setProps = (nextProps: any) => {
-    if (!nextProps) {
-      return;
-    }
-
-    Object.assign(this.props, nextProps);
-  };
-
-  get element() {
-    return this._element;
-  }
-
-  _render() {
+  private _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
+    this._element && this._element.append(block);
   }
 
-	// Может переопределять пользователь, необязательно трогать
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  render() {}
-
-  getContent() {
-    return this.element;
-  }
-
-  _makePropsProxy(props: {}) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    const self = this;
-
+  private _makePropsProxy(props: Property) {
     return new Proxy(props, {
-      get(target, prop) {
+      get(target, prop: string) {
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set(target, prop: string, value) {
         target[prop] = value;
 
-        // Запускаем обновление компоненты
-        // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
         return true;
       },
       deleteProperty() {
@@ -126,16 +76,34 @@ export class Block {
     });
   }
 
-  _createDocumentElement(tagName: any) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+  public init() {
+    this._createResources();
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  show() {
-    this.getContent().style.display = "block";
+  public getContent() {
+    return this._element;
   }
 
-  hide() {
-    this.getContent().style.display = "none";
+
+  public componentDidMount() {
+    return true;
   }
+
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  public componentDidUpdate(_oldProps: Property, _newProps: Property) {
+    return true;
+  }
+
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  public render(): any {}
+
+  public setProps = (nextProps: Property) => {
+    if (!nextProps) {
+      return;
+    }
+
+    Object.assign(this.props, nextProps);
+  };
 }

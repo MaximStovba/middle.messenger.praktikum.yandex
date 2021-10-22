@@ -1,12 +1,5 @@
-/** JSDoc
-   * @param {Object} obj
-   * @param {string} path
-   * @param {string} defaultValue
-   *
-   * @returns {any}
-   */
-export function get(obj: object, path: string, defaultValue?: string): unknown {
-  const keys = path.split('.');
+export function get(obj: any, path: string, defaultValue?: any): unknown {
+  const keys = path.split(".");
   let result = obj;
   for (const key of keys) {
     result = result[key];
@@ -15,5 +8,5 @@ export function get(obj: object, path: string, defaultValue?: string): unknown {
       return defaultValue;
     }
   }
-  return result || defaultValue;
+  return result ?? defaultValue;
 }

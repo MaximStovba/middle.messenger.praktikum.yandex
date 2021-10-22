@@ -1,11 +1,11 @@
 export class EventBus {
-  listeners: any;
+  public listeners: { [key: string]: ((...args: []) => void)[] };
 
   constructor() {
     this.listeners = {};
   }
 
-  on(event: string, callback: () => void) {
+  on(event: string, callback: (...args: []) => void): void {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -13,17 +13,17 @@ export class EventBus {
     this.listeners[event].push(callback);
   }
 
-  off(event: string, callback: () => void) {
+  off(event: string, callback: (...args: []) => void): void {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
 
     this.listeners[event] = this.listeners[event].filter(
-      (listener: any) => listener !== callback
+      (listener) => listener !== callback
     );
   }
 
-  emit(event: string, ...args: []) {
+  emit(event: string, ...args: []): void {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }

@@ -4,9 +4,11 @@ import { buttonTempl } from './button.tmpl';
 import { Templator } from '../../utils/templator';
 import { Block } from "../../utils/block";
 
+export type Property = Record<string, any>;
+
 export class Button extends Block {
-  constructor(props: object | undefined) {
-    super('div', props);
+  constructor(props: Property) {
+    super('button', props);
   }
 
   render() {
