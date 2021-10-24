@@ -1,49 +1,67 @@
 import './signin.scss';
-import '../../../components/input/input.scss';
-
-import { signinTempl } from './signin.tmpl';
+import { render } from '../../../utils/render';
 import { Templator } from '../../../utils/templator';
+import { signinTempl } from './signin.tmpl';
 import { Block } from '../../../utils/block';
-import { Button } from '../../../components/button/button';
+import { button } from '../../../components/button/button';
 import { Input } from '../../../components/input/input';
 
-export class Signin extends Block {
-  constructor() {
-    super('div', {
-      name: 'Вход',
-      login: new Input({
-        title: 'Логин',
-        name: 'login',
-        placeholder: 'Введите логин',
-        validationMsg: 'Неверный логин!',
-      }),
-      password: new Input({
-        title: 'Пароль',
-        name: 'password',
-        placeholder: 'Введите пароль',
-        validationMsg: 'Неверный пароль!',
-      }),
-      button: new Button({
-        text: 'Войти!',
-      }),
-    });
+function click() {
+  console.log('Click');
+}
+
+class Signin extends Block {
+  constructor(props: {} | undefined) {
+    super("section", props, "signin");
   }
 
   render() {
     const tmpl = new Templator(signinTempl);
-    return tmpl.compile({
-      pageName: this.props.name,
+
+    const str = tmpl.compile({
+      name: this.props.name,
       login: this.props.login.render(),
       password: this.props.password.render(),
       button: this.props.button.render(),
     });
+
+    return str;
   }
 }
 
-const signin = new Signin();
-const content = signin.render();
-const root = document.querySelector('.root');
+const signin = new Signin({
+  name: 'Вход',
+  login: new Input({
+    title: 'Логин',
+    name: 'login',
+    placeholder: 'Введите логин',
+    validationMsg: 'Неверный логин!',
+  }),
+  password: new Input({
+    title: 'Пароль',
+    name: 'password',
+    placeholder: 'Введите пароль',
+    validationMsg: 'Неверный пароль!',
+  }),
+  // button: new Button({
+  //   text: 'Click me!',
+  //   events: {
+  //     click: handleClick,
+  //   },
+  // }),
+  button,
+});
 
-if (root) {
-  root.innerHTML = content;
-}
+render(".root", signin);
+
+button.setProps({
+  events: {
+    click: click,
+  },
+})
+
+setTimeout(() => {
+  signin.setProps({
+    name: 'Нужна регистрация',
+  });
+}, 1000);

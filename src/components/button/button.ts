@@ -8,13 +8,18 @@ export type Property = Record<string, any>;
 
 export class Button extends Block {
   constructor(props: Property) {
-    super('button', props);
+    super("button", props);
   }
 
   render() {
     const tmpl = new Templator(buttonTempl);
-    return tmpl.compile({
+    const str = tmpl.compile({
       text: this.props.text,
     });
+    return str;
   }
 }
+
+export const button = new Button({
+  text: 'Click me!',
+});
