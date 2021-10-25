@@ -3,11 +3,11 @@ import { render } from '../../../utils/render';
 import { Templator } from '../../../utils/templator';
 import { signinTempl } from './signin.tmpl';
 import { Block } from '../../../utils/block';
-import { button } from '../../../components/button/button';
+import { Button } from '../../../components/button/button';
 import { Input } from '../../../components/input/input';
 
-function click() {
-  console.log('Click');
+function hclick(events: Event) {
+  console.log(events);
 }
 
 class Signin extends Block {
@@ -20,9 +20,9 @@ class Signin extends Block {
 
     const str = tmpl.compile({
       name: this.props.name,
-      login: this.props.login.render(),
-      password: this.props.password.render(),
-      button: this.props.button.render(),
+      login: this.props.login.render().outerHTML,
+      password: this.props.password.render().outerHTML,
+      button: this.props.button.render().outerHTML,
     });
 
     return str;
@@ -43,22 +43,21 @@ const signin = new Signin({
     placeholder: 'Введите пароль',
     validationMsg: 'Неверный пароль!',
   }),
-  // button: new Button({
-  //   text: 'Click me!',
-  //   events: {
-  //     click: handleClick,
-  //   },
-  // }),
-  button,
+  button: new Button({
+    text: 'Click me!;)',
+    events: {
+      click: hclick,
+    },
+  }),
 });
 
 render(".root", signin);
 
-button.setProps({
-  events: {
-    click: click,
-  },
-})
+// button.setProps({
+//   events: {
+//     click: click,
+//   },
+// })
 
 setTimeout(() => {
   signin.setProps({

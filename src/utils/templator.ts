@@ -1,4 +1,5 @@
 import { get } from "./get";
+import { stringToHTML } from "./stringToHTML";
 
 export type Context = Record<string, any>;
 
@@ -10,8 +11,8 @@ export class Templator {
     this._template = template;
   }
 
-  public compile(ctx: Context): string {
-    return this._compileTemplate(ctx);
+  public compile(ctx: Context): HTMLElement {
+    return stringToHTML(this._compileTemplate(ctx));
   }
 
   private _compileTemplate(ctx: Context): string {

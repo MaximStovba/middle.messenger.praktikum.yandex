@@ -8,7 +8,7 @@ export type Property = Record<string, any>;
 
 export class Button extends Block {
   constructor(props: Property) {
-    super("button", props);
+    super("div", props);
   }
 
   render() {
@@ -19,7 +19,3 @@ export class Button extends Block {
     return str;
   }
 }
-
-export const button = new Button({
-  text: 'Click me!',
-});
