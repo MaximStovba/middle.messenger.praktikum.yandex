@@ -1,4 +1,5 @@
 import { EventBus } from "./event-bus";
+import { v4 as makeUUID } from "uuid";
 
 export type Property = Record<string, any>;
 
@@ -20,6 +21,8 @@ export class Block {
 
   private _meta: TMeta;
 
+  _id: string;
+
   protected props: any;
 
   private eventBus: () => EventBus;
@@ -32,8 +35,9 @@ export class Block {
       className,
     };
 
+    this._id = makeUUID();
 
-    this.props = this._makePropsProxy(props);
+    this.props = this._makePropsProxy({ ...props, __id: this._id });
 
     this.eventBus = () => eventBus;
 
@@ -89,21 +93,43 @@ export class Block {
     return this._element;
   }
 
+  _bindEvent(e: Event, eventFn: Function) {
+    const target = e.target as HTMLElement;
+    const dataId = target.getAttribute("data-id");
+    if (target != null) {
+      if (dataId === this._id) {
+        // e.preventDefault();
+        eventFn.bind(this);
+        eventFn(e);
+      }
+    }
+  }
+
   _addEvents() {
-    const self = this;
     const {events = {}} = this.props;
 
-    Object.keys(events).forEach(eventName => {
-      self._element.addEventListener(eventName, events[eventName]);
+    Object.keys(events).forEach((eventName) => {
+      document.querySelector(".root")?.addEventListener(
+        eventName,
+        (evt) => {
+          this._bindEvent(evt, events[eventName])
+        },
+        true
+      );
     });
   }
 
   _removeEvents() {
-    // const {events = {}} = this.props;
+    const { events = {} } = this.props;
 
-    // Object.keys(events).forEach(eventName => {
-    //   this._element.removeEventListener(eventName, events[eventName]);
-    // });
+    Object.keys(events).forEach((eventName) => {
+      document.querySelector(".root")?.removeEventListener(
+        eventName,
+        (evt) => {
+          this._bindEvent(evt, events[eventName])
+        },
+      );
+    });
   }
 
   _render() {
@@ -126,7 +152,7 @@ export class Block {
   render() {
     const { tagName } = this._meta;
     const element = document.createElement(tagName);
-    return element
+    return element;
   }
 
   getContent() {
@@ -158,6 +184,7 @@ export class Block {
 
   _createDocumentElement(tagName: string, className?: string) {
     const element = document.createElement(tagName);
+    element.setAttribute("data-id", this._id);
     if (className) {
       element.classList.add(className);
     }

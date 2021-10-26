@@ -3,64 +3,67 @@ import { render } from '../../../utils/render';
 import { Templator } from '../../../utils/templator';
 import { signinTempl } from './signin.tmpl';
 import { Block } from '../../../utils/block';
-import { Button } from '../../../components/button/button';
 import { Input } from '../../../components/input/input';
+import { Button } from '../../../components/button/button';
 
-function hclick(events: Event) {
-  console.log(events);
+export function handleClick() {
+  console.log('btn click');
 }
 
-class Signin extends Block {
-  constructor(props: {} | undefined) {
-    super("section", props, "signin");
+export const login = new Input({
+  title: 'Логин',
+  name: 'login',
+  placeholder: 'Введите логин',
+  validationMsg: 'Неверный логин!',
+})
+
+export const password = new Input({
+  title: 'Пароль',
+  name: 'password',
+  placeholder: 'Введите пароль',
+  validationMsg: 'Неверный пароль!',
+})
+
+export const button = new Button({
+  text: 'Войти',
+  events: {
+    click: handleClick,
+  },
+})
+
+export class Signin extends Block {
+  constructor() {
+    super(
+      'section',
+      {
+        name: 'Вход',
+        login,
+        password,
+        button,
+      },
+      'signin'
+    );
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setProps({
+        name: 'Signin',
+      });
+    }, 1000);
   }
 
   render() {
     const tmpl = new Templator(signinTempl);
-
     const str = tmpl.compile({
       name: this.props.name,
-      login: this.props.login.render().outerHTML,
-      password: this.props.password.render().outerHTML,
-      button: this.props.button.render().outerHTML,
+      login: this.props.login.getContent().outerHTML,
+      password: this.props.password.getContent().outerHTML,
+      button: this.props.button.getContent().outerHTML,
     });
-
     return str;
   }
 }
 
-const signin = new Signin({
-  name: 'Вход',
-  login: new Input({
-    title: 'Логин',
-    name: 'login',
-    placeholder: 'Введите логин',
-    validationMsg: 'Неверный логин!',
-  }),
-  password: new Input({
-    title: 'Пароль',
-    name: 'password',
-    placeholder: 'Введите пароль',
-    validationMsg: 'Неверный пароль!',
-  }),
-  button: new Button({
-    text: 'Click me!;)',
-    events: {
-      click: hclick,
-    },
-  }),
-});
-
-render(".root", signin);
-
-// button.setProps({
-//   events: {
-//     click: click,
-//   },
-// })
-
-setTimeout(() => {
-  signin.setProps({
-    name: 'Нужна регистрация',
-  });
-}, 1000);
+const signin = new Signin();
+render('.root', signin);
