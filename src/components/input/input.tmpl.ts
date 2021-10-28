@@ -1,21 +1,20 @@
 // input.tmpl.ts
 
 export const inputTempl = `
-  <span
+  <p
     class="popup__input-title popup__input-title_active"/>
     {{title}}
-  </span>
+  </p>
   <input
     name="{{name}}"
-    type="input"
+    type="{{type}}"
     placeholder="{{placeholder}}"
+    id="{{id}}"
+    data-id="{{internalId}}"
     class="popup__text"
-    minLength=3
-    maxLength=50
-    required=true
   />
   <span
-    class='popup__text-error popup__text-error_active' />
+    class='popup__text-error' />
     {{validationMsg}}
   </span>
 `;

@@ -7,7 +7,7 @@ export type TMeta = {
   tagName: string;
   props: Property;
   className?: string;
-}
+};
 
 export class Block {
   static EVENTS = {
@@ -32,7 +32,7 @@ export class Block {
     this._meta = {
       tagName,
       props,
-      className,
+      className
     };
 
     this._id = makeUUID();
@@ -98,7 +98,7 @@ export class Block {
     const dataId = target.getAttribute("data-id");
     if (target != null) {
       if (dataId === this._id) {
-        // e.preventDefault();
+        e.preventDefault();
         eventFn.bind(this);
         eventFn(e);
       }
@@ -106,13 +106,13 @@ export class Block {
   }
 
   _addEvents() {
-    const {events = {}} = this.props;
+    const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
       document.querySelector(".root")?.addEventListener(
         eventName,
         (evt) => {
-          this._bindEvent(evt, events[eventName])
+          this._bindEvent(evt, events[eventName]);
         },
         true
       );
@@ -123,12 +123,9 @@ export class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      document.querySelector(".root")?.removeEventListener(
-        eventName,
-        (evt) => {
-          this._bindEvent(evt, events[eventName])
-        },
-      );
+      document.querySelector(".root")?.removeEventListener(eventName, (evt) => {
+        this._bindEvent(evt, events[eventName]);
+      });
     });
   }
 
@@ -149,7 +146,7 @@ export class Block {
     this._addEvents();
   }
 
-  render() {
+  render(): ChildNode | null {
     const { tagName } = this._meta;
     const element = document.createElement(tagName);
     return element;
@@ -159,8 +156,16 @@ export class Block {
     return this.element;
   }
 
+  getContentAsString() {
+    return this.element.outerHTML;
+  }
+
   getProps() {
     return this.props;
+  }
+
+  getInternalID() {
+    return this._id;
   }
 
   _makePropsProxy(props: Property) {
@@ -173,7 +178,7 @@ export class Block {
       set(target, prop: string, value: unknown) {
         target[prop] = value;
 
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
         return true;
       },
       deleteProperty() {
@@ -183,8 +188,11 @@ export class Block {
   }
 
   _createDocumentElement(tagName: string, className?: string) {
+    const { settings } = this.props;
     const element = document.createElement(tagName);
-    element.setAttribute("data-id", this._id);
+    if (settings && settings.withInternalID) {
+      element.setAttribute("data-id", this._id);
+    }
     if (className) {
       element.classList.add(className);
     }
