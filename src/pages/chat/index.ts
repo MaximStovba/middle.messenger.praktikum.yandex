@@ -1,19 +1,22 @@
 import './chat.scss';
-import './chat.tmpl';
-
-import { chatTempl } from './chat.tmpl';
+import { render } from '../../utils/render';
 import { Templator } from '../../utils/templator';
+import { chatTempl } from './chat.tmpl';
+import { Block } from '../../utils/block';
 
-const context = {
-  title: 'Chat',
-};
+export class Chat extends Block {
+  constructor(props: Record<string, any>) {
+    super("div", props);
+  }
 
-const tmpl = new Templator(chatTempl);
-const renderedTemplate = tmpl.compile(context);
-const root = document.querySelector('.root');
-
-if (root) {
-  root.innerHTML = `
-  ${renderedTemplate}
-`;
+  render() {
+    const tmpl = new Templator(chatTempl);
+    const str = tmpl.compile({});
+    return str.firstChild;
+  }
 }
+
+const chat = new Chat({});
+render('.root', chat);
+
+

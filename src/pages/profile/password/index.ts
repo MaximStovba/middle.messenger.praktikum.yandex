@@ -1,18 +1,20 @@
 import './password.scss';
-
-import { passwordTempl } from './password.tmpl';
+import { render } from '../../../utils/render';
 import { Templator } from '../../../utils/templator';
+import { passwordTempl } from './password.tmpl';
+import { Block } from '../../../utils/block';
 
-const context = {
-  title: 'profile',
-};
+export class Password extends Block {
+  constructor(props: Record<string, any>) {
+    super("div", props);
+  }
 
-const tmpl = new Templator(passwordTempl);
-const renderedTemplate = tmpl.compile(context);
-const root = document.querySelector('.root');
-
-if (root) {
-  root.innerHTML = `
-  ${renderedTemplate}
-`;
+  render() {
+    const tmpl = new Templator(passwordTempl);
+    const str = tmpl.compile({});
+    return str.firstChild;
+  }
 }
+
+const password = new Password({});
+render('.root', password);

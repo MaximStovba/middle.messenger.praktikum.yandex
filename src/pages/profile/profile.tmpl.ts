@@ -3,7 +3,7 @@
 export const profileTempl = `
 <section class="profile">
   <div class="profile__block-left">
-    <a href="/"><button type='button' class='profile_btn-back'></button></a>
+    <a href="/"><button type='button' class='profile_btn-back'>&lt;</button></a>
   </div>
   <div class="profile__block-right">
     <div class="profile__container">

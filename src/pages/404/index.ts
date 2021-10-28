@@ -1,19 +1,24 @@
-import './404.scss';
-import './404.tmpl';
+import "./404.scss";
+import { render } from "../../utils/render";
+import { Templator } from "../../utils/templator";
+import { err404Templ } from "./404.tmpl";
+import { Block } from "../../utils/block";
 
-import { err404Templ } from './404.tmpl';
-import { Templator } from '../../utils/templator';
+export class Err404 extends Block {
+  constructor() {
+    super(
+      "section",
+      {},
+      "page-404"
+    );
+  }
 
-const context = {
-  title: '404',
-};
-
-const tmpl = new Templator(err404Templ);
-const renderedTemplate = tmpl.compile(context);
-const root = document.querySelector('.root');
-
-if (root) {
-  root.innerHTML = `
-  ${renderedTemplate}
-`;
+  render() {
+    const tmpl = new Templator(err404Templ);
+    const str = tmpl.compile({});
+    return str.firstChild;
+  }
 }
+
+const err404 = new Err404();
+render(".root", err404);

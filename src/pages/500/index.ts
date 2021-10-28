@@ -1,19 +1,24 @@
-import './500.scss';
-import './500.tmpl';
+import "./500.scss";
+import { render } from "../../utils/render";
+import { Templator } from "../../utils/templator";
+import { err500Templ } from "./500.tmpl";
+import { Block } from "../../utils/block";
 
-import { err500Templ } from './500.tmpl';
-import { Templator } from '../../utils/templator';
+export class Err500 extends Block {
+  constructor() {
+    super(
+      "section",
+      {},
+      "page-500"
+    );
+  }
 
-const context = {
-  title: '500',
-};
-
-const tmpl = new Templator(err500Templ);
-const renderedTemplate = tmpl.compile(context);
-const root = document.querySelector('.root');
-
-if (root) {
-  root.innerHTML = `
-  ${renderedTemplate}
-`;
+  render() {
+    const tmpl = new Templator(err500Templ);
+    const str = tmpl.compile({});
+    return str.firstChild;
+  }
 }
+
+const err500 = new Err500();
+render(".root", err500);

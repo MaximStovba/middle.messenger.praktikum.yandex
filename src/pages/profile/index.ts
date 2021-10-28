@@ -1,19 +1,21 @@
 import './profile.scss';
-
-import { profileTempl } from './profile.tmpl';
+import { render } from '../../utils/render';
 import { Templator } from '../../utils/templator';
+import { profileTempl } from './profile.tmpl';
+import { Block } from '../../utils/block';
 
-const context = {
-  title: 'profile',
-};
+export class Profile extends Block {
+  constructor(props: Record<string, any>) {
+    super("div", props);
+  }
 
-const tmpl = new Templator(profileTempl);
-const renderedTemplate = tmpl.compile(context);
-const root = document.querySelector('.root');
-
-if (root) {
-  root.innerHTML = `
-  ${renderedTemplate}
-`;
+  render() {
+    const tmpl = new Templator(profileTempl);
+    const str = tmpl.compile({});
+    return str.firstChild;
+  }
 }
+
+const profile = new Profile({});
+render('.root', profile);
 

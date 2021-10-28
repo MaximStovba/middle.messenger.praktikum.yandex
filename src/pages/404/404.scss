@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  background: $light-blue;
 }
 
 .page-404__modal {
@@ -13,6 +14,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  height: 150px;
   width: 180px;
 }
 
