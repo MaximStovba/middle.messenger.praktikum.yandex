@@ -16,6 +16,7 @@ export class ProfileInput extends Block {
       internalId,
       title: this.props.title,
       name: this.props.name,
+      value: this.props.value,
       id: this.props.id,
       type: this.props.type,
       placeholder: this.props.placeholder,

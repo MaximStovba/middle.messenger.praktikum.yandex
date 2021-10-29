@@ -25,7 +25,7 @@ function validation(el: HTMLElement | any) {
     return isValid;
   }
 
-  if (elName === "password") {
+  if (elName === "password" || elName === "oldPassword" || elName === "newPassword") {
     const isValid =
       /^(?=.*[A-Z])(?=.*\d).*$/.test(elValue) &&
       elValue.length >= 8 &&

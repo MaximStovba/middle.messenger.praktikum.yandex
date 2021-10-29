@@ -8,6 +8,7 @@ export const profileInputTempl = `
   <input
     name="{{name}}"
     type="{{type}}"
+    value="{{value}}"
     placeholder="{{placeholder}}"
     id="{{id}}"
     data-id="{{internalId}}"
