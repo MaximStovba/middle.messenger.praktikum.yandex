@@ -1,12 +1,12 @@
-@import "../vars";
-@import "../type";
+@import '../vars';
+@import '../type';
 
 .chat-page {
   height: 100vh;
   display: grid;
   grid-template-columns: 311px 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: "users-block msg-block";
+  grid-template-areas: 'users-block msg-block';
 }
 
 .chat-page__users-block {
@@ -39,7 +39,7 @@
   background: transparent;
   cursor: pointer;
   /* вынести стиль */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -65,7 +65,7 @@
   outline: none;
   padding: 10px 0 10px 34px;
   /* Заменить */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -97,8 +97,8 @@
   grid-template-rows: 13px 34px;
   column-gap: 10px;
   grid-template-areas:
-    "avatar name msg-time"
-    "avatar last-msg msg-num";
+    'avatar name msg-time'
+    'avatar last-msg msg-num';
 }
 
 .user-card__avatar {
@@ -116,7 +116,7 @@
   justify-self: start;
   margin: 0;
   /* Card title */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
@@ -130,7 +130,7 @@
   margin: 4px 0 0;
   align-self: start;
   justify-self: start;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -141,7 +141,7 @@
 
 .user-card__you-msg {
   margin: 0;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -155,7 +155,7 @@
   margin: 0;
   align-self: start;
   justify-self: end;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
@@ -178,7 +178,7 @@
   background: #f89735;
   align-self: end;
   justify-self: end;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 11px;
@@ -193,9 +193,9 @@
   grid-template-columns: 1fr;
   grid-template-rows: minmax(min-content, max-content) 1fr 60px;
   grid-template-areas:
-    "chat-header"
-    "pablic-area"
-    "send-msg";
+    'chat-header'
+    'pablic-area'
+    'send-msg';
 }
 
 .chat-header {
@@ -249,7 +249,7 @@
 .chat-user-name {
   margin: 0 10px;
   /* Card title */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
@@ -265,7 +265,7 @@
   background: transparent;
   cursor: pointer;
   /* вынести стиль */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 25px;
@@ -278,7 +278,7 @@
   margin: 20px 0;
   text-align: center;
   /* Caption */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -303,7 +303,7 @@
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   /* Caption */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -315,7 +315,7 @@
 .message-left__time {
   margin-top: 11px;
   /* Body 2 */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -343,7 +343,7 @@
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   /* Caption */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -355,7 +355,7 @@
 .message-right__time {
   margin-top: 11px;
   /* Body 2 */
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -368,17 +368,20 @@
   margin: 10px 10px 0;
   display: grid;
   grid-template-columns: 32px 1fr 32px;
-  grid-template-rows: 32px;
+  grid-template-rows: 40px;
   column-gap: 10px;
-  grid-template-areas: "upload-btn msg-input msg-btn";
+  grid-template-areas: 'upload-btn msg-input msg-btn';
 }
 
 .content-upload-btn {
+  width: 32px;
+  height: 32px;
+  align-self: flex-end;
   grid-area: upload-btn;
   border: 0;
   border-radius: 50%;
   background: transparent;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
@@ -387,36 +390,15 @@
   cursor: pointer;
 }
 
-.send-msg-input {
-  grid-area: msg-input;
-  /* Светло-голубой */
-  border: 0;
-  outline: none;
-  padding: 0 20px;
-  background: #eff2f7;
-  border-radius: 30px;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 12px;
-  color: black;
-}
-.send-msg-input::-moz-placeholder {
-  /* Темно-серый */
-  color: #909090;
-}
-.send-msg-input::-webkit-input-placeholder {
-  /* Темно-серый */
-  color: #909090;
-}
-
 .send-msg-btn {
+  width: 32px;
+  height: 32px;
+  align-self: flex-end;
   grid-area: msg-btn;
   border: 0;
   border-radius: 50%;
   background: #f89735;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 16px;

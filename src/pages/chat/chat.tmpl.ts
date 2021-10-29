@@ -65,7 +65,6 @@ export const chatTempl = `
       </div>
 
       <div class="chat-pablic-area">
-
         <p class="chat-date">&mdash; Апрель, 23 &mdash;</p>
         <div class="message-left">
           <p class="message-left__text">Отлично! Предлагаю обсудить.</p>
@@ -75,22 +74,20 @@ export const chatTempl = `
           <p class="message-right__text">Добрый день! Предложение направил.</p>
           <span class="message-right__time">10:38</span>
         </div>
-
       </div>
-      <div class="chat-send-msg">
 
+      <form class="chat-send-msg">
         <hr class="chat-separator" />
         <div class="send-msg-element">
           <button class="content-upload-btn">+</button>
-          <input
-            placeholder="Сообщение"
-            type="text"
-            class="send-msg-input"
-          ></input>
-          <button class="send-msg-btn">&#10003;</button>
-        </div>
 
-      </div>
+          {{message}}
+
+          {{sendButton}}
+
+        </div>
+      </form>
+
     </div>
   </div>
 </section>
