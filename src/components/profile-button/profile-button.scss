@@ -1,0 +1,29 @@
+@import "../../pages/vars";
+@import "../../pages/type";
+
+.profile__btn {
+  margin: 0;
+  width: 100%;
+  background: $white;
+  text-align: right;
+  border: 0;
+  border-bottom: 1px solid $dark-blue;
+  box-sizing: border-box;
+  padding: 0 0 6px;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: $dark;
+  outline: none;
+  margin-top: 6px;
+  text-align: left;
+  font-weight: 600;
+  color: $orange;
+  cursor: pointer;
+}
+
+.profile__btn:last-child {
+  border: 0;
+}
