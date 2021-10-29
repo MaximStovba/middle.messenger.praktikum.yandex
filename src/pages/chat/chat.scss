@@ -1,35 +1,426 @@
 @import "../vars";
 @import "../type";
 
-.chat {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.chat-page {
   height: 100vh;
+  display: grid;
+  grid-template-columns: 311px 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "users-block msg-block";
 }
 
-.chat__modal {
-  margin: 0 auto;
+.chat-page__users-block {
+  grid-area: users-block;
+  background: #fbfbfb; /* заменить на константу */
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   justify-content: flex-start;
-  width: 380px;
 }
 
-.chat__text {
-  @include heading-4;
-
-  margin-top: 12px;
-  color: $dark-blue;
-  text-align: center;
+.chat-page__msg-block {
+  grid-area: msg-block;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 }
 
-.chat__link {
-  color: $orange;
+.chat-menu {
+  margin: 10px 10px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
 
-  @include caption;
+.btn-menu-chat {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  /* вынести стиль */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  /* Темно-серый */
+  color: #909090;
+}
 
-  margin-top: 45px;
-  text-align: center;
+.btn-create-chat {
+  text-decoration: underline;
+}
+
+.btn-open-profile {
   text-decoration: none;
+}
+
+.input-search {
+  margin: 22px 10px 30px;
+  border: 0;
+  /* Светло-голубой */
+  background: #eff2f7;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 0 10px 34px;
+  /* Заменить */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.input-search::-moz-placeholder {
+  /* Темно-серый */
+  color: #909090;
+}
+.input-search::-webkit-input-placeholder {
+  /* Темно-серый */
+  color: #909090;
+}
+
+.chat-separator {
+  margin: 0 10px;
+  width: auto;
+  border: none;
+  background-color: #d6d7d8;
+  color: #d6d7d8;
+  height: 1px;
+}
+
+.chat-user-card {
+  margin: 12px 10px;
+  display: grid;
+  grid-template-columns: 47px 1fr minmax(min-content, max-content);
+  grid-template-rows: 13px 34px;
+  column-gap: 10px;
+  grid-template-areas:
+    "avatar name msg-time"
+    "avatar last-msg msg-num";
+}
+
+.user-card__avatar {
+  grid-area: avatar;
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  /* Серый */
+  background: #d6d7d8;
+}
+
+.user-card__name {
+  grid-area: name;
+  align-self: start;
+  justify-self: start;
+  margin: 0;
+  /* Card title */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+  /* Темно-синий */
+  color: #09293a;
+}
+
+.user-card__last-msg {
+  grid-area: last-msg;
+  margin: 4px 0 0;
+  align-self: start;
+  justify-self: start;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  /* Темно-серый */
+  color: #909090;
+}
+
+.user-card__you-msg {
+  margin: 0;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  /* Темно-синий */
+  color: #09293a;
+}
+
+.user-card__msg-time {
+  grid-area: msg-time;
+  margin: 0;
+  align-self: start;
+  justify-self: end;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: right;
+  /* Темно-серый */
+  color: #909090;
+}
+
+.user-card__msg-num {
+  grid-area: msg-num;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Желтый */
+  background: #f89735;
+  align-self: end;
+  justify-self: end;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 12px;
+  /* Белый */
+  color: #ffffff;
+}
+
+.chat-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(min-content, max-content) 1fr 60px;
+  grid-template-areas:
+    "chat-header"
+    "pablic-area"
+    "send-msg";
+}
+
+.chat-header {
+  grid-area: chat-header;
+  align-self: end;
+}
+
+.chat-pablic-area {
+  grid-area: pablic-area;
+  align-self: end;
+}
+
+.chat-send-msg {
+  grid-area: send-msg;
+  align-self: start;
+}
+
+.header-element {
+  margin: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-users-container {
+  margin-left: 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chat-user-box {
+  margin: 10px 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chat-user-avatar {
+  width: 34px;
+  height: 34px;
+  /* Серый */
+  background: #d6d7d8;
+  border-radius: 50%;
+}
+
+.chat-user-name {
+  margin: 0 10px;
+  /* Card title */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+  color: #1e1e1e;
+}
+
+.header-menu-btn {
+  width: 25px;
+  height: 25px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  /* вынести стиль */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 25px;
+  /* Темно-серый */
+  color: #909090;
+}
+
+.chat-date {
+  margin: 20px 0;
+  text-align: center;
+  /* Caption */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  /* Темно-серый */
+  color: #909090;
+}
+
+.message-left {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message-left__text {
+  margin: 0;
+  max-width: 600px;
+  padding: 24px 20px;
+  /* Светло-голубой */
+  background: #eff2f7;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  /* Caption */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  /* Черный */
+  color: #000000;
+}
+
+.message-left__time {
+  margin-top: 11px;
+  /* Body 2 */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  /* Темно-серый */
+  color: #909090;
+}
+
+.message-right {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.message-right__text {
+  margin: 0;
+  max-width: 600px;
+  padding: 24px 20px;
+  /* Белый */
+  background: #ffffff;
+  /* Светло-голубой */
+  border: 1px solid #eff2f7;
+  box-sizing: border-box;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  /* Caption */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  /* Черный */
+  color: #000000;
+}
+
+.message-right__time {
+  margin-top: 11px;
+  /* Body 2 */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  /* Темно-серый */
+  color: #909090;
+}
+
+.send-msg-element {
+  margin: 10px 10px 0;
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  grid-template-rows: 32px;
+  column-gap: 10px;
+  grid-template-areas: "upload-btn msg-input msg-btn";
+}
+
+.content-upload-btn {
+  grid-area: upload-btn;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 28px;
+  color: #09293a;
+  cursor: pointer;
+}
+
+.send-msg-input {
+  grid-area: msg-input;
+  /* Светло-голубой */
+  border: 0;
+  outline: none;
+  padding: 0 20px;
+  background: #eff2f7;
+  border-radius: 30px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  color: black;
+}
+.send-msg-input::-moz-placeholder {
+  /* Темно-серый */
+  color: #909090;
+}
+.send-msg-input::-webkit-input-placeholder {
+  /* Темно-серый */
+  color: #909090;
+}
+
+.send-msg-btn {
+  grid-area: msg-btn;
+  border: 0;
+  border-radius: 50%;
+  background: #f89735;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: #ffffff;
+  cursor: pointer;
 }
