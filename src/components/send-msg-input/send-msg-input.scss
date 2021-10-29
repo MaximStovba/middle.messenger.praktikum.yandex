@@ -16,7 +16,7 @@
   font-weight: normal;
   font-size: 8px;
   line-height: 8px;
-  color: red;
+  color: $red;
   opacity: 0;
 }
 
@@ -26,24 +26,23 @@
 
 .send-msg-input {
   grid-area: msg-input;
-  /* Светло-голубой */
   border: 0;
   outline: none;
   padding: 0 20px;
   background: #eff2f7;
   border-radius: 30px;
-  font-family: 'Open Sans';
+  font-family: $font-sans;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 32px;
-  color: black;
+  color: $dark;
 }
+
 .send-msg-input::-moz-placeholder {
-  /* Темно-серый */
-  color: #909090;
+  color: $dark-grey;
 }
+
 .send-msg-input::-webkit-input-placeholder {
-  /* Темно-серый */
-  color: #909090;
+  color: $dark-grey;
 }

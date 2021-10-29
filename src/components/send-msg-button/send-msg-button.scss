@@ -5,12 +5,12 @@
   grid-area: msg-btn;
   border: 0;
   border-radius: 50%;
-  background: #f89735;
-  font-family: "Open Sans";
+  background: $orange;
+  font-family: $font-sans;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 16px;
-  color: #ffffff;
+  color: $white;
   cursor: pointer;
 }

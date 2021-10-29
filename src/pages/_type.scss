@@ -69,3 +69,12 @@
   font-size: 14px;
   line-height: 16px;
 }
+
+/* Body 2 */
+@mixin body-2 {
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+}

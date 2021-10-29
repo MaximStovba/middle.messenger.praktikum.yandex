@@ -1,7 +1,8 @@
 /* BEGIN Light */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./Light/OpenSans-Light.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./Light/OpenSans-Light.woff2?v=1.1.0') format('woff2'),
     url('./Light/OpenSans-Light.woff?v=1.1.0') format('woff');
   font-weight: 300;
   font-style: normal;
@@ -12,7 +13,8 @@
 /* BEGIN Light Italic */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./LightItalic/OpenSans-LightItalic.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./LightItalic/OpenSans-LightItalic.woff2?v=1.1.0') format('woff2'),
     url('./LightItalic/OpenSans-LightItalic.woff?v=1.1.0') format('woff');
   font-weight: 300;
   font-style: italic;
@@ -23,7 +25,8 @@
 /* BEGIN Regular */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./Regular/OpenSans-Regular.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./Regular/OpenSans-Regular.woff2?v=1.1.0') format('woff2'),
     url('./Regular/OpenSans-Regular.woff?v=1.1.0') format('woff');
   font-weight: normal;
   font-style: normal;
@@ -34,7 +37,8 @@
 /* BEGIN Italic */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./Italic/OpenSans-Italic.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./Italic/OpenSans-Italic.woff2?v=1.1.0') format('woff2'),
     url('./Italic/OpenSans-Italic.woff?v=1.1.0') format('woff');
   font-weight: normal;
   font-style: italic;
@@ -45,7 +49,8 @@
 /* BEGIN Semibold */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./Semibold/OpenSans-Semibold.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./Semibold/OpenSans-Semibold.woff2?v=1.1.0') format('woff2'),
     url('./Semibold/OpenSans-Semibold.woff?v=1.1.0') format('woff');
   font-weight: 600;
   font-style: normal;
@@ -56,8 +61,9 @@
 /* BEGIN Semibold Italic */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./SemiboldItalic/OpenSans-SemiboldItalic.woff2?v=1.1.0')
-      format('woff2'),
+  src:
+    url('./SemiboldItalic/OpenSans-SemiboldItalic.woff2?v=1.1.0')
+    format('woff2'),
     url('./SemiboldItalic/OpenSans-SemiboldItalic.woff?v=1.1.0') format('woff');
   font-weight: 600;
   font-style: italic;
@@ -68,7 +74,8 @@
 /* BEGIN Bold */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./Bold/OpenSans-Bold.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./Bold/OpenSans-Bold.woff2?v=1.1.0') format('woff2'),
     url('./Bold/OpenSans-Bold.woff?v=1.1.0') format('woff');
   font-weight: bold;
   font-style: normal;
@@ -79,7 +86,8 @@
 /* BEGIN Bold Italic */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./BoldItalic/OpenSans-BoldItalic.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./BoldItalic/OpenSans-BoldItalic.woff2?v=1.1.0') format('woff2'),
     url('./BoldItalic/OpenSans-BoldItalic.woff?v=1.1.0') format('woff');
   font-weight: bold;
   font-style: italic;
@@ -90,7 +98,8 @@
 /* BEGIN Extrabold */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./ExtraBold/OpenSans-ExtraBold.woff2?v=1.1.0') format('woff2'),
+  src:
+    url('./ExtraBold/OpenSans-ExtraBold.woff2?v=1.1.0') format('woff2'),
     url('./ExtraBold/OpenSans-ExtraBold.woff?v=1.1.0') format('woff');
   font-weight: 800;
   font-style: normal;
@@ -101,10 +110,11 @@
 /* BEGIN Extrabold Italic */
 @font-face {
   font-family: 'Open Sans';
-  src: url('./ExtraBoldItalic/OpenSans-ExtraBoldItalic.woff2?v=1.1.0')
-      format('woff2'),
+  src:
+    url('./ExtraBoldItalic/OpenSans-ExtraBoldItalic.woff2?v=1.1.0')
+    format('woff2'),
     url('./ExtraBoldItalic/OpenSans-ExtraBoldItalic.woff?v=1.1.0')
-      format('woff');
+    format('woff');
   font-weight: 800;
   font-style: italic;
 }

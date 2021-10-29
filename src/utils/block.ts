@@ -93,7 +93,7 @@ export class Block {
     return this._element;
   }
 
-  _bindEvent(e: Event, eventFn: Function) {
+  _bindEvent(e: Event, eventFn: () => void) {
     const target = e.target as HTMLElement;
     const dataId = target.getAttribute("data-id");
     if (target != null) {
@@ -169,6 +169,7 @@ export class Block {
   }
 
   _makePropsProxy(props: Property) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
     return new Proxy(props, {
       get(target, prop: string) {
