@@ -1,53 +1,52 @@
 import './password.scss';
-import { render } from '../../../utils/render';
 import { Templator } from '../../../utils/templator';
 import { passwordTempl } from './password.tmpl';
 import { Block } from '../../../utils/block';
-import { ProfileInput } from "../../../components/profile-input/profile-input";
-import { Button } from "../../../components/button/button";
-import { inputValidation, formValidation } from "../../../utils/validator";
+import { ProfileInput } from '../../../components/profile-input/profile-input';
+import { Button } from '../../../components/button/button';
+import { inputValidation, formValidation } from '../../../utils/validator';
 
 const oldPassword = new ProfileInput({
-  title: "Старый пароль",
-  name: "oldPassword",
-  id: "input-oldpassword-profile",
-  type: "password",
-  value: "Ghdjkf678484",
-  placeholder: "Введите старый пароль",
-  validationMsg: "Неверный формат!",
+  title: 'Старый пароль',
+  name: 'oldPassword',
+  id: 'input-oldpassword-profile',
+  type: 'password',
+  value: 'Ghdjkf678484',
+  placeholder: 'Введите старый пароль',
+  validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const newPassword = new ProfileInput({
-  title: "Новый пароль",
-  name: "newPassword",
-  id: "input-newpassword-profile",
-  type: "password",
-  value: "Ghdjkf678409",
-  placeholder: "Введите новый пароль",
-  validationMsg: "Неверный формат!",
+  title: 'Новый пароль',
+  name: 'newPassword',
+  id: 'input-newpassword-profile',
+  type: 'password',
+  value: 'Ghdjkf678409',
+  placeholder: 'Введите новый пароль',
+  validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const saveButton = new Button({
-  text: "Сохранить",
+  text: 'Сохранить',
   settings: { withInternalID: true },
   events: {
-    click: formValidation
-  }
+    click: formValidation,
+  },
 });
 
-export class Profile extends Block {
+export class EditPassword extends Block {
   constructor() {
-    super("div", {
+    super('div', {
       oldPassword,
       newPassword,
       saveButton,
@@ -64,8 +63,3 @@ export class Profile extends Block {
     return str.firstChild;
   }
 }
-
-const profile = new Profile();
-render(".root", profile);
-
-

@@ -10,6 +10,9 @@ export type TMeta = {
 };
 
 export class Block {
+  static hide() {
+    throw new Error('Method not implemented.');
+  }
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",

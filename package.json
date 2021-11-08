@@ -8,7 +8,7 @@
 
   "scripts": {
     "server": "nodemon -r esm server.js",
-    "start": "parcel -p 3000",
+    "start": "parcel -p 3000 --no-cache",
     "dev": "parcel",
     "build": "parcel build"
   },

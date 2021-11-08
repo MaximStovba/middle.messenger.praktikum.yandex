@@ -11,6 +11,6 @@ export const signinTempl = `
       {{password}}
       {{button}}
     </div>
-    <a class="signin__link" href="/">Нет аккаунта?</a>
+    <a class="signin__link" href="/sign-up">Нет аккаунта?</a>
   </form>
 `;

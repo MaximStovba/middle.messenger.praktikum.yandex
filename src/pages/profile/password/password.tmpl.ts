@@ -3,7 +3,7 @@
 export const passwordTempl = `
 <section class="profile">
   <div class="profile__block-left">
-    <a href="/"><button type='button' class='profile_btn-back'></button></a>
+    <a href="/settings"><button type='button' class='profile_btn-back'>&lt;</button></a>
   </div>
   <div class="profile__block-right">
     <form class="profile__container">
