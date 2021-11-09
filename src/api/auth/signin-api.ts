@@ -1,4 +1,4 @@
-// signin-api.ts
+// api/signin-api.ts
 import { HTTPTransport } from '../../utils/http';
 import { BaseAPI, baseUrl } from '../base-api';
 import { SignInReq } from '../types';
@@ -6,9 +6,9 @@ import { SignInReq } from '../types';
 const api = new HTTPTransport();
 
 export class SignInAPI extends BaseAPI {
-  request(user: SignInReq) {
+  request(data: SignInReq) {
     return api.post(baseUrl + '/auth/signin', {
-      data: user,
+      data,
       headers: {
         'content-type': 'application/json',
       },

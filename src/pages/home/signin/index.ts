@@ -1,17 +1,16 @@
 import './signin.scss';
-import { Router } from '../../../utils/router';
 import { Templator } from '../../../utils/templator';
 import { signinTempl } from './signin.tmpl';
 import { Block } from '../../../utils/block';
 import { Input } from '../../../components/input/input';
 import { Button } from '../../../components/button/button';
-import { inputValidation, formValidation } from '../../../utils/validator';
+import { inputValidation } from '../../../utils/validator';
+import { AuthController } from '../../../controllers/auth';
 
-const router = new Router('.root');
+const auth = new AuthController();
 
 function handleButtonClick(event: Event) {
-  formValidation(event);
-  router.go('/settings');
+  auth.login(event);
 }
 
 const login = new Input({

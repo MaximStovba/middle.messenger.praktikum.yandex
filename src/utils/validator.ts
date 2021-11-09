@@ -88,11 +88,18 @@ export function formValidation(event: Event | any) {
     .map((input) => validation(input))
     .every((isValid) => isValid === true);
 
-  const inputsValue = {};
+  const inputsValue: { [key: string]: any } = {};
   inputs.forEach((el: { name: string | number; value: any }) => {
     inputsValue[el.name] = el.value;
   });
 
-  console.log(inputsValue);
-  console.log({ isFormValid });
+  console.log({
+    inputsValue,
+    isFormValid,
+  });
+
+  return {
+    inputsValue,
+    isFormValid,
+  };
 }
