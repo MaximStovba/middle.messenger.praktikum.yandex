@@ -7,6 +7,7 @@ enum METHOD {
 
 type Options = {
   method: METHOD;
+  headers?: Record<string, string>;
   data?: any;
 };
 
@@ -56,7 +57,7 @@ export class HTTPTransport {
     url: string,
     options: Options = { method: METHOD.GET }
   ): Promise<XMLHttpRequest> {
-    const { method, data } = options;
+    const { headers = {}, method, data } = options;
 
     return new Promise(function (resolve, reject) {
       if (!method) {
@@ -68,6 +69,10 @@ export class HTTPTransport {
       const isGet = method === METHOD.GET;
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+
+      Object.keys(headers).forEach((key) => {
+        xhr.setRequestHeader(key, headers[key]);
+      });
 
       xhr.onload = function () {
         resolve(xhr);

@@ -16,17 +16,15 @@ import { Err500 } from './pages/500';
 
 const router = new Router('.root');
 
-router
-  .use('/', Signin)
-  .use('/sign-up', Signup)
-  .use('/settings', Profile)
-  .use('/edit-profile', EditProfile)
-  .use('/edit-password', EditPassword)
-  .use('/messenger', Chat)
-  .use('/404', Err404)
-  .use('/500', Err500)
-  .start();
-
-window.onpopstate = () => {
-  router.go(document.location.pathname);
-};
+document.addEventListener('DOMContentLoaded', () => {
+  router
+    .use('/', Signin)
+    .use('/sign-up', Signup)
+    .use('/settings', Profile)
+    .use('/edit-profile', EditProfile)
+    .use('/edit-password', EditPassword)
+    .use('/messenger', Chat)
+    .use('/404', Err404)
+    .use('/500', Err500)
+    .start();
+});
