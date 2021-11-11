@@ -4,7 +4,14 @@ import { signupTempl } from './signup.tmpl';
 import { Block } from '../../../utils/block';
 import { Input } from '../../../components/input/input';
 import { Button } from '../../../components/button/button';
-import { inputValidation, formValidation } from '../../../utils/validator';
+import { inputValidation } from '../../../utils/validator';
+import { AuthController } from '../../../controllers/auth';
+
+const auth = new AuthController();
+
+function handleButtonClick(event: Event) {
+  auth.registration(event);
+}
 
 const firstName = new Input({
   title: 'Имя',
@@ -94,7 +101,7 @@ const button = new Button({
   text: 'Регистрация',
   settings: { withInternalID: true },
   events: {
-    click: formValidation,
+    click: handleButtonClick,
   },
 });
 

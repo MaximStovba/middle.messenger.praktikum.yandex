@@ -1,10 +1,16 @@
 // controllers/auth.ts
 import { SignInAPI } from '../api/auth/signin-api';
+import { SignUpAPI } from '../api/auth/signup-api';
+import { LogoutAPI } from '../api/auth/logout-api';
 import { Router } from '../utils/router';
 import { formValidation } from '../utils/validator';
+import { Store } from '../utils/store';
 
 const router = new Router('.root');
-const loginApi = new SignInAPI();
+const store = new Store();
+const signInApi = new SignInAPI();
+const signUpApi = new SignUpAPI();
+const logoutApi = new LogoutAPI();
 
 export class AuthController {
   public async login(event: Event) {
@@ -17,13 +23,60 @@ export class AuthController {
       const login = validateData.inputsValue.login;
       const password = validateData.inputsValue.password;
 
-      loginApi
+      signInApi
         .request({ login, password })
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
-            router.go('/settings');
+            store.setState({ isLogin: true });
           }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async registration(event: Event) {
+    try {
+      const validateData = formValidation(event);
+
+      if (!validateData.isFormValid) {
+        throw new Error('Ошибка валидации');
+      }
+
+      const first_name = validateData.inputsValue.first_name;
+      const second_name = validateData.inputsValue.second_name;
+      const login = validateData.inputsValue.login;
+      const email = validateData.inputsValue.email;
+      const password = validateData.inputsValue.password;
+      const phone = validateData.inputsValue.phone;
+
+      signUpApi
+        .request({ first_name, second_name, login, email, password, phone })
+        .then((res) => {
+          if (res.status === 200) {
+            const userId = res.response;
+            console.log(userId);
+            router.go('/');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async logout() {
+    try {
+      logoutApi
+        .request()
+        .then((res) => {
+          console.log(res);
         })
         .catch((error) => {
           console.log(error);

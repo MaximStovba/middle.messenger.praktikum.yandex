@@ -6,9 +6,9 @@ import { SignUpReq } from '../types';
 const api = new HTTPTransport();
 
 export class SignUpAPI extends BaseAPI {
-  request(user: SignUpReq) {
+  request(data: SignUpReq) {
     return api.post(baseUrl + '/auth/signup', {
-      data: user,
+      data,
       headers: {
         'content-type': 'application/json',
       },

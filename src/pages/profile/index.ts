@@ -5,8 +5,10 @@ import { profileTempl } from './profile.tmpl';
 import { Block } from '../../utils/block';
 import { ProfileInput } from '../../components/profile-input/profile-input';
 import { ProfileButton } from '../../components/profile-button/profile-button';
-import { inputValidation, formValidation } from '../../utils/validator';
+import { inputValidation } from '../../utils/validator';
+import { AuthController } from '../../controllers/auth';
 
+const auth = new AuthController();
 const router = new Router('.root');
 
 function handleEditDataButtonClick() {
@@ -15,6 +17,10 @@ function handleEditDataButtonClick() {
 
 function handleEditPasswordButtonClick() {
   router.go('/edit-password');
+}
+
+function handleExitButtonClick() {
+  auth.logout();
 }
 
 const email = new ProfileInput({
@@ -127,7 +133,7 @@ const exitButton = new ProfileButton({
   text: 'Выйти',
   settings: { withInternalID: true },
   events: {
-    click: formValidation,
+    click: handleExitButtonClick,
   },
 });
 

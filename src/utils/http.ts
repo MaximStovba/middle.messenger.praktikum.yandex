@@ -66,9 +66,11 @@ export class HTTPTransport {
       }
 
       const xhr = new XMLHttpRequest();
+
       const isGet = method === METHOD.GET;
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+      xhr.withCredentials = true;
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
@@ -85,7 +87,7 @@ export class HTTPTransport {
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   }

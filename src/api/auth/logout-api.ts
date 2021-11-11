@@ -4,7 +4,7 @@ import { BaseAPI, baseUrl } from '../base-api';
 
 const api = new HTTPTransport();
 
-export class SignUpAPI extends BaseAPI {
+export class LogoutAPI extends BaseAPI {
   request() {
     return api.post(baseUrl + '/auth/logout');
   }
