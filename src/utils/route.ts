@@ -37,7 +37,7 @@ export class Route {
   render(route?: Route, _pathname?: string) {
     if (route) {
       this._block = new route._blockClass();
-      render(route._props.rootQuery, route._block);
+      render(route._props.rootQuery, this._block);
       return;
     }
 

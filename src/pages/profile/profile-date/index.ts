@@ -7,8 +7,10 @@ import { ProfileInput } from '../../../components/profile-input/profile-input';
 import { Button } from '../../../components/button/button';
 import { ProfileButtonBack } from '../../../components/profile-button-back/profile-button-back';
 import { inputValidation, formValidation } from '../../../utils/validator';
+import { Store } from '../../../utils/store';
 
 const router = new Router('.root');
+const store = new Store();
 
 function handleBackButtonClick() {
   router.back();
@@ -132,6 +134,32 @@ export class EditProfile extends Block {
       saveButton,
       backButton,
     });
+  }
+
+  componentDidMount() {
+    console.log('profile-date componentDidMount');
+    const appStore = store.getState();
+
+    if (appStore.user) {
+      email.setProps({
+        value: appStore.user.email,
+      });
+      login.setProps({
+        value: appStore.user.login,
+      });
+      firstName.setProps({
+        value: appStore.user.first_name,
+      });
+      secondName.setProps({
+        value: appStore.user.second_name,
+      });
+      nickName.setProps({
+        value: appStore.user.display_name,
+      });
+      phone.setProps({
+        value: appStore.user.phone,
+      });
+    }
   }
 
   render() {

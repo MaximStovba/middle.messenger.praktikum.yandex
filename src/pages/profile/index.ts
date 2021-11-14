@@ -8,9 +8,11 @@ import { ProfileButton } from '../../components/profile-button/profile-button';
 import { ProfileButtonBack } from '../../components/profile-button-back/profile-button-back';
 import { inputValidation } from '../../utils/validator';
 import { AuthController } from '../../controllers/auth';
+import { Store } from '../../utils/store';
 
 const auth = new AuthController();
 const router = new Router('.root');
+const store = new Store();
 
 function handleEditDataButtonClick() {
   router.go('/edit-profile');
@@ -150,6 +152,8 @@ const backButton = new ProfileButtonBack({
   },
 });
 
+const appStore = store.getState();
+
 export class Profile extends Block {
   constructor() {
     super('div', {
@@ -164,6 +168,32 @@ export class Profile extends Block {
       exitButton,
       backButton,
     });
+  }
+
+  componentDidMount() {
+    console.log('profile componentDidMount');
+    console.log(appStore.user);
+
+    if (appStore.user) {
+      email.setProps({
+        value: appStore.user.email,
+      });
+      login.setProps({
+        value: appStore.user.login,
+      });
+      firstName.setProps({
+        value: appStore.user.first_name,
+      });
+      secondName.setProps({
+        value: appStore.user.second_name,
+      });
+      nickName.setProps({
+        value: appStore.user.display_name ? appStore.user.display_name : '',
+      });
+      phone.setProps({
+        value: appStore.user.phone,
+      });
+    }
   }
 
   render() {

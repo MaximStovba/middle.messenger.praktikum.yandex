@@ -19,27 +19,23 @@ import { Store } from './utils/store';
 const auth = new AuthController();
 const router = new Router('.root');
 const store = new Store();
+
 const appStore = store.getState();
 
-const protectedRout = () => {
+function protectedRout() {
   if (appStore.isLogin === true) {
-    if (appStore.user) {
-      console.log(appStore.user);
-        
-    }
-
     if (location.pathname === '/') {
       router.go('/settings');
     }
   } else {
     router.go('/');
   }
-};
+}
+
 store.setListener(protectedRout);
 
 document.addEventListener('DOMContentLoaded', () => {
   auth.getUser();
-
   router
     .use('/', Signin)
     .use('/sign-up', Signup)
