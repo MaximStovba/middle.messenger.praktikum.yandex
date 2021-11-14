@@ -1,7 +1,9 @@
 // controllers/auth.ts
+
 import { SignInAPI } from '../api/auth/signin-api';
 import { SignUpAPI } from '../api/auth/signup-api';
 import { LogoutAPI } from '../api/auth/logout-api';
+import { GetUserAPI } from '../api/auth/get-user-api';
 import { Router } from '../utils/router';
 import { formValidation } from '../utils/validator';
 import { Store } from '../utils/store';
@@ -11,8 +13,27 @@ const store = new Store();
 const signInApi = new SignInAPI();
 const signUpApi = new SignUpAPI();
 const logoutApi = new LogoutAPI();
+const getUserApi = new GetUserAPI();
 
 export class AuthController {
+  public async getUser() {
+    try {
+      getUserApi
+        .request()
+        .then((res) => {
+          if (res.status === 200) {
+            const user = JSON.parse(res.response);
+            store.setState({ isLogin: true, user });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   public async login(event: Event) {
     try {
       const validateData = formValidation(event);
@@ -28,7 +49,7 @@ export class AuthController {
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
-            store.setState({ isLogin: true });
+            this.getUser();
           }
         })
         .catch((error) => {

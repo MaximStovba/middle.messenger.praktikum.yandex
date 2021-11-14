@@ -56,7 +56,7 @@ function validation(el: HTMLElement | any) {
     return isValid;
   }
 
-  if (elName === 'nick_name') {
+  if (elName === 'display_name') {
     const isValid = /^[A-ZА-Я][а-яa-z]+$/.test(elValue);
     showValidationMessage(el, isValid);
     return isValid;
@@ -102,4 +102,11 @@ export function formValidation(event: Event | any) {
     inputsValue,
     isFormValid,
   };
+}
+
+export function getCurrentForm(event: Event | any) {
+  const el = event.target;
+  const parentEl = el?.closest('form');
+
+  return parentEl;
 }

@@ -5,6 +5,7 @@ import { profileTempl } from './profile.tmpl';
 import { Block } from '../../utils/block';
 import { ProfileInput } from '../../components/profile-input/profile-input';
 import { ProfileButton } from '../../components/profile-button/profile-button';
+import { ProfileButtonBack } from '../../components/profile-button-back/profile-button-back';
 import { inputValidation } from '../../utils/validator';
 import { AuthController } from '../../controllers/auth';
 
@@ -17,6 +18,10 @@ function handleEditDataButtonClick() {
 
 function handleEditPasswordButtonClick() {
   router.go('/edit-password');
+}
+
+function handleBackButtonClick() {
+  router.go('/messenger');
 }
 
 function handleExitButtonClick() {
@@ -85,8 +90,8 @@ const secondName = new ProfileInput({
 
 const nickName = new ProfileInput({
   title: 'Имя в чате',
-  name: 'nick_name',
-  id: 'input-nick-name-profile',
+  name: 'display_name',
+  id: 'input-display-name-profile',
   type: 'text',
   value: '',
   placeholder: 'Введите имя в чате',
@@ -137,6 +142,14 @@ const exitButton = new ProfileButton({
   },
 });
 
+const backButton = new ProfileButtonBack({
+  text: '<',
+  settings: { withInternalID: true },
+  events: {
+    click: handleBackButtonClick,
+  },
+});
+
 export class Profile extends Block {
   constructor() {
     super('div', {
@@ -149,6 +162,7 @@ export class Profile extends Block {
       editDataButton,
       editPasswordButton,
       exitButton,
+      backButton,
     });
   }
 
@@ -164,6 +178,7 @@ export class Profile extends Block {
       editDataButton: this.props.editDataButton.getContentAsString(),
       editPasswordButton: this.props.editPasswordButton.getContentAsString(),
       exitButton: this.props.exitButton.getContentAsString(),
+      backButton: this.props.backButton.getContentAsString(),
     });
     return str.firstChild;
   }

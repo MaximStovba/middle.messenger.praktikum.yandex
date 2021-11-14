@@ -1,17 +1,25 @@
 import './profile-date.scss';
+import { Router } from '../../../utils/router';
 import { Templator } from '../../../utils/templator';
 import { profileDateTempl } from './profile-date.tmpl';
 import { Block } from '../../../utils/block';
 import { ProfileInput } from '../../../components/profile-input/profile-input';
 import { Button } from '../../../components/button/button';
+import { ProfileButtonBack } from '../../../components/profile-button-back/profile-button-back';
 import { inputValidation, formValidation } from '../../../utils/validator';
+
+const router = new Router('.root');
+
+function handleBackButtonClick() {
+  router.back();
+}
 
 const email = new ProfileInput({
   title: 'Почта',
   name: 'email',
   id: 'input-login-profile',
   type: 'email',
-  value: 'mail@ya.ru',
+  value: 'email@ya.ru',
   placeholder: 'Введите почту',
   validationMsg: 'Неверный формат почты!',
   settings: { withInternalID: true },
@@ -104,6 +112,14 @@ const saveButton = new Button({
   },
 });
 
+const backButton = new ProfileButtonBack({
+  text: '<',
+  settings: { withInternalID: true },
+  events: {
+    click: handleBackButtonClick,
+  },
+});
+
 export class EditProfile extends Block {
   constructor() {
     super('div', {
@@ -114,6 +130,7 @@ export class EditProfile extends Block {
       nickName,
       phone,
       saveButton,
+      backButton,
     });
   }
 
@@ -127,6 +144,7 @@ export class EditProfile extends Block {
       nickName: this.props.nickName.getContentAsString(),
       phone: this.props.phone.getContentAsString(),
       saveButton: this.props.saveButton.getContentAsString(),
+      backButton: this.props.backButton.getContentAsString(),
     });
     return str.firstChild;
   }

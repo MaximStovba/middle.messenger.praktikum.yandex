@@ -3,7 +3,7 @@
 export const profileDateTempl = `
 <section class="profile">
   <div class="profile__block-left">
-    <a href="/settings"><button type='button' class='profile_btn-back'>&lt;</button></a>
+    {{backButton}}
   </div>
   <div class="profile__block-right">
     <form class="profile__container">

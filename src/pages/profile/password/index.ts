@@ -1,10 +1,19 @@
 import './password.scss';
+import { Router } from '../../../utils/router';
 import { Templator } from '../../../utils/templator';
 import { passwordTempl } from './password.tmpl';
 import { Block } from '../../../utils/block';
 import { ProfileInput } from '../../../components/profile-input/profile-input';
 import { Button } from '../../../components/button/button';
+import { ProfileButtonBack } from '../../../components/profile-button-back/profile-button-back';
 import { inputValidation, formValidation } from '../../../utils/validator';
+
+const router = new Router('.root');
+
+function handleBackButtonClick() {
+  router.back();
+}
+
 
 const oldPassword = new ProfileInput({
   title: 'Старый пароль',
@@ -44,12 +53,21 @@ const saveButton = new Button({
   },
 });
 
+const backButton = new ProfileButtonBack({
+  text: '<',
+  settings: { withInternalID: true },
+  events: {
+    click: handleBackButtonClick,
+  },
+});
+
 export class EditPassword extends Block {
   constructor() {
     super('div', {
       oldPassword,
       newPassword,
       saveButton,
+      backButton,
     });
   }
 
@@ -59,6 +77,7 @@ export class EditPassword extends Block {
       oldPassword: this.props.oldPassword.getContentAsString(),
       newPassword: this.props.newPassword.getContentAsString(),
       saveButton: this.props.saveButton.getContentAsString(),
+      backButton: this.props.backButton.getContentAsString(),
     });
     return str.firstChild;
   }

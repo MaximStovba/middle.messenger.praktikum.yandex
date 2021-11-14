@@ -1,0 +1,15 @@
+@import '../../pages/vars';
+@import '../../pages/type';
+
+.profile_btn-back {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50px;
+  background: $orange;
+
+  @include heading-5;
+
+  color: $white;
+  cursor: pointer;
+}

@@ -1,17 +1,17 @@
 // change-password-api.ts
-import { HTTPTransport } from '../../utils/http';
-import { BaseAPI, baseUrl } from '../base-api';
-import { ChangePasswordReq } from '../types';
+import { HTTPTransport } from "../../utils/http";
+import { BaseAPI, baseUrl } from "../base-api";
+import { ChangePasswordModel } from "../types";
 
 const api = new HTTPTransport();
 
 export class ChangePasswordAPI extends BaseAPI {
-  update(user: ChangePasswordReq) {
-    return api.put(baseUrl + '/user/password', {
+  update(user: ChangePasswordModel) {
+    return api.put(baseUrl + "/user/password", {
       data: user,
       headers: {
-        'content-type': 'application/json',
-      },
+        "content-type": "application/json"
+      }
     });
   }
 }

@@ -1,16 +1,16 @@
-import { EventBus } from "./event-bus";
+import { EventBus } from './event-bus';
 
 interface State {
   [key: string]: any;
 }
 
 const initialState: State = {
-  isLogin: false
+  isLogin: false,
 };
 
 export class Store {
   static EVENTS = {
-    FLOW_SDU: "flow:store-did-update"
+    FLOW_SDU: 'flow:store-did-update',
   };
 
   static __instance: Store;
@@ -25,12 +25,9 @@ export class Store {
     const eventBus = new EventBus();
     this.eventBus = () => eventBus;
     this._state = this._makeStateProxy(initialState);
-    //this._registerEvents(eventBus);
 
     Store.__instance = this;
   }
-
-  // _registerEvents(eventBus: EventBus) {}
 
   setListener(listener: () => unknown) {
     this.eventBus().on(Store.EVENTS.FLOW_SDU, listener.bind(this));
@@ -53,7 +50,7 @@ export class Store {
     return new Proxy(state, {
       get(target, prop: string) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, value: unknown) {
         target[prop] = value;
@@ -61,8 +58,8 @@ export class Store {
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
-      }
+        throw new Error('Нет доступа');
+      },
     });
   }
 }

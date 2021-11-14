@@ -1,13 +1,13 @@
-export interface BaseReq {
+export interface BaseModel {
   [key: string]: any;
 }
 
-export interface SignInReq {
+export interface SignInModel {
   login: string;
   password: string;
 }
 
-export interface SignUpReq {
+export interface SignUpModel {
   first_name: string;
   second_name: string;
   login: string;
@@ -16,7 +16,7 @@ export interface SignUpReq {
   phone: string;
 }
 
-export interface ChangeProfileReq {
+export interface ChangeProfileModel {
   first_name: string;
   second_name: string;
   display_name: string;
@@ -25,21 +25,25 @@ export interface ChangeProfileReq {
   phone: string;
 }
 
-export interface ChangePasswordReq {
+export interface ChangePasswordModel {
   oldPassword: string;
   newPassword: string;
 }
 
-export interface CreateChatReq {
+export interface CreateChatModel {
   title: string;
 }
 
-export interface AddUsersToChatReq {
+export interface AddUsersToChatModel {
   users: number[];
   chatId: number;
 }
 
-export interface DeleteUsersFromChatReq {
+export interface DeleteUsersFromChatModel {
   users: number[];
   chatId: number;
+}
+
+export interface FindUserModel {
+  login: string;
 }

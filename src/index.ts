@@ -13,22 +13,33 @@ import { EditPassword } from './pages/profile/password';
 import { Chat } from './pages/chat';
 import { Err404 } from './pages/404';
 import { Err500 } from './pages/500';
+import { AuthController } from './controllers/auth';
 import { Store } from './utils/store';
 
+const auth = new AuthController();
 const router = new Router('.root');
 const store = new Store();
+const appStore = store.getState();
 
-const listener = () => {
-  const appStore = store.getState();
+const protectedRout = () => {
   if (appStore.isLogin === true) {
-    router.go('/messenger');
+    if (appStore.user) {
+      console.log(appStore.user);
+        
+    }
+
+    if (location.pathname === '/') {
+      router.go('/settings');
+    }
   } else {
     router.go('/');
   }
 };
-store.setListener(listener);
+store.setListener(protectedRout);
 
 document.addEventListener('DOMContentLoaded', () => {
+  auth.getUser();
+
   router
     .use('/', Signin)
     .use('/sign-up', Signup)
@@ -39,6 +50,4 @@ document.addEventListener('DOMContentLoaded', () => {
     .use('/404', Err404)
     .use('/500', Err500)
     .start();
-
-    // listener();
 });
