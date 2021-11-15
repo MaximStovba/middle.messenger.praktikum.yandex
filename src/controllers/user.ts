@@ -1,13 +1,15 @@
 // controllers/user.ts
 
-import { ChangeProfileAPI } from "../api/user/change-profile-api";
-import { ChangePasswordAPI } from "../api/user/change-password-api";
-import { ChangeAvatarAPI } from "../api/user/change-avatar-api";
-import { FindUserAPI } from "../api/user/find-user-api";
-import { formValidation, getCurrentForm } from "../utils/validator";
-import { Store } from "../utils/store";
+import { ChangeProfileAPI } from '../api/user/change-profile-api';
+import { ChangePasswordAPI } from '../api/user/change-password-api';
+import { ChangeAvatarAPI } from '../api/user/change-avatar-api';
+import { FindUserAPI } from '../api/user/find-user-api';
+import { formValidation, getCurrentForm } from '../utils/validator';
+import { AuthController } from './auth';
+import { Store } from '../utils/store';
 
 const store = new Store();
+const auth = new AuthController();
 const changeProfileApi = new ChangeProfileAPI();
 const changePasswordApi = new ChangePasswordAPI();
 const changeAvatarApi = new ChangeAvatarAPI();
@@ -19,7 +21,7 @@ export class UserController {
       const validateData = formValidation(event);
 
       if (!validateData.isFormValid) {
-        throw new Error("Ошибка валидации");
+        throw new Error('Ошибка валидации');
       }
 
       const first_name = validateData.inputsValue.first_name;
@@ -30,7 +32,7 @@ export class UserController {
       const phone = validateData.inputsValue.phone;
 
       changeProfileApi
-        .request({ first_name, second_name, display_name, login, email, phone })
+        .update({ first_name, second_name, display_name, login, email, phone })
         .then((res) => {
           if (res.status === 200) {
             console.log(JSON.parse(res.response));
@@ -51,17 +53,17 @@ export class UserController {
       const validateData = formValidation(event);
 
       if (!validateData.isFormValid) {
-        throw new Error("Ошибка валидации");
+        throw new Error('Ошибка валидации');
       }
 
       const oldPassword = validateData.inputsValue.oldPassword;
       const newPassword = validateData.inputsValue.newPassword;
 
       changePasswordApi
-        .request({ oldPassword, newPassword })
+        .update({ oldPassword, newPassword })
         .then((res) => {
           if (res.status === 200) {
-            console.log(JSON.parse(res.response));
+            auth.logout();
           }
         })
         .catch((error) => {
@@ -94,7 +96,7 @@ export class UserController {
     }
   }
 
-  public async findUser(login) {
+  public async findUser(login: string) {
     try {
       findUserApi
         .request({ login })

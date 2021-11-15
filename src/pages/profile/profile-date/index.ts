@@ -6,9 +6,11 @@ import { Block } from '../../../utils/block';
 import { ProfileInput } from '../../../components/profile-input/profile-input';
 import { Button } from '../../../components/button/button';
 import { ProfileButtonBack } from '../../../components/profile-button-back/profile-button-back';
-import { inputValidation, formValidation } from '../../../utils/validator';
+import { inputValidation } from '../../../utils/validator';
+import { UserController } from '../../../controllers/user';
 import { Store } from '../../../utils/store';
 
+const user = new UserController();
 const router = new Router('.root');
 const store = new Store();
 
@@ -16,12 +18,18 @@ function handleBackButtonClick() {
   router.back();
 }
 
+function handleSaveButtonClick(event: Event) {
+  user.changeProfile(event).then(() => {
+    router.go('/settings');
+  });
+}
+
 const email = new ProfileInput({
   title: 'Почта',
   name: 'email',
   id: 'input-login-profile',
   type: 'email',
-  value: 'email@ya.ru',
+  value: '',
   placeholder: 'Введите почту',
   validationMsg: 'Неверный формат почты!',
   settings: { withInternalID: true },
@@ -36,7 +44,7 @@ const login = new ProfileInput({
   name: 'login',
   id: 'input-login-login',
   type: 'text',
-  value: 'Login',
+  value: '',
   placeholder: 'Введите логин',
   validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
@@ -51,7 +59,7 @@ const firstName = new ProfileInput({
   name: 'first_name',
   id: 'input-first-name-profile',
   type: 'text',
-  value: 'Ivan',
+  value: '',
   placeholder: 'Введите имя',
   validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
@@ -66,7 +74,7 @@ const secondName = new ProfileInput({
   name: 'second_name',
   id: 'input-second-name-profile',
   type: 'text',
-  value: 'Ivanov',
+  value: '',
   placeholder: 'Введите фамилию',
   validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
@@ -78,10 +86,10 @@ const secondName = new ProfileInput({
 
 const nickName = new ProfileInput({
   title: 'Имя в чате',
-  name: 'nick_name',
+  name: 'display_name',
   id: 'input-nick-name-profile',
   type: 'text',
-  value: 'Tzar',
+  value: '',
   placeholder: 'Введите имя в чате',
   validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
@@ -96,7 +104,7 @@ const phone = new ProfileInput({
   name: 'phone',
   id: 'input-phone-profile',
   type: 'phone',
-  value: '+79179876500',
+  value: '',
   placeholder: 'Введите телефон',
   validationMsg: 'Неверный формат телефонного номера!',
   settings: { withInternalID: true },
@@ -110,7 +118,7 @@ const saveButton = new Button({
   text: 'Сохранить',
   settings: { withInternalID: true },
   events: {
-    click: formValidation,
+    click: handleSaveButtonClick,
   },
 });
 
@@ -153,7 +161,7 @@ export class EditProfile extends Block {
         value: appStore.user.second_name,
       });
       nickName.setProps({
-        value: appStore.user.display_name,
+        value: appStore.user.display_name ? appStore.user.display_name : '',
       });
       phone.setProps({
         value: appStore.user.phone,

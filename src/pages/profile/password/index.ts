@@ -6,21 +6,26 @@ import { Block } from '../../../utils/block';
 import { ProfileInput } from '../../../components/profile-input/profile-input';
 import { Button } from '../../../components/button/button';
 import { ProfileButtonBack } from '../../../components/profile-button-back/profile-button-back';
-import { inputValidation, formValidation } from '../../../utils/validator';
+import { inputValidation } from '../../../utils/validator';
+import { UserController } from '../../../controllers/user';
 
 const router = new Router('.root');
+const user = new UserController();
 
 function handleBackButtonClick() {
   router.back();
 }
 
+function handleSaveButtonClick(event: Event) {
+  user.changePassword(event);
+}
 
 const oldPassword = new ProfileInput({
   title: 'Старый пароль',
   name: 'oldPassword',
   id: 'input-oldpassword-profile',
   type: 'password',
-  value: 'Ghdjkf678484',
+  value: '',
   placeholder: 'Введите старый пароль',
   validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
@@ -35,7 +40,7 @@ const newPassword = new ProfileInput({
   name: 'newPassword',
   id: 'input-newpassword-profile',
   type: 'password',
-  value: 'Ghdjkf678409',
+  value: '',
   placeholder: 'Введите новый пароль',
   validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
@@ -49,7 +54,7 @@ const saveButton = new Button({
   text: 'Сохранить',
   settings: { withInternalID: true },
   events: {
-    click: formValidation,
+    click: handleSaveButtonClick,
   },
 });
 
