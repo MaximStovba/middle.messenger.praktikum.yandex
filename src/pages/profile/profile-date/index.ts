@@ -122,6 +122,8 @@ const backButton = new ProfileButtonBack({
   },
 });
 
+const appStore = store.getState();
+
 export class EditProfile extends Block {
   constructor() {
     super('div', {
@@ -137,9 +139,6 @@ export class EditProfile extends Block {
   }
 
   componentDidMount() {
-    console.log('profile-date componentDidMount');
-    const appStore = store.getState();
-
     if (appStore.user) {
       email.setProps({
         value: appStore.user.email,

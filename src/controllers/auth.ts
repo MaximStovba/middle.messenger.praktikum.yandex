@@ -47,7 +47,6 @@ export class AuthController {
       signInApi
         .request({ login, password })
         .then((res) => {
-          console.log(res);
           if (res.status === 200) {
             this.getUser();
           }
@@ -96,8 +95,8 @@ export class AuthController {
     try {
       logoutApi
         .request()
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          store.setState({ isLogin: false, user: {} });
         })
         .catch((error) => {
           console.log(error);

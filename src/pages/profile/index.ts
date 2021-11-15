@@ -171,9 +171,6 @@ export class Profile extends Block {
   }
 
   componentDidMount() {
-    console.log('profile componentDidMount');
-    console.log(appStore.user);
-
     if (appStore.user) {
       email.setProps({
         value: appStore.user.email,

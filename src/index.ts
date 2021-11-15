@@ -16,26 +16,14 @@ import { Err500 } from './pages/500';
 import { AuthController } from './controllers/auth';
 import { Store } from './utils/store';
 
-const auth = new AuthController();
-const router = new Router('.root');
-const store = new Store();
-
-const appStore = store.getState();
-
-function protectedRout() {
-  if (appStore.isLogin === true) {
-    if (location.pathname === '/') {
-      router.go('/settings');
-    }
-  } else {
-    router.go('/');
-  }
-}
-
-store.setListener(protectedRout);
-
 document.addEventListener('DOMContentLoaded', () => {
-  auth.getUser();
+  const auth = new AuthController();
+  const router = new Router('.root');
+  const store = new Store();
+  const appStore = store.getState();
+
+  auth.getUser().then(() => router.start());
+
   router
     .use('/', Signin)
     .use('/sign-up', Signup)
@@ -44,6 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
     .use('/edit-password', EditPassword)
     .use('/messenger', Chat)
     .use('/404', Err404)
-    .use('/500', Err500)
-    .start();
+    .use('/500', Err500);
+
+  store.setListener(startRouter);
+
+  function startRouter() {
+    if (appStore.isLogin === true) {
+      if (location.pathname === '/') {
+        router.go('/settings');
+      }
+    } else {
+      router.go('/');
+    }
+    router.start();
+  }
 });
