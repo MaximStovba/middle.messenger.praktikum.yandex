@@ -3,14 +3,19 @@ import { Router } from '../../utils/router';
 import { Templator } from '../../utils/templator';
 import { profileTempl } from './profile.tmpl';
 import { Block } from '../../utils/block';
+import { Input } from '../../components/input/input';
+import { Button } from '../../components/button/button';
 import { ProfileInput } from '../../components/profile-input/profile-input';
 import { ProfileButton } from '../../components/profile-button/profile-button';
 import { ProfileButtonBack } from '../../components/profile-button-back/profile-button-back';
+import { ProfilePatchavatarButton } from '../../components/profile-patchavatar-btn/profile-patchavatar-btn';
 import { inputValidation } from '../../utils/validator';
 import { AuthController } from '../../controllers/auth';
+import { UserController } from '../../controllers/user';
 import { Store } from '../../utils/store';
 
 const auth = new AuthController();
+const user = new UserController();
 const router = new Router('.root');
 const store = new Store();
 
@@ -28,6 +33,18 @@ function handleBackButtonClick() {
 
 function handleExitButtonClick() {
   auth.logout();
+}
+
+function handleOpenPopupAvatarButtonClick() {
+  const el = document.getElementById('popup-add-avatar');
+  el?.classList.add('popup_opened');
+}
+
+function handleAvatarLoadingButtonClick(event: Event) {
+  const el = document.getElementById('popup-add-avatar');
+  user.changeAvatar(event).then(() => {
+    el?.classList.remove('popup_opened');
+  });
 }
 
 const email = new ProfileInput({
@@ -152,7 +169,33 @@ const backButton = new ProfileButtonBack({
   },
 });
 
+const patchavatarButton = new ProfilePatchavatarButton({
+  settings: { withInternalID: true },
+  events: {
+    click: handleOpenPopupAvatarButtonClick,
+  },
+});
+
+const avatarInput = new Input({
+  title: 'Аватар',
+  name: 'avatar',
+  id: 'input-avatar',
+  type: 'file',
+  settings: { withInternalID: true },
+});
+
+const avatarLoadingBtn = new Button({
+  text: 'Загрузить',
+  settings: { withInternalID: true },
+  events: {
+    click: handleAvatarLoadingButtonClick,
+  },
+});
+
 const appStore = store.getState();
+const nameAvatar = '';
+const urlAvatar =
+  'https://drasler.ru/wp-content/uploads/2019/06/Фото-девушки-на-закате-силуэт-–-очень-красивые012.jpg';
 
 export class Profile extends Block {
   constructor() {
@@ -167,11 +210,22 @@ export class Profile extends Block {
       editPasswordButton,
       exitButton,
       backButton,
+      nameAvatar,
+      urlAvatar,
+      patchavatarButton,
+      avatarInput,
+      avatarLoadingBtn,
     });
   }
 
   componentDidMount() {
     if (appStore.user) {
+      this.setProps({
+        nameAvatar: appStore.user.first_name,
+      });
+      this.setProps({
+        urlAvatar: `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`,
+      });
       email.setProps({
         value: appStore.user.email,
       });
@@ -206,6 +260,11 @@ export class Profile extends Block {
       editPasswordButton: this.props.editPasswordButton.getContentAsString(),
       exitButton: this.props.exitButton.getContentAsString(),
       backButton: this.props.backButton.getContentAsString(),
+      patchavatarButton: this.props.patchavatarButton.getContentAsString(),
+      avatarLoadingBtn: this.props.avatarLoadingBtn.getContentAsString(),
+      avatarInput: this.props.avatarInput.getContentAsString(),
+      nameAvatar: this.props.nameAvatar,
+      urlAvatar: this.props.urlAvatar,
     });
     return str.firstChild;
   }

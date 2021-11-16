@@ -80,10 +80,9 @@ export class UserController {
       const data = new FormData(form);
 
       changeAvatarApi
-        .request(data)
+        .update(data)
         .then((res) => {
           if (res.status === 200) {
-            console.log(JSON.parse(res.response));
             const user = JSON.parse(res.response);
             store.setState({ user });
           }

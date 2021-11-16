@@ -7,9 +7,14 @@ export const profileTempl = `
   </div>
   <div class="profile__block-right">
     <form class="profile__container">
-      <div class="profile__photo">
-        <button type='button' class='profile_btn-avatar'></button>
-        <p class='profile_name'>Иван</p>
+      <div class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src={{urlAvatar}} alt="Жак-Ив Кусто" class="profile__avatar-img" />
+          <div class="profile__avatar-overlay">
+            {{patchavatarButton}}
+          </div>
+        </div>
+        <p class="profile_name">{{nameAvatar}}</p>
       </div>
       <div class="profile__about">
         {{email}}
@@ -24,6 +29,13 @@ export const profileTempl = `
         {{editPasswordButton}}
         {{exitButton}}
       </div>
+    </form>
+  </div>
+  <div id="popup-add-avatar" class="popup">
+    <form class="popup-form__modal">
+      <p class="popup-form__title">Добавить фото</p>
+      {{avatarInput}}
+      {{avatarLoadingBtn}}
     </form>
   </div>
 </section>

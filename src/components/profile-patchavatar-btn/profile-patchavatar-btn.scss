@@ -1,0 +1,21 @@
+@import '../../pages/vars';
+@import '../../pages/type';
+
+.profile__patchavatar-btn {
+  padding: 0;
+  width: 26px;
+  height: 26px;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  color: white;
+  border-width: 0;
+  background-color: transparent;
+  visibility: hidden;
+}
+
+.profile__patchavatar-btn:hover {
+  cursor: pointer;
+}
