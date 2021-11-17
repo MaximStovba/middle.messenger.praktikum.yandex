@@ -4,7 +4,7 @@ import { sendMsgInputTempl } from "./send-msg-input.tmpl";
 import { Templator } from "../../utils/templator";
 import { Block } from "../../utils/block";
 
-export class sendMsgInput extends Block {
+export class SendMsgInput extends Block {
   constructor(props: Record<string, any>) {
     super("div", props, "send-msg-input-block");
   }

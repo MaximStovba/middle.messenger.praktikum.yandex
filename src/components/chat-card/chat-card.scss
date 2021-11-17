@@ -1,0 +1,95 @@
+@import '../../pages/vars';
+@import '../../pages/type';
+
+.chat-user-card {
+  margin: 12px 10px;
+  display: grid;
+  grid-template-columns: 47px 1fr minmax(min-content, max-content);
+  grid-template-rows: 13px 34px;
+  column-gap: 10px;
+  grid-template-areas:
+    'avatar name msg-time'
+    'avatar last-msg msg-num';
+}
+
+.user-card__avatar {
+  grid-area: avatar;
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  background: $grey;
+}
+
+.user-card__name {
+  grid-area: name;
+  align-self: start;
+  justify-self: start;
+  margin: 0;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+  color: $dark-blue;
+}
+
+.user-card__last-msg {
+  grid-area: last-msg;
+  margin: 4px 0 0;
+  align-self: start;
+  justify-self: start;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: $dark-grey;
+}
+
+.user-card__you-msg {
+  margin: 0;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: $dark-blue;
+}
+
+.user-card__you-msg_hidden {
+  display: none;
+}
+
+.user-card__msg-time {
+  grid-area: msg-time;
+  margin: 0;
+  align-self: start;
+  justify-self: end;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: right;
+  color: $font-sans;
+}
+
+.user-card__msg-num {
+  grid-area: msg-num;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $orange;
+  align-self: end;
+  justify-self: end;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 12px;
+  color: $white;
+}

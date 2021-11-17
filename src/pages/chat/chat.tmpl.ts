@@ -4,40 +4,21 @@ export const chatTempl = `
 <section class="chat-page">
   <div class="chat-page__users-block">
     <div class="chat-menu">
-      <button type="button" class="btn-menu-chat btn-create-chat">
-        Создать чат
-      </button>
-      <button type="button" class="btn-menu-chat btn-open-profile">
-        Профиль &gt;
-      </button>
+
+      {{createChatBtn}}
+
+      {{backToProfileBtn}}
+
     </div>
     <input type="text" class="input-search" placeholder="Поиск"></input>
 
     <hr class="chat-separator" />
 
-    <div class="chat-user-card">
-      <h6 class="user-card__name">Алена</h6>
-      <p class="user-card__last-msg">
-        <span class="user-card__you-msg">Вы: </span>
-        Круто!
-      </p>
-      <p class="user-card__msg-time">11:08</p>
-      <span class="user-card__msg-num">5</span>
-      <div class="user-card__avatar"></div>
-    </div>
+    {{chatCard1}}
 
     <hr class="chat-separator" />
 
-    <div class="chat-user-card">
-      <h6 class="user-card__name">Юлия</h6>
-      <p class="user-card__last-msg">
-        <span class="user-card__you-msg">Вы: </span>
-        Ок!
-      </p>
-      <p class="user-card__msg-time">19:08</p>
-      <span class="user-card__msg-num">3</span>
-      <div class="user-card__avatar"></div>
-    </div>
+    {{chatCard1}}
 
     <hr class="chat-separator" />
 
