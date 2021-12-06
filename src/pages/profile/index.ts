@@ -1,34 +1,34 @@
-import './profile.scss';
-import { Router } from '../../utils/router';
-import { Templator } from '../../utils/templator';
-import { profileTempl } from './profile.tmpl';
-import { Block } from '../../utils/block';
-import { Input } from '../../components/input/input';
-import { Button } from '../../components/button/button';
-import { ProfileInput } from '../../components/profile-input/profile-input';
-import { ProfileButton } from '../../components/profile-button/profile-button';
-import { ProfileButtonBack } from '../../components/profile-button-back/profile-button-back';
-import { ProfilePatchavatarButton } from '../../components/profile-patchavatar-btn/profile-patchavatar-btn';
-import { inputValidation } from '../../utils/validator';
-import { AuthController } from '../../controllers/auth';
-import { UserController } from '../../controllers/user';
-import { Store } from '../../utils/store';
+import "./profile.scss";
+import { Router } from "../../utils/router";
+import { Templator } from "../../utils/templator";
+import { profileTempl } from "./profile.tmpl";
+import { Block } from "../../utils/block";
+import { Input } from "../../components/input/input";
+import { Button } from "../../components/button/button";
+import { ProfileInput } from "../../components/profile-input/profile-input";
+import { ProfileButton } from "../../components/profile-button/profile-button";
+import { ProfileButtonBack } from "../../components/profile-button-back/profile-button-back";
+import { ProfilePatchavatarButton } from "../../components/profile-patchavatar-btn/profile-patchavatar-btn";
+import { inputValidation } from "../../utils/validator";
+import { AuthController } from "../../controllers/auth";
+import { UserController } from "../../controllers/user";
+import { Store } from "../../utils/store";
 
 const auth = new AuthController();
 const user = new UserController();
-const router = new Router('.root');
+const router = new Router(".root");
 const store = new Store();
 
 function handleEditDataButtonClick() {
-  router.go('/edit-profile');
+  router.go("/edit-profile");
 }
 
 function handleEditPasswordButtonClick() {
-  router.go('/edit-password');
+  router.go("/edit-password");
 }
 
 function handleBackButtonClick() {
-  router.go('/messenger');
+  router.go("/messenger");
 }
 
 function handleExitButtonClick() {
@@ -36,170 +36,169 @@ function handleExitButtonClick() {
 }
 
 function handleOpenPopupAvatarButtonClick() {
-  const el = document.getElementById('popup-add-avatar');
-  el?.classList.add('popup_opened');
+  const el = document.getElementById("popup-add-avatar");
+  el?.classList.add("popup_opened");
 }
 
 function handleAvatarLoadingButtonClick(event: Event) {
-  const el = document.getElementById('popup-add-avatar');
+  const el = document.getElementById("popup-add-avatar");
   user.changeAvatar(event).then(() => {
-    el?.classList.remove('popup_opened');
+    el?.classList.remove("popup_opened");
   });
 }
 
 const email = new ProfileInput({
-  title: 'Почта',
-  name: 'email',
-  id: 'input-login-profile',
-  type: 'email',
-  value: '',
-  placeholder: 'Введите почту',
-  validationMsg: 'Неверный формат почты!',
+  title: "Почта",
+  name: "email",
+  id: "input-login-profile",
+  type: "email",
+  value: "",
+  placeholder: "Введите почту",
+  validationMsg: "Неверный формат почты!",
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation,
-  },
+    blur: inputValidation
+  }
 });
 
 const login = new ProfileInput({
-  title: 'Логин',
-  name: 'login',
-  id: 'input-login-login',
-  type: 'text',
-  value: '',
-  placeholder: 'Введите логин',
-  validationMsg: 'Неверный формат!',
+  title: "Логин",
+  name: "login",
+  id: "input-login-login",
+  type: "text",
+  value: "",
+  placeholder: "Введите логин",
+  validationMsg: "Неверный формат!",
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation,
-  },
+    blur: inputValidation
+  }
 });
 
 const firstName = new ProfileInput({
-  title: 'Имя',
-  name: 'first_name',
-  id: 'input-first-name-profile',
-  type: 'text',
-  value: '',
-  placeholder: 'Введите имя',
-  validationMsg: 'Неверный формат!',
+  title: "Имя",
+  name: "first_name",
+  id: "input-first-name-profile",
+  type: "text",
+  value: "",
+  placeholder: "Введите имя",
+  validationMsg: "Неверный формат!",
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation,
-  },
+    blur: inputValidation
+  }
 });
 
 const secondName = new ProfileInput({
-  title: 'Фамилия',
-  name: 'second_name',
-  id: 'input-second-name-profile',
-  type: 'text',
-  value: '',
-  placeholder: 'Введите фамилию',
-  validationMsg: 'Неверный формат!',
+  title: "Фамилия",
+  name: "second_name",
+  id: "input-second-name-profile",
+  type: "text",
+  value: "",
+  placeholder: "Введите фамилию",
+  validationMsg: "Неверный формат!",
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation,
-  },
+    blur: inputValidation
+  }
 });
 
 const nickName = new ProfileInput({
-  title: 'Имя в чате',
-  name: 'display_name',
-  id: 'input-display-name-profile',
-  type: 'text',
-  value: '',
-  placeholder: 'Введите имя в чате',
-  validationMsg: 'Неверный формат!',
+  title: "Имя в чате",
+  name: "display_name",
+  id: "input-display-name-profile",
+  type: "text",
+  value: "",
+  placeholder: "Введите имя в чате",
+  validationMsg: "Неверный формат!",
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation,
-  },
+    blur: inputValidation
+  }
 });
 
 const phone = new ProfileInput({
-  title: 'Телефон',
-  name: 'phone',
-  id: 'input-phone-profile',
-  type: 'phone',
-  value: '',
-  placeholder: 'Введите телефон',
-  validationMsg: 'Неверный формат телефонного номера!',
+  title: "Телефон",
+  name: "phone",
+  id: "input-phone-profile",
+  type: "phone",
+  value: "",
+  placeholder: "Введите телефон",
+  validationMsg: "Неверный формат телефонного номера!",
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation,
-  },
+    blur: inputValidation
+  }
 });
 
 const editDataButton = new ProfileButton({
-  text: 'Изменить данные',
+  text: "Изменить данные",
   settings: { withInternalID: true },
   events: {
-    click: handleEditDataButtonClick,
-  },
+    click: handleEditDataButtonClick
+  }
 });
 
 const editPasswordButton = new ProfileButton({
-  text: 'Изменить пароль',
+  text: "Изменить пароль",
   settings: { withInternalID: true },
   events: {
-    click: handleEditPasswordButtonClick,
-  },
+    click: handleEditPasswordButtonClick
+  }
 });
 
 const exitButton = new ProfileButton({
-  text: 'Выйти',
+  text: "Выйти",
   settings: { withInternalID: true },
   events: {
-    click: handleExitButtonClick,
-  },
+    click: handleExitButtonClick
+  }
 });
 
 const backButton = new ProfileButtonBack({
-  text: '<',
+  text: "<",
   settings: { withInternalID: true },
   events: {
-    click: handleBackButtonClick,
-  },
+    click: handleBackButtonClick
+  }
 });
 
 const patchavatarButton = new ProfilePatchavatarButton({
   settings: { withInternalID: true },
   events: {
-    click: handleOpenPopupAvatarButtonClick,
-  },
+    click: handleOpenPopupAvatarButtonClick
+  }
 });
 
 const avatarInput = new Input({
-  title: 'Аватар',
-  name: 'avatar',
-  id: 'input-avatar',
-  type: 'file',
-  settings: { withInternalID: true },
+  title: "Аватар",
+  name: "avatar",
+  id: "input-avatar",
+  type: "file",
+  settings: { withInternalID: true }
 });
 
 const avatarLoadingBtn = new Button({
-  text: 'Загрузить',
+  text: "Загрузить",
   settings: { withInternalID: true },
   events: {
-    click: handleAvatarLoadingButtonClick,
-  },
+    click: handleAvatarLoadingButtonClick
+  }
 });
 
 const appStore = store.getState();
-const nameAvatar = '';
-const urlAvatar =
-  'https://drasler.ru/wp-content/uploads/2019/06/Фото-девушки-на-закате-силуэт-–-очень-красивые012.jpg';
+const nameAvatar = "";
+const urlAvatar = "";
 
 export class Profile extends Block {
   constructor() {
-    super('div', {
+    super("div", {
       email,
       login,
       firstName,
@@ -214,35 +213,35 @@ export class Profile extends Block {
       urlAvatar,
       patchavatarButton,
       avatarInput,
-      avatarLoadingBtn,
+      avatarLoadingBtn
     });
   }
 
   componentDidMount() {
     if (appStore.user) {
       this.setProps({
-        nameAvatar: appStore.user.first_name,
+        nameAvatar: appStore.user.first_name
       });
       this.setProps({
-        urlAvatar: `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`,
+        urlAvatar: `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`
       });
       email.setProps({
-        value: appStore.user.email,
+        value: appStore.user.email
       });
       login.setProps({
-        value: appStore.user.login,
+        value: appStore.user.login
       });
       firstName.setProps({
-        value: appStore.user.first_name,
+        value: appStore.user.first_name
       });
       secondName.setProps({
-        value: appStore.user.second_name,
+        value: appStore.user.second_name
       });
       nickName.setProps({
-        value: appStore.user.display_name ? appStore.user.display_name : '',
+        value: appStore.user.display_name ? appStore.user.display_name : ""
       });
       phone.setProps({
-        value: appStore.user.phone,
+        value: appStore.user.phone
       });
     }
   }
@@ -264,7 +263,7 @@ export class Profile extends Block {
       avatarLoadingBtn: this.props.avatarLoadingBtn.getContentAsString(),
       avatarInput: this.props.avatarInput.getContentAsString(),
       nameAvatar: this.props.nameAvatar,
-      urlAvatar: this.props.urlAvatar,
+      urlAvatar: this.props.urlAvatar
     });
     return str.firstChild;
   }

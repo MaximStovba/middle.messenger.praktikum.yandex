@@ -9,7 +9,7 @@ export const profileTempl = `
     <form class="profile__container">
       <div class="profile__avatar">
         <div class="profile__avatar-container">
-          <img src={{urlAvatar}} alt="Жак-Ив Кусто" class="profile__avatar-img" />
+          <img src={{urlAvatar}} alt="Аватар" class="profile__avatar-img" />
           <div class="profile__avatar-overlay">
             {{patchavatarButton}}
           </div>

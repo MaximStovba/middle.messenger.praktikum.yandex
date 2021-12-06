@@ -1,4 +1,4 @@
-import { EventBus } from './event-bus';
+import { EventBus } from "./event-bus";
 
 interface State {
   [key: string]: any;
@@ -6,11 +6,19 @@ interface State {
 
 const initialState: State = {
   isLogin: false,
+  chats: [
+    {
+      name: "Виктория",
+      lastMsg: "Новый чат",
+      msgTime: "15:30",
+      msgNum: "1"
+    }
+  ]
 };
 
 export class Store {
   static EVENTS = {
-    FLOW_SDU: 'flow:store-did-update',
+    FLOW_SDU: "flow:store-did-update"
   };
 
   static __instance: Store;
@@ -50,7 +58,7 @@ export class Store {
     return new Proxy(state, {
       get(target, prop: string) {
         const value = target[prop];
-        return typeof value === 'function' ? value.bind(target) : value;
+        return typeof value === "function" ? value.bind(target) : value;
       },
       set(target, prop: string, value: unknown) {
         target[prop] = value;
@@ -58,8 +66,8 @@ export class Store {
         return true;
       },
       deleteProperty() {
-        throw new Error('Нет доступа');
-      },
+        throw new Error("Нет доступа");
+      }
     });
   }
 }

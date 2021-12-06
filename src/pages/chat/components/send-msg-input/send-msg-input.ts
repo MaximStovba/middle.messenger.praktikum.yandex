@@ -1,12 +1,12 @@
-import "./send-msg-input.scss";
-import { sendMsgInputTempl } from "./send-msg-input.tmpl";
+import './send-msg-input.scss';
+import { sendMsgInputTempl } from './send-msg-input.tmpl';
 
-import { Templator } from "../../utils/templator";
-import { Block } from "../../utils/block";
+import { Templator } from '../../../../utils/templator';
+import { Block } from '../../../../utils/block';
 
 export class SendMsgInput extends Block {
   constructor(props: Record<string, any>) {
-    super("div", props, "send-msg-input-block");
+    super('div', props, 'send-msg-input-block');
   }
 
   render() {
@@ -19,7 +19,7 @@ export class SendMsgInput extends Block {
       id: this.props.id,
       type: this.props.type,
       placeholder: this.props.placeholder,
-      validationMsg: this.props.validationMsg
+      validationMsg: this.props.validationMsg,
     });
     return str;
   }

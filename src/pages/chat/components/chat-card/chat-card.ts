@@ -1,8 +1,8 @@
 import './chat-card.scss';
 import { chatCardTempl } from './chat-card.tmpl';
 
-import { Templator } from '../../utils/templator';
-import { Block } from '../../utils/block';
+import { Templator } from '../../../../utils/templator';
+import { Block } from '../../../../utils/block';
 
 export class ChatCard extends Block {
   constructor(props: Record<string, any>) {

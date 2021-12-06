@@ -7,10 +7,12 @@ export const passwordTempl = `
   </div>
   <div class="profile__block-right">
     <form class="profile__container">
-      <div class="profile__photo">
-        <button type='button' class='profile_btn-avatar'></button>
-        <p class='profile_name'>Иван</p>
-      </div>
+    <div class="profile__avatar">
+    <div class="profile__avatar-container">
+      <img src={{urlAvatar}} alt="Аватар" class="profile__avatar-img" />
+    </div>
+    <p class="profile_name">{{nameAvatar}}</p>
+  </div>
       <div class="profile__password">
         {{oldPassword}}
         {{newPassword}}

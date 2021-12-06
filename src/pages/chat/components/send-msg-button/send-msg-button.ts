@@ -1,8 +1,8 @@
 import "./send-msg-button.scss";
 import { sendMsgBtnTempl } from "./send-msg-button.tmpl";
 
-import { Templator } from "../../utils/templator";
-import { Block } from "../../utils/block";
+import { Templator } from "../../../../utils/templator";
+import { Block } from "../../../../utils/block";
 
 export class SendMsgButton extends Block {
   constructor(props: Record<string, any>) {

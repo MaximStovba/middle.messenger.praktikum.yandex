@@ -4,6 +4,7 @@ import { SignInAPI } from '../api/auth/signin-api';
 import { SignUpAPI } from '../api/auth/signup-api';
 import { LogoutAPI } from '../api/auth/logout-api';
 import { GetUserAPI } from '../api/auth/get-user-api';
+import { GetChatsAPI } from '../api/chats/get-chats-api';
 import { Router } from '../utils/router';
 import { formValidation } from '../utils/validator';
 import { Store } from '../utils/store';
@@ -14,6 +15,7 @@ const signInApi = new SignInAPI();
 const signUpApi = new SignUpAPI();
 const logoutApi = new LogoutAPI();
 const getUserApi = new GetUserAPI();
+const getChatsApi = new GetChatsAPI();
 
 export class AuthController {
   public async getUser() {
@@ -23,7 +25,17 @@ export class AuthController {
         .then((res) => {
           if (res.status === 200) {
             const user = JSON.parse(res.response);
-            store.setState({ isLogin: true, user });
+            getChatsApi
+              .request()
+              .then((res) => {
+                if (res.status === 200) {
+                  const chats = JSON.parse(res.response);
+                  store.setState({ isLogin: true, user, chats });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }
         })
         .catch((error) => {
