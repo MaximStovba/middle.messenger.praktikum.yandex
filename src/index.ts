@@ -14,15 +14,21 @@ import { Chat } from './pages/chat';
 import { Err404 } from './pages/404';
 import { Err500 } from './pages/500';
 import { AuthController } from './controllers/auth';
+import { ChatsController } from './controllers/chats';
 import { Store } from './utils/store';
 
 document.addEventListener('DOMContentLoaded', () => {
   const auth = new AuthController();
+  const chats = new ChatsController();
   const router = new Router('.root');
   const store = new Store();
   const appStore = store.getState();
 
-  auth.getUser().then(() => router.start());
+  auth.getUser().then(() => {
+    chats.getChats().then(() => {
+      router.start();
+    });
+  });
 
   router
     .use('/', Signin)
@@ -34,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .use('/404', Err404)
     .use('/500', Err500);
 
-  store.setListener(startRouter);
+  store.setListener(startRouter, 'LOGIN');
 
   function startRouter() {
     if (appStore.isLogin === true) {

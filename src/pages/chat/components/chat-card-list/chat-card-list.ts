@@ -4,18 +4,16 @@ import { chatCardListTempl } from './chat-card-list.tmpl';
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 import { ChatCard } from '../chat-card/chat-card';
-import { Store } from '../../../../utils/store';
-
-const store = new Store();
-const appStore = store.getState();
 
 export class ChatCardList extends Block {
-  constructor(props: Record<string, any>) {
-    super('div', props);
+  constructor() {
+    super('div', {
+      chats: [],
+    });
   }
 
   render() {
-    const chats = appStore.chats;
+    const chats = this.props.chats;
 
     let chatsList: any = [];
 

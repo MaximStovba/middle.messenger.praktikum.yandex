@@ -1,4 +1,4 @@
-import { EventBus } from "./event-bus";
+import { EventBus } from './event-bus';
 
 interface State {
   [key: string]: any;
@@ -6,19 +6,13 @@ interface State {
 
 const initialState: State = {
   isLogin: false,
-  chats: [
-    {
-      name: "Виктория",
-      lastMsg: "Новый чат",
-      msgTime: "15:30",
-      msgNum: "1"
-    }
-  ]
+  chats: [],
 };
 
 export class Store {
   static EVENTS = {
-    FLOW_SDU: "flow:store-did-update"
+    FLOW_LOGIN_DU: 'flow:login-did-update',
+    FLOW_CHATS_DU: 'flow:chats-did-update',
   };
 
   static __instance: Store;
@@ -37,8 +31,13 @@ export class Store {
     Store.__instance = this;
   }
 
-  setListener(listener: () => unknown) {
-    this.eventBus().on(Store.EVENTS.FLOW_SDU, listener.bind(this));
+  setListener(listener: () => unknown, action: string) {
+    if (action === 'LOGIN') {
+      this.eventBus().on(Store.EVENTS.FLOW_LOGIN_DU, listener.bind(this));
+    }
+    if (action === 'CHATS') {
+      this.eventBus().on(Store.EVENTS.FLOW_CHATS_DU, listener.bind(this));
+    }
   }
 
   getState() {
@@ -58,16 +57,21 @@ export class Store {
     return new Proxy(state, {
       get(target, prop: string) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, value: unknown) {
         target[prop] = value;
-        self.eventBus().emit(Store.EVENTS.FLOW_SDU);
+        if (prop === 'isLogin' || prop === 'user') {
+          self.eventBus().emit(Store.EVENTS.FLOW_LOGIN_DU);
+        }
+        if (prop === 'chats') {
+          self.eventBus().emit(Store.EVENTS.FLOW_CHATS_DU);
+        }
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
-      }
+        throw new Error('Нет доступа');
+      },
     });
   }
 }
