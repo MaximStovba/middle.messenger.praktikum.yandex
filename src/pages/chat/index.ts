@@ -5,7 +5,6 @@ import { chatTempl } from './chat.tmpl';
 import { Block } from '../../utils/block';
 import { Input } from '../../components/input/input';
 import { Button } from '../../components/button/button';
-
 import { ChatCardList } from './components/chat-card-list/chat-card-list';
 import { SendMsgInput } from './components/send-msg-input/send-msg-input';
 import { SendMsgButton } from './components/send-msg-button/send-msg-button';
@@ -14,12 +13,8 @@ import { inputValidation, formValidation } from '../../utils/validator';
 import { ChatsController } from '../../controllers/chats';
 import { Store } from '../../utils/store';
 
-const store = new Store();
 const router = new Router('.root');
 const chats = new ChatsController();
-
-const appStore = store.getState();
-store.setListener(chatsRender, 'CHATS');
 
 function openPopupNewChat() {
   const el = document.getElementById('popup-add-chat');
@@ -38,12 +33,6 @@ function handleCreateNewChatButtonClick(event: Event) {
 }
 
 const chatCardList = new ChatCardList();
-
-function chatsRender() {
-  const chats = appStore.chats;
-  chatCardList.setProps({ chats });
-  console.log('чаты изменились');
-}
 
 const message = new SendMsgInput({
   name: 'message',
@@ -101,6 +90,9 @@ const createNewChatBtn = new Button({
   },
 });
 
+const store: Store = new Store();
+const appStore = store.getState();
+
 export class Chat extends Block {
   constructor() {
     super('div', {
@@ -112,6 +104,11 @@ export class Chat extends Block {
       chatNameInput,
       createNewChatBtn,
     });
+    store.setListener(this.componentDidMount.bind(this), 'CHATS');
+  }
+
+  componentDidMount() {
+    this.props.chatCardList.setProps({ chats: appStore.chats });
   }
 
   render() {

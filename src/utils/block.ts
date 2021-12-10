@@ -1,5 +1,5 @@
-import { EventBus } from "./event-bus";
-import { v4 as makeUUID } from "uuid";
+import { EventBus } from './event-bus';
+import { v4 as makeUUID } from 'uuid';
 
 export type Property = Record<string, any>;
 
@@ -14,10 +14,10 @@ export class Block {
     throw new Error('Method not implemented.');
   }
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_CDU: "flow:component-did-update",
-    FLOW_RENDER: "flow:render"
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
   };
 
   private _element: HTMLElement;
@@ -30,12 +30,12 @@ export class Block {
 
   private eventBus: () => EventBus;
 
-  constructor(tagName = "div", props = {}, className?: string) {
+  constructor(tagName = 'div', props = {}, className?: string) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
       props,
-      className
+      className,
     };
 
     this._id = makeUUID();
@@ -96,9 +96,9 @@ export class Block {
     return this._element;
   }
 
-  _bindEvent(e: Event, eventFn: () => void) {
+  _bindEvent(e: Event, eventFn: (e: Event) => void) {
     const target = e.target as HTMLElement;
-    const dataId = target.getAttribute("data-id");
+    const dataId = target.getAttribute('data-id');
     if (target != null) {
       if (dataId === this._id) {
         e.preventDefault();
@@ -112,7 +112,7 @@ export class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      document.querySelector(".root")?.addEventListener(
+      document.querySelector('.root')?.addEventListener(
         eventName,
         (evt) => {
           this._bindEvent(evt, events[eventName]);
@@ -126,7 +126,7 @@ export class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      document.querySelector(".root")?.removeEventListener(eventName, (evt) => {
+      document.querySelector('.root')?.removeEventListener(eventName, (evt) => {
         this._bindEvent(evt, events[eventName]);
       });
     });
@@ -177,7 +177,7 @@ export class Block {
     return new Proxy(props, {
       get(target, prop: string) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, value: unknown) {
         target[prop] = value;
@@ -186,8 +186,8 @@ export class Block {
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
-      }
+        throw new Error('Нет доступа');
+      },
     });
   }
 
@@ -195,7 +195,7 @@ export class Block {
     const { settings } = this.props;
     const element = document.createElement(tagName);
     if (settings && settings.withInternalID) {
-      element.setAttribute("data-id", this._id);
+      element.setAttribute('data-id', this._id);
     }
     if (className) {
       element.classList.add(className);
@@ -204,10 +204,10 @@ export class Block {
   }
 
   show() {
-    this.getContent().style.display = "block";
+    this.getContent().style.display = 'block';
   }
 
   hide() {
-    this.getContent().style.display = "none";
+    this.getContent().style.display = 'none';
   }
 }

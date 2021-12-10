@@ -26,21 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   auth.getUser().then(() => {
     chats.getChats().then(() => {
+      router
+        .use('/', Signin)
+        .use('/sign-up', Signup)
+        .use('/settings', Profile)
+        .use('/edit-profile', EditProfile)
+        .use('/edit-password', EditPassword)
+        .use('/messenger', Chat)
+        .use('/404', Err404)
+        .use('/500', Err500);
+
       router.start();
     });
   });
 
-  router
-    .use('/', Signin)
-    .use('/sign-up', Signup)
-    .use('/settings', Profile)
-    .use('/edit-profile', EditProfile)
-    .use('/edit-password', EditPassword)
-    .use('/messenger', Chat)
-    .use('/404', Err404)
-    .use('/500', Err500);
-
   store.setListener(startRouter, 'LOGIN');
+  store.setListener(startRouter, 'CHATS');
 
   function startRouter() {
     if (appStore.isLogin === true) {
