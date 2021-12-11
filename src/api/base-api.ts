@@ -16,7 +16,7 @@ export class BaseAPI {
     throw new Error('Not implemented');
   }
 
-  delete(): Promise<XMLHttpRequest> {
+  delete(_data?: BaseModel | unknown): Promise<XMLHttpRequest> {
     throw new Error('Not implemented');
   }
 }

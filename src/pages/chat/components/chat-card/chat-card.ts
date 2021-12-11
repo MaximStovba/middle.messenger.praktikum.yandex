@@ -1,25 +1,13 @@
 import './chat-card.scss';
 import { chatCardTempl } from './chat-card.tmpl';
-import { ChatDeleteButton } from '../../../chat/components/chat-delete-btn/chat-delete-btn';
 import profileWithoutPhoto from '../../../../../static/img/profile-without-photo.svg';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 
-function handleDeleteChatButtonClick() {
-  console.log('handleDeleteChatButtonClick');
-}
-
-const chatDeleteButton = new ChatDeleteButton({
-  settings: { withInternalID: true },
-  events: {
-    click: handleDeleteChatButtonClick,
-  },
-});
-
 export class ChatCard extends Block {
   constructor(props: Record<string, any>) {
-    super('div', { ...props, chatDeleteButton }, 'chat-user-card');
+    super('div', props, 'chat-user-card');
   }
 
   render() {

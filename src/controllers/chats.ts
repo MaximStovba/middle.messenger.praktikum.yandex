@@ -2,6 +2,7 @@
 
 import { GetChatsAPI } from '../api/chats/get-chats-api';
 import { CreateChatAPI } from '../api/chats/create-chat-api';
+import { DeleteChatAPI } from '../api/chats/delete-chat-api';
 import { AddUserToChatAPI } from '../api/chats/add-user-to-chat-api';
 import { DeleteUserFromChatAPI } from '../api/chats/delete-user-from-chat-api';
 import { formValidation } from '../utils/validator';
@@ -10,6 +11,7 @@ import { Store } from '../utils/store';
 const store = new Store();
 const getChatsApi = new GetChatsAPI();
 const createChatApi = new CreateChatAPI();
+const deleteChatApi = new DeleteChatAPI();
 const addUserToChatApi = new AddUserToChatAPI();
 const deleteUserFromChatApi = new DeleteUserFromChatAPI();
 
@@ -46,7 +48,28 @@ export class ChatsController {
         .create({ title })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res);
+            const chat = JSON.parse(res.response);
+            console.log(chat);
+            this.getChats();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async deleteChat(chatId: number) {
+    try {
+      deleteChatApi
+        .delete({ chatId })
+        .then((res) => {
+          if (res.status === 200) {
+            const response = JSON.parse(res.response);
+            console.log(response.result.id);
+            this.getChats();
           }
         })
         .catch((error) => {

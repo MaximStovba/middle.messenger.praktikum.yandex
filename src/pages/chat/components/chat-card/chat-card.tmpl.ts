@@ -8,9 +8,9 @@ export const chatCardTempl = `
   </p>
   <p class="user-card__msg-time">{{msgTime}}</p>
   <span class="user-card__msg-num">{{msgNum}}</span>
-  <div class="user-card__avatar" id={{cardId}}>
+  <div class="user-card__avatar" data-id={{cardId}}>
     <img src={{urlAvatar}} alt="Аватар" class="user-card__avatar-img" />
-    <div class="user-card__avatar-overlay">
+    <div class="user-card__avatar-overlay" data-id={{cardId}}>
       {{delChatButton}}
     </div>
   </div>

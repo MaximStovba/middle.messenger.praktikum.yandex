@@ -34,6 +34,10 @@ export interface CreateChatModel {
   title: string;
 }
 
+export interface DeleteChatModel {
+  chatId: number;
+}
+
 export interface AddUsersToChatModel {
   users: number[];
   chatId: number;
