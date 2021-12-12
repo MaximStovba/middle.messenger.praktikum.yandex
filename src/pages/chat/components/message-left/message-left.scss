@@ -1,0 +1,30 @@
+@import '../../../../pages/vars';
+@import '../../../../pages/type';
+
+.message-left {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message-left__text {
+  margin: 0;
+  max-width: 600px;
+  padding: 24px 20px;
+  background: $light-blue;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+
+  @include caption;
+
+  color: $dark;
+}
+
+.message-left__time {
+  margin-top: 11px;
+
+  @include body-2;
+
+  color: $dark-grey;
+}

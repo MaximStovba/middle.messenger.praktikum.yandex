@@ -6,6 +6,7 @@ import { Block } from '../../utils/block';
 import { Input } from '../../components/input/input';
 import { Button } from '../../components/button/button';
 import { ChatCardList } from './components/chat-card-list/chat-card-list';
+import { MessageList } from './components/message-list/message-list';
 import { SendMsgInput } from './components/send-msg-input/send-msg-input';
 import { SendMsgButton } from './components/send-msg-button/send-msg-button';
 import { BtnMenuChat } from './components/btn-menu-chat/btn-menu-chat';
@@ -33,6 +34,8 @@ function handleCreateNewChatButtonClick(event: Event) {
 }
 
 const chatCardList = new ChatCardList();
+
+const messageList = new MessageList();
 
 const message = new SendMsgInput({
   name: 'message',
@@ -97,6 +100,7 @@ export class Chat extends Block {
   constructor() {
     super('div', {
       chatCardList,
+      messageList,
       message,
       sendButton,
       openPopupNewChatBtn,
@@ -115,6 +119,7 @@ export class Chat extends Block {
     const tmpl = new Templator(chatTempl);
     const str = tmpl.compile({
       chatCardList: this.props.chatCardList.getContentAsString(),
+      messageList: this.props.messageList.getContentAsString(),
       message: this.props.message.getContentAsString(),
       sendButton: this.props.sendButton.getContentAsString(),
       openPopupNewChatBtn: this.props.openPopupNewChatBtn.getContentAsString(),

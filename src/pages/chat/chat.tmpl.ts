@@ -35,17 +35,7 @@ export const chatTempl = `
 
       </div>
 
-      <div class="chat-pablic-area">
-        <p class="chat-date">&mdash; Апрель, 23 &mdash;</p>
-        <div class="message-left">
-          <p class="message-left__text">Отлично! Предлагаю обсудить.</p>
-          <span class="message-left__time">10:38</span>
-        </div>
-        <div class="message-right">
-          <p class="message-right__text">Добрый день! Предложение направил.</p>
-          <span class="message-right__time">10:38</span>
-        </div>
-      </div>
+      {{messageList}}
 
       <form class="chat-send-msg">
         <hr class="chat-separator" />
