@@ -1,3 +1,4 @@
 // chat-empty-msg.tmpl.ts
 
-export const chatEmptyMsgTempl = `Выберите чат, чтобы отправить сообщение!`;
+export const chatEmptyMsgTempl = `
+<p class="chat-empty-msg">Выберите чат, чтобы отправить сообщение!</p>`;

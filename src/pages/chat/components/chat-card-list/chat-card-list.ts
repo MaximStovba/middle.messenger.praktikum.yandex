@@ -16,6 +16,7 @@ function handleChatCardClick(event: Event | any) {
   const dataId = targetEl.getAttribute('data-id');
 
   console.log('id чата = ' + dataId);
+  store.setState({ currentChat: dataId });
 }
 
 function handleDeleteChatButtonClick(event: Event | any) {

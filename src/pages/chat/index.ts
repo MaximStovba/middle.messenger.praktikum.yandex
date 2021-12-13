@@ -7,6 +7,7 @@ import { Input } from '../../components/input/input';
 import { Button } from '../../components/button/button';
 import { ChatCardList } from './components/chat-card-list/chat-card-list';
 import { MessageList } from './components/message-list/message-list';
+import { ChatEmptyMsg } from './components/chat-empty-msg/chat-empty-msg';
 import { SendMsgInput } from './components/send-msg-input/send-msg-input';
 import { SendMsgButton } from './components/send-msg-button/send-msg-button';
 import { BtnMenuChat } from './components/btn-menu-chat/btn-menu-chat';
@@ -16,6 +17,9 @@ import { Store } from '../../utils/store';
 
 const router = new Router('.root');
 const chats = new ChatsController();
+
+const store: Store = new Store();
+const appStore = store.getState();
 
 function openPopupNewChat() {
   const el = document.getElementById('popup-add-chat');
@@ -36,6 +40,7 @@ function handleCreateNewChatButtonClick(event: Event) {
 const chatCardList = new ChatCardList();
 
 const messageList = new MessageList();
+const chatEmptyMsg = new ChatEmptyMsg({});
 
 const message = new SendMsgInput({
   name: 'message',
@@ -93,14 +98,12 @@ const createNewChatBtn = new Button({
   },
 });
 
-const store: Store = new Store();
-const appStore = store.getState();
-
 export class Chat extends Block {
   constructor() {
     super('div', {
       chatCardList,
       messageList,
+      chatEmptyMsg,
       message,
       sendButton,
       openPopupNewChatBtn,
@@ -119,7 +122,9 @@ export class Chat extends Block {
     const tmpl = new Templator(chatTempl);
     const str = tmpl.compile({
       chatCardList: this.props.chatCardList.getContentAsString(),
-      messageList: this.props.messageList.getContentAsString(),
+      messageList: appStore.currentChat
+        ? this.props.messageList.getContentAsString()
+        : this.props.chatEmptyMsg.getContentAsString(),
       message: this.props.message.getContentAsString(),
       sendButton: this.props.sendButton.getContentAsString(),
       openPopupNewChatBtn: this.props.openPopupNewChatBtn.getContentAsString(),

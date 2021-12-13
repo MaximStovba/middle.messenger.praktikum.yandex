@@ -6,7 +6,7 @@ import { Block } from '../../../../utils/block';
 
 export class ChatEmptyMsg extends Block {
   constructor(props: Record<string, any>) {
-    super('p', props, 'chat-empty-msg');
+    super('div', props, 'chat-pablic-area_center');
   }
 
   render() {

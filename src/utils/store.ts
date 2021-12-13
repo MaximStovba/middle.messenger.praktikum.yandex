@@ -7,6 +7,7 @@ interface State {
 const initialState: State = {
   isLogin: false,
   chats: [],
+  currentChat: null,
 };
 
 export class Store {
@@ -65,6 +66,9 @@ export class Store {
           self.eventBus().emit(Store.EVENTS.FLOW_LOGIN_DU);
         }
         if (prop === 'chats') {
+          self.eventBus().emit(Store.EVENTS.FLOW_CHATS_DU);
+        }
+        if (prop === 'currentChat') {
           self.eventBus().emit(Store.EVENTS.FLOW_CHATS_DU);
         }
         return true;
