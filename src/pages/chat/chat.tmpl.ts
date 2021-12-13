@@ -28,7 +28,7 @@ export const chatTempl = `
             <p class="chat-user-name">Юля</p>
           </li>
         </ul>
-        <button class="header-menu-btn">&#8801;</button>
+        <button class="header-menu-btn"></button>
       </div>
 
       <hr class="chat-separator" />
