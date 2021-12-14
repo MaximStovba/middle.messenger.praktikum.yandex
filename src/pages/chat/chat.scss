@@ -112,46 +112,6 @@
   flex-wrap: wrap;
 }
 
-.chat-user-box {
-  margin: 10px 0;
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.chat-user-avatar {
-  width: 34px;
-  height: 34px;
-  background: $grey;
-  border-radius: 50%;
-}
-
-.chat-user-name {
-  margin: 0 10px;
-  font-family: $font-sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 13px;
-  color: $dark;
-}
-
-.header-menu-btn {
-  width: 25px;
-  height: 25px;
-  background: transparent;
-  background-image: url(../../../static/img/add_person.svg);
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font-family: $font-sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 25px;
-}
-
 .chat-date {
   margin: 20px 0;
   text-align: center;
@@ -202,63 +162,4 @@
   line-height: 16px;
   color: $white;
   cursor: pointer;
-}
-
-.popup {
-  margin: 0;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-
-  /* закрытие попапа */
-  visibility: hidden;
-  opacity: 0;
-}
-
-.popup_opened {
-  /* открытие попапа */
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup-form {
-  background: #eff2f7; /* Светло-голубой */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-}
-
-.popup-form__modal {
-  margin: 0 auto;
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 340px;
-  background: #fff; /* Белый */
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-}
-
-.popup-form__title {
-  /* Heading 4 */
-  margin: 0;
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-
-  margin: 20px 0 20px;
-  color: #09293a; /* Темно-синий */
-  text-align: center;
 }

@@ -3,14 +3,17 @@ import { Router } from '../../utils/router';
 import { Templator } from '../../utils/templator';
 import { chatTempl } from './chat.tmpl';
 import { Block } from '../../utils/block';
+import { PopupWithForm } from '../../components/popup-with-form/popup-with-form';
 import { Input } from '../../components/input/input';
 import { Button } from '../../components/button/button';
 import { ChatCardList } from './components/chat-card-list/chat-card-list';
+import { ChatUserList } from './components/chat-user-list/chat-user-list';
 import { MessageList } from './components/message-list/message-list';
 import { ChatEmptyMsg } from './components/chat-empty-msg/chat-empty-msg';
 import { SendMsgInput } from './components/send-msg-input/send-msg-input';
 import { SendMsgButton } from './components/send-msg-button/send-msg-button';
 import { BtnMenuChat } from './components/btn-menu-chat/btn-menu-chat';
+import { AddUserButton } from './components/add-user-button/add-user-button';
 import { inputValidation, formValidation } from '../../utils/validator';
 import { ChatsController } from '../../controllers/chats';
 import { Store } from '../../utils/store';
@@ -23,7 +26,14 @@ const appStore = store.getState();
 
 function openPopupNewChat() {
   const el = document.getElementById('popup-add-chat');
-  el?.classList.add('popup_opened');
+  const parentEl = el?.closest('div');
+  parentEl?.classList.add('popup_opened');
+}
+
+function openPopupAddUserToChat() {
+  const addUserEl = document.getElementById('popup-add-user');
+  const parentAddUserEl = addUserEl?.closest('div');
+  parentAddUserEl?.classList.add('popup_opened');
 }
 
 function handleBackToProfileBtnClick() {
@@ -32,12 +42,26 @@ function handleBackToProfileBtnClick() {
 
 function handleCreateNewChatButtonClick(event: Event) {
   const el = document.getElementById('popup-add-chat');
+  const parentEl = el?.closest('div');
   chats.createChat(event).then(() => {
-    el?.classList.remove('popup_opened');
+    parentEl?.classList.remove('popup_opened');
   });
 }
 
+function handleAddNewUserButtonClick() {}
+
+function handleAllPopupClose() {
+  const addChatEl = document.getElementById('popup-add-chat');
+  const parentAddChatEl = addChatEl?.closest('div');
+  parentAddChatEl?.classList.remove('popup_opened');
+
+  const addUserEl = document.getElementById('popup-add-user');
+  const parentAddUserEl = addUserEl?.closest('div');
+  parentAddUserEl?.classList.remove('popup_opened');
+}
+
 const chatCardList = new ChatCardList();
+const chatUserList = new ChatUserList();
 
 const messageList = new MessageList();
 const chatEmptyMsg = new ChatEmptyMsg({});
@@ -80,6 +104,13 @@ const backToProfileBtn = new BtnMenuChat({
   },
 });
 
+const addUserButton = new AddUserButton({
+  settings: { withInternalID: true },
+  events: {
+    click: openPopupAddUserToChat,
+  },
+});
+
 const chatNameInput = new Input({
   title: 'Название чата',
   name: 'title',
@@ -98,30 +129,80 @@ const createNewChatBtn = new Button({
   },
 });
 
+const popupAddChat = new PopupWithForm({
+  popupId: 'popup-add-chat',
+  title: 'Создать чат',
+  input: chatNameInput.getContentAsString(),
+  button: createNewChatBtn.getContentAsString(),
+  settings: { withInternalID: true },
+  events: {
+    click: handleAllPopupClose,
+  },
+});
+
+const userLoginInput = new Input({
+  title: 'Логин',
+  name: 'login',
+  id: 'input-chat-user-login',
+  type: 'text',
+  placeholder: 'Введите имя пользователя',
+  validationMsg: 'Неверный логин!',
+  settings: { withInternalID: true },
+});
+
+const addNewUserBtn = new Button({
+  text: 'Добавить',
+  settings: { withInternalID: true },
+  events: {
+    click: handleAddNewUserButtonClick,
+  },
+});
+
+const popupAddUser = new PopupWithForm({
+  popupId: 'popup-add-user',
+  title: 'Добавить пользователя',
+  input: userLoginInput.getContentAsString(),
+  button: addNewUserBtn.getContentAsString(),
+  settings: { withInternalID: true },
+  events: {
+    click: handleAllPopupClose,
+  },
+});
+
 export class Chat extends Block {
   constructor() {
     super('div', {
       chatCardList,
+      chatUserList,
       messageList,
       chatEmptyMsg,
       message,
       sendButton,
       openPopupNewChatBtn,
       backToProfileBtn,
-      chatNameInput,
-      createNewChatBtn,
+      addUserButton,
+      popupAddChat,
+      popupAddUser,
     });
     store.setListener(this.componentDidMount.bind(this), 'CHATS');
   }
 
   componentDidMount() {
     this.props.chatCardList.setProps({ chats: appStore.chats });
+    this.props.chatUserList.setProps({
+      users: [
+        { name: 'Алиса', id: '1' },
+        { name: 'Виктория', id: '2' },
+        { name: 'Елена', id: '3' },
+      ],
+    });
   }
 
   render() {
     const tmpl = new Templator(chatTempl);
     const str = tmpl.compile({
       chatCardList: this.props.chatCardList.getContentAsString(),
+      chatUserList: this.props.chatUserList.getContentAsString(),
       messageList: appStore.currentChat
         ? this.props.messageList.getContentAsString()
         : this.props.chatEmptyMsg.getContentAsString(),
@@ -129,8 +210,9 @@ export class Chat extends Block {
       sendButton: this.props.sendButton.getContentAsString(),
       openPopupNewChatBtn: this.props.openPopupNewChatBtn.getContentAsString(),
       backToProfileBtn: this.props.backToProfileBtn.getContentAsString(),
-      chatNameInput: this.props.chatNameInput.getContentAsString(),
-      createNewChatBtn: this.props.createNewChatBtn.getContentAsString(),
+      addUserButton: this.props.addUserButton.getContentAsString(),
+      popupAddChat: this.props.popupAddChat.getContentAsString(),
+      popupAddUser: this.props.popupAddUser.getContentAsString(),
     });
     return str.firstChild;
   }

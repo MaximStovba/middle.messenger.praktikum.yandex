@@ -18,17 +18,8 @@ export const chatTempl = `
       <div class="chat-header">
 
       <div class="header-element">
-        <ul class="header-users-container">
-          <li class="chat-user-box">
-            <div class="chat-user-avatar"></div>
-            <p class="chat-user-name">Алина</p>
-          </li>
-          <li class="chat-user-box">
-            <div class="chat-user-avatar"></div>
-            <p class="chat-user-name">Юля</p>
-          </li>
-        </ul>
-        <button class="header-menu-btn"></button>
+        {{chatUserList}}
+        {{addUserButton}}
       </div>
 
       <hr class="chat-separator" />
@@ -48,12 +39,9 @@ export const chatTempl = `
 
     </div>
   </div>
-  <div id="popup-add-chat" class="popup">
-    <form class="popup-form__modal">
-      <p class="popup-form__title">Создать чат</p>
-      {{chatNameInput}}
-      {{createNewChatBtn}}
-    </form>
-  </div>
+
+  {{popupAddChat}}
+  {{popupAddUser}}
+
 </section>
 `;

@@ -1,0 +1,17 @@
+@import '../../../../pages/vars';
+@import '../../../../pages/type';
+
+.header-menu-btn {
+  width: 25px;
+  height: 25px;
+  background: transparent;
+  background-image: url(../../../../../static/img/add_person.svg);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 25px;
+}
