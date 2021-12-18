@@ -4,22 +4,27 @@ import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 import { ChatUserBox } from '../chat-user-box/chat-user-box';
 import { ChatDeleteButton } from '../../../chat/components/chat-delete-btn/chat-delete-btn';
-// import { ChatsController } from '../../../../controllers/chats';
-// import { Store } from '../../../../utils/store';
+import { ChatsController } from '../../../../controllers/chats';
+import { Store } from '../../../../utils/store';
 
-// const chats = new ChatsController();
-// const store: Store = new Store();
+const chats = new ChatsController();
+const store: Store = new Store();
+const appStore = store.getState();
 
 function handleDeleteUserButtonClick(event: Event | any) {
   const el = event.target;
   const parentEl = el?.closest('div');
   const dataId = parentEl.getAttribute('data-id');
+  const chatId = appStore.currentChat;
+  const userId = [];
 
-  console.log(dataId);
-  // chats.deleteChat(dataId).then(() => {
-  //   const appStore = store.getState();
-  //   console.log(appStore);
-  // });
+  if (Number(dataId) === Number(appStore.user.id)) {
+    console.log('Нельзя удалять себя из чата!');
+  } else {
+    userId.push(Number(dataId));
+
+    chats.deleteUserFromChat(userId, chatId);
+  }
 }
 
 export class ChatUserList extends Block {

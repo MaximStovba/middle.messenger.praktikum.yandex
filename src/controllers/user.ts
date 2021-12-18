@@ -95,14 +95,20 @@ export class UserController {
     }
   }
 
-  public async findUser(login: string) {
+  public async findUser(event: Event) {
     try {
-      findUserApi
+      const validateData = formValidation(event);
+
+      if (!validateData.isFormValid) {
+        throw new Error('Ошибка валидации');
+      }
+
+      const login = validateData.inputsValue.login;
+
+      return findUserApi
         .request({ login })
         .then((res) => {
-          if (res.status === 200) {
-            console.log(JSON.parse(res.response));
-          }
+          return res;
         })
         .catch((error) => {
           console.log(error);

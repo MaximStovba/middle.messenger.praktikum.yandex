@@ -13,10 +13,11 @@ const store: Store = new Store();
 function handleChatCardClick(event: Event | any) {
   const el = event.target;
   const targetEl = el?.querySelector('.user-card__avatar');
-  const dataId = targetEl.getAttribute('data-id');
+  const chatId = targetEl.getAttribute('data-id');
 
-  console.log('id чата = ' + dataId);
-  store.setState({ currentChat: dataId });
+  console.log('id выбранного чата = ' + chatId);
+  store.setState({ currentChat: chatId });
+  chats.getChatsUsers(chatId);
 }
 
 function handleDeleteChatButtonClick(event: Event | any) {

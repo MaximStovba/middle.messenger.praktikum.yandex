@@ -5,6 +5,7 @@ import { CreateChatAPI } from '../api/chats/create-chat-api';
 import { DeleteChatAPI } from '../api/chats/delete-chat-api';
 import { AddUserToChatAPI } from '../api/chats/add-user-to-chat-api';
 import { DeleteUserFromChatAPI } from '../api/chats/delete-user-from-chat-api';
+import { GetChatsUsersAPI } from '../api/chats/get-chats-users-api';
 import { formValidation } from '../utils/validator';
 import { Store } from '../utils/store';
 
@@ -14,6 +15,7 @@ const createChatApi = new CreateChatAPI();
 const deleteChatApi = new DeleteChatAPI();
 const addUserToChatApi = new AddUserToChatAPI();
 const deleteUserFromChatApi = new DeleteUserFromChatAPI();
+const getChatsUsersApi = new GetChatsUsersAPI();
 
 export class ChatsController {
   public async getChats() {
@@ -24,7 +26,6 @@ export class ChatsController {
           if (res.status === 200) {
             const chats = JSON.parse(res.response);
             store.setState({ chats });
-            console.log(chats);
           }
         })
         .catch((error) => {
@@ -52,6 +53,8 @@ export class ChatsController {
             const chat = JSON.parse(res.response);
             console.log(chat);
             this.getChats();
+            store.setState({ currentChat: chat.id });
+            this.getChatsUsers(chat.id);
           }
         })
         .catch((error) => {
@@ -71,6 +74,7 @@ export class ChatsController {
             const response = JSON.parse(res.response);
             console.log(response.result.id);
             this.getChats();
+            store.setState({ currentChat: null, currentChatUsers: [] });
           }
         })
         .catch((error) => {
@@ -81,16 +85,13 @@ export class ChatsController {
     }
   }
 
-  public async addUserToChat(event: Event) {
+  public async addUserToChat(users: number[], chatId: number) {
     try {
-      const users = [0];
-      const chatId = 0;
-
       addUserToChatApi
         .update({ users, chatId })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res);
+            this.getChatsUsers(chatId);
           }
         })
         .catch((error) => {
@@ -101,16 +102,31 @@ export class ChatsController {
     }
   }
 
-  public async deleteUserFromChat(event: Event) {
+  public async deleteUserFromChat(users: number[], chatId: number) {
     try {
-      const users = [0];
-      const chatId = 0;
-
       deleteUserFromChatApi
         .update({ users, chatId })
         .then((res) => {
           if (res.status === 200) {
-            console.log(res);
+            this.getChatsUsers(chatId);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getChatsUsers(chatId: number) {
+    try {
+      getChatsUsersApi
+        .request(chatId)
+        .then((res) => {
+          if (res.status === 200) {
+            const currentChatUsers = JSON.parse(res.response);
+            store.setState({ currentChatUsers });
           }
         })
         .catch((error) => {

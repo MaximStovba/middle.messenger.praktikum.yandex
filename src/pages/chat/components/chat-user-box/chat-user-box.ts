@@ -14,8 +14,10 @@ export class ChatUserBox extends Block {
     const tmpl = new Templator(chatUserBoxTempl);
     const str = tmpl.compile({
       cardId: this.props.id,
-      name: this.props.name,
-      urlAvatar: profileWithoutPhoto,
+      name: this.props.first_name,
+      urlAvatar: this.props.avatar
+        ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`
+        : profileWithoutPhoto,
       userDeleteButton: this.props.userDeleteButton.getContentAsString(),
     });
     return str;

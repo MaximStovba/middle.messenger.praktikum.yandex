@@ -26,7 +26,7 @@ export class AuthController {
           if (res.status === 200) {
             const user = JSON.parse(res.response);
             store.setState({ isLogin: true, user });
-            console.log(user);
+            //console.log(user);
           }
         })
         .catch((error) => {

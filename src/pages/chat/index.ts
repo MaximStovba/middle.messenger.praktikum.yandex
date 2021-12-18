@@ -16,10 +16,12 @@ import { BtnMenuChat } from './components/btn-menu-chat/btn-menu-chat';
 import { AddUserButton } from './components/add-user-button/add-user-button';
 import { inputValidation, formValidation } from '../../utils/validator';
 import { ChatsController } from '../../controllers/chats';
+import { UserController } from '../../controllers/user';
 import { Store } from '../../utils/store';
 
 const router = new Router('.root');
 const chats = new ChatsController();
+const users = new UserController();
 
 const store: Store = new Store();
 const appStore = store.getState();
@@ -48,7 +50,19 @@ function handleCreateNewChatButtonClick(event: Event) {
   });
 }
 
-function handleAddNewUserButtonClick() {}
+function handleAddNewUserButtonClick(event: Event) {
+  users.findUser(event).then((res) => {
+    if (res?.status === 200) {
+      const users = JSON.parse(res.response);
+      const usersId = users.map((user: any) => user.id);
+      const chatId = appStore.currentChat;
+
+      chats.addUserToChat(usersId, chatId);
+    }
+  });
+
+  handleAllPopupClose();
+}
 
 function handleAllPopupClose() {
   const addChatEl = document.getElementById('popup-add-chat');
@@ -191,11 +205,7 @@ export class Chat extends Block {
   componentDidMount() {
     this.props.chatCardList.setProps({ chats: appStore.chats });
     this.props.chatUserList.setProps({
-      users: [
-        { name: 'Алиса', id: '1' },
-        { name: 'Виктория', id: '2' },
-        { name: 'Елена', id: '3' },
-      ],
+      users: appStore.currentChatUsers,
     });
   }
 
@@ -211,7 +221,9 @@ export class Chat extends Block {
       sendButton: this.props.sendButton.getContentAsString(),
       openPopupNewChatBtn: this.props.openPopupNewChatBtn.getContentAsString(),
       backToProfileBtn: this.props.backToProfileBtn.getContentAsString(),
-      addUserButton: this.props.addUserButton.getContentAsString(),
+      addUserButton: appStore.currentChat
+        ? this.props.addUserButton.getContentAsString()
+        : '',
       popupAddChat: this.props.popupAddChat.getContentAsString(),
       popupAddUser: this.props.popupAddUser.getContentAsString(),
     });
