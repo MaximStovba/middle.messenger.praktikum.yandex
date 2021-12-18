@@ -184,6 +184,7 @@ export class Chat extends Block {
       popupAddChat,
       popupAddUser,
     });
+
     store.setListener(this.componentDidMount.bind(this), 'CHATS');
   }
 

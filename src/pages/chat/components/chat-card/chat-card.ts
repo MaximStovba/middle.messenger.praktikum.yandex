@@ -1,6 +1,6 @@
 import './chat-card.scss';
 import { chatCardTempl } from './chat-card.tmpl';
-import profileWithoutPhoto from '../../../../../static/img/profile-without-photo.svg';
+import profileWithoutPhoto from '../../../../../static/img/chat-without-pfoto.svg';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';

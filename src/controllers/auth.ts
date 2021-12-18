@@ -7,6 +7,7 @@ import { GetUserAPI } from '../api/auth/get-user-api';
 import { Router } from '../utils/router';
 import { formValidation } from '../utils/validator';
 import { Store } from '../utils/store';
+import { ChatsController } from './chats';
 
 const router = new Router('.root');
 const store = new Store();
@@ -14,6 +15,7 @@ const signInApi = new SignInAPI();
 const signUpApi = new SignUpAPI();
 const logoutApi = new LogoutAPI();
 const getUserApi = new GetUserAPI();
+const chats = new ChatsController();
 
 export class AuthController {
   public async getUser() {
@@ -24,6 +26,7 @@ export class AuthController {
           if (res.status === 200) {
             const user = JSON.parse(res.response);
             store.setState({ isLogin: true, user });
+            console.log(user);
           }
         })
         .catch((error) => {
@@ -49,6 +52,7 @@ export class AuthController {
         .then((res) => {
           if (res.status === 200) {
             this.getUser();
+            chats.getChats();
           }
         })
         .catch((error) => {

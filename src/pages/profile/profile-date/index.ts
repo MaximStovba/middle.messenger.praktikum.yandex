@@ -2,6 +2,7 @@ import './profile-date.scss';
 import { Router } from '../../../utils/router';
 import { Templator } from '../../../utils/templator';
 import { profileDateTempl } from './profile-date.tmpl';
+import profileWithoutPhoto from '../../../../static/img/profile-without-photo.svg';
 import { Block } from '../../../utils/block';
 import { PopupWithForm } from '../../../components/popup-with-form/popup-with-form';
 import { ProfileInput } from '../../../components/profile-input/profile-input';
@@ -214,7 +215,9 @@ export class EditProfile extends Block {
         nameAvatar: appStore.user.first_name,
       });
       this.setProps({
-        urlAvatar: `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`,
+        urlAvatar: appStore.user.avatar
+          ? `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`
+          : profileWithoutPhoto,
       });
       email.setProps({
         value: appStore.user.email,

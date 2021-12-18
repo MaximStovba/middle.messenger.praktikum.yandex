@@ -24,6 +24,7 @@ export class ChatsController {
           if (res.status === 200) {
             const chats = JSON.parse(res.response);
             store.setState({ chats });
+            console.log(chats);
           }
         })
         .catch((error) => {
