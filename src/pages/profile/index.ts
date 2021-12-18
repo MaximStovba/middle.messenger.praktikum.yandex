@@ -3,6 +3,7 @@ import { Router } from '../../utils/router';
 import { Templator } from '../../utils/templator';
 import { profileTempl } from './profile.tmpl';
 import { Block } from '../../utils/block';
+import { PopupWithForm } from '../../components/popup-with-form/popup-with-form';
 import { Input } from '../../components/input/input';
 import { Button } from '../../components/button/button';
 import { ProfileInput } from '../../components/profile-input/profile-input';
@@ -35,9 +36,10 @@ function handleExitButtonClick() {
   auth.logout();
 }
 
-function handleOpenPopupAvatarButtonClick() {
+function handleOpenPopupAddAvatar() {
   const el = document.getElementById('popup-add-avatar');
-  el?.classList.add('popup_opened');
+  const parentEl = el?.closest('div');
+  parentEl?.classList.add('popup_opened');
 }
 
 function handleAvatarLoadingButtonClick(event: Event) {
@@ -45,6 +47,12 @@ function handleAvatarLoadingButtonClick(event: Event) {
   user.changeAvatar(event).then(() => {
     el?.classList.remove('popup_opened');
   });
+}
+
+function handleAllPopupClose() {
+  const addAvatarEl = document.getElementById('popup-add-avatar');
+  const parentAddAvatarEl = addAvatarEl?.closest('div');
+  parentAddAvatarEl?.classList.remove('popup_opened');
 }
 
 const email = new ProfileInput({
@@ -172,7 +180,7 @@ const backButton = new ProfileButtonBack({
 const patchavatarButton = new ProfilePatchavatarButton({
   settings: { withInternalID: true },
   events: {
-    click: handleOpenPopupAvatarButtonClick,
+    click: handleOpenPopupAddAvatar,
   },
 });
 
@@ -189,6 +197,17 @@ const avatarLoadingBtn = new Button({
   settings: { withInternalID: true },
   events: {
     click: handleAvatarLoadingButtonClick,
+  },
+});
+
+const popupAddAvatar = new PopupWithForm({
+  popupId: 'popup-add-avatar',
+  title: 'Добавить фото',
+  input: avatarInput.getContentAsString(),
+  button: avatarLoadingBtn.getContentAsString(),
+  settings: { withInternalID: true },
+  events: {
+    click: handleAllPopupClose,
   },
 });
 
@@ -212,8 +231,7 @@ export class Profile extends Block {
       nameAvatar,
       urlAvatar,
       patchavatarButton,
-      avatarInput,
-      avatarLoadingBtn,
+      popupAddAvatar,
     });
   }
 
@@ -260,10 +278,9 @@ export class Profile extends Block {
       exitButton: this.props.exitButton.getContentAsString(),
       backButton: this.props.backButton.getContentAsString(),
       patchavatarButton: this.props.patchavatarButton.getContentAsString(),
-      avatarLoadingBtn: this.props.avatarLoadingBtn.getContentAsString(),
-      avatarInput: this.props.avatarInput.getContentAsString(),
       nameAvatar: this.props.nameAvatar,
       urlAvatar: this.props.urlAvatar,
+      popupAddAvatar: this.props.popupAddAvatar.getContentAsString(),
     });
     return str.firstChild;
   }

@@ -1,19 +1,20 @@
-import "./profile-date.scss";
-import { Router } from "../../../utils/router";
-import { Templator } from "../../../utils/templator";
-import { profileDateTempl } from "./profile-date.tmpl";
-import { Block } from "../../../utils/block";
-import { ProfileInput } from "../../../components/profile-input/profile-input";
-import { Input } from "../../../components/input/input";
-import { Button } from "../../../components/button/button";
-import { ProfileButtonBack } from "../../../components/profile-button-back/profile-button-back";
-import { ProfilePatchavatarButton } from "../../../components/profile-patchavatar-btn/profile-patchavatar-btn";
-import { inputValidation } from "../../../utils/validator";
-import { UserController } from "../../../controllers/user";
-import { Store } from "../../../utils/store";
+import './profile-date.scss';
+import { Router } from '../../../utils/router';
+import { Templator } from '../../../utils/templator';
+import { profileDateTempl } from './profile-date.tmpl';
+import { Block } from '../../../utils/block';
+import { PopupWithForm } from '../../../components/popup-with-form/popup-with-form';
+import { ProfileInput } from '../../../components/profile-input/profile-input';
+import { Input } from '../../../components/input/input';
+import { Button } from '../../../components/button/button';
+import { ProfileButtonBack } from '../../../components/profile-button-back/profile-button-back';
+import { ProfilePatchavatarButton } from '../../../components/profile-patchavatar-btn/profile-patchavatar-btn';
+import { inputValidation } from '../../../utils/validator';
+import { UserController } from '../../../controllers/user';
+import { Store } from '../../../utils/store';
 
 const user = new UserController();
-const router = new Router(".root");
+const router = new Router('.root');
 const store = new Store();
 
 function handleBackButtonClick() {
@@ -22,158 +23,176 @@ function handleBackButtonClick() {
 
 function handleSaveButtonClick(event: Event) {
   user.changeProfile(event).then(() => {
-    router.go("/settings");
+    router.go('/settings');
   });
 }
 
-function handleOpenPopupAvatarButtonClick() {
-  const el = document.getElementById("popup-add-avatar");
-  el?.classList.add("popup_opened");
+function handleOpenPopupAddAvatar() {
+  const el = document.getElementById('popup-add-avatar');
+  const parentEl = el?.closest('div');
+  parentEl?.classList.add('popup_opened');
 }
 
 function handleAvatarLoadingButtonClick(event: Event) {
-  const el = document.getElementById("popup-add-avatar");
+  const el = document.getElementById('popup-add-avatar');
   user.changeAvatar(event).then(() => {
-    el?.classList.remove("popup_opened");
+    el?.classList.remove('popup_opened');
   });
 }
 
+function handleAllPopupClose() {
+  const addAvatarEl = document.getElementById('popup-add-avatar');
+  const parentAddAvatarEl = addAvatarEl?.closest('div');
+  parentAddAvatarEl?.classList.remove('popup_opened');
+}
+
 const email = new ProfileInput({
-  title: "Почта",
-  name: "email",
-  id: "input-login-profile",
-  type: "email",
-  value: "",
-  placeholder: "Введите почту",
-  validationMsg: "Неверный формат почты!",
+  title: 'Почта',
+  name: 'email',
+  id: 'input-login-profile',
+  type: 'email',
+  value: '',
+  placeholder: 'Введите почту',
+  validationMsg: 'Неверный формат почты!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const login = new ProfileInput({
-  title: "Логин",
-  name: "login",
-  id: "input-login-login",
-  type: "text",
-  value: "",
-  placeholder: "Введите логин",
-  validationMsg: "Неверный формат!",
+  title: 'Логин',
+  name: 'login',
+  id: 'input-login-login',
+  type: 'text',
+  value: '',
+  placeholder: 'Введите логин',
+  validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const firstName = new ProfileInput({
-  title: "Имя",
-  name: "first_name",
-  id: "input-first-name-profile",
-  type: "text",
-  value: "",
-  placeholder: "Введите имя",
-  validationMsg: "Неверный формат!",
+  title: 'Имя',
+  name: 'first_name',
+  id: 'input-first-name-profile',
+  type: 'text',
+  value: '',
+  placeholder: 'Введите имя',
+  validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const secondName = new ProfileInput({
-  title: "Фамилия",
-  name: "second_name",
-  id: "input-second-name-profile",
-  type: "text",
-  value: "",
-  placeholder: "Введите фамилию",
-  validationMsg: "Неверный формат!",
+  title: 'Фамилия',
+  name: 'second_name',
+  id: 'input-second-name-profile',
+  type: 'text',
+  value: '',
+  placeholder: 'Введите фамилию',
+  validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const nickName = new ProfileInput({
-  title: "Имя в чате",
-  name: "display_name",
-  id: "input-nick-name-profile",
-  type: "text",
-  value: "",
-  placeholder: "Введите имя в чате",
-  validationMsg: "Неверный формат!",
+  title: 'Имя в чате',
+  name: 'display_name',
+  id: 'input-nick-name-profile',
+  type: 'text',
+  value: '',
+  placeholder: 'Введите имя в чате',
+  validationMsg: 'Неверный формат!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const phone = new ProfileInput({
-  title: "Телефон",
-  name: "phone",
-  id: "input-phone-profile",
-  type: "phone",
-  value: "",
-  placeholder: "Введите телефон",
-  validationMsg: "Неверный формат телефонного номера!",
+  title: 'Телефон',
+  name: 'phone',
+  id: 'input-phone-profile',
+  type: 'phone',
+  value: '',
+  placeholder: 'Введите телефон',
+  validationMsg: 'Неверный формат телефонного номера!',
   settings: { withInternalID: true },
   events: {
     focus: inputValidation,
-    blur: inputValidation
-  }
+    blur: inputValidation,
+  },
 });
 
 const saveButton = new Button({
-  text: "Сохранить",
+  text: 'Сохранить',
   settings: { withInternalID: true },
   events: {
-    click: handleSaveButtonClick
-  }
+    click: handleSaveButtonClick,
+  },
 });
 
 const backButton = new ProfileButtonBack({
-  text: "<",
+  text: '<',
   settings: { withInternalID: true },
   events: {
-    click: handleBackButtonClick
-  }
+    click: handleBackButtonClick,
+  },
 });
 
 const patchavatarButton = new ProfilePatchavatarButton({
   settings: { withInternalID: true },
   events: {
-    click: handleOpenPopupAvatarButtonClick
-  }
+    click: handleOpenPopupAddAvatar,
+  },
 });
 
 const avatarInput = new Input({
-  title: "Аватар",
-  name: "avatar",
-  id: "input-avatar",
-  type: "file",
-  settings: { withInternalID: true }
+  title: 'Аватар',
+  name: 'avatar',
+  id: 'input-avatar',
+  type: 'file',
+  settings: { withInternalID: true },
 });
 
 const avatarLoadingBtn = new Button({
-  text: "Загрузить",
+  text: 'Загрузить',
   settings: { withInternalID: true },
   events: {
-    click: handleAvatarLoadingButtonClick
-  }
+    click: handleAvatarLoadingButtonClick,
+  },
+});
+
+const popupAddAvatar = new PopupWithForm({
+  popupId: 'popup-add-avatar',
+  title: 'Добавить фото',
+  input: avatarInput.getContentAsString(),
+  button: avatarLoadingBtn.getContentAsString(),
+  settings: { withInternalID: true },
+  events: {
+    click: handleAllPopupClose,
+  },
 });
 
 const appStore = store.getState();
-const nameAvatar = "";
-const urlAvatar = "";
+const nameAvatar = '';
+const urlAvatar = '';
 
 export class EditProfile extends Block {
   constructor() {
-    super("div", {
+    super('div', {
       email,
       login,
       firstName,
@@ -185,36 +204,35 @@ export class EditProfile extends Block {
       nameAvatar,
       urlAvatar,
       patchavatarButton,
-      avatarInput,
-      avatarLoadingBtn
+      popupAddAvatar,
     });
   }
 
   componentDidMount() {
     if (appStore.user) {
       this.setProps({
-        nameAvatar: appStore.user.first_name
+        nameAvatar: appStore.user.first_name,
       });
       this.setProps({
-        urlAvatar: `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`
+        urlAvatar: `https://ya-praktikum.tech/api/v2/resources${appStore.user.avatar}`,
       });
       email.setProps({
-        value: appStore.user.email
+        value: appStore.user.email,
       });
       login.setProps({
-        value: appStore.user.login
+        value: appStore.user.login,
       });
       firstName.setProps({
-        value: appStore.user.first_name
+        value: appStore.user.first_name,
       });
       secondName.setProps({
-        value: appStore.user.second_name
+        value: appStore.user.second_name,
       });
       nickName.setProps({
-        value: appStore.user.display_name ? appStore.user.display_name : ""
+        value: appStore.user.display_name ? appStore.user.display_name : '',
       });
       phone.setProps({
-        value: appStore.user.phone
+        value: appStore.user.phone,
       });
     }
   }
@@ -231,10 +249,9 @@ export class EditProfile extends Block {
       saveButton: this.props.saveButton.getContentAsString(),
       backButton: this.props.backButton.getContentAsString(),
       patchavatarButton: this.props.patchavatarButton.getContentAsString(),
-      avatarLoadingBtn: this.props.avatarLoadingBtn.getContentAsString(),
-      avatarInput: this.props.avatarInput.getContentAsString(),
       nameAvatar: this.props.nameAvatar,
-      urlAvatar: this.props.urlAvatar
+      urlAvatar: this.props.urlAvatar,
+      popupAddAvatar: this.props.popupAddAvatar.getContentAsString(),
     });
     return str.firstChild;
   }

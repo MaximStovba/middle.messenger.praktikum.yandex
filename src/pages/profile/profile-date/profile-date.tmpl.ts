@@ -27,12 +27,8 @@ export const profileDateTempl = `
       {{saveButton}}
     </form>
   </div>
-  <div id="popup-add-avatar" class="popup">
-    <form class="popup-form__modal">
-      <p class="popup-form__title">Добавить фото</p>
-      {{avatarInput}}
-      {{avatarLoadingBtn}}
-    </form>
-  </div>
+
+  {{popupAddAvatar}}
+
 </section>
 `;
