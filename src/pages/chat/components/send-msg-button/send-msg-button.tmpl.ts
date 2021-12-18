@@ -1,2 +1,2 @@
 // send-msg-button.tmpl.ts
-export const sendMsgBtnTempl = `{{ text }}`;
+export const sendMsgBtnTempl = ``;

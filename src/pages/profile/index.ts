@@ -171,7 +171,6 @@ const exitButton = new ProfileButton({
 });
 
 const backButton = new ProfileButtonBack({
-  text: '<',
   settings: { withInternalID: true },
   events: {
     click: handleBackButtonClick,

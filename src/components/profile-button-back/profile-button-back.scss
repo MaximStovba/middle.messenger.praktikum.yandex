@@ -6,10 +6,7 @@
   height: 28px;
   border: 0;
   border-radius: 50px;
-  background: $orange;
-
-  @include heading-5;
-
-  color: $white;
+  background-image: url(../../../static/img/go-back-button.svg);
   cursor: pointer;
 }
+

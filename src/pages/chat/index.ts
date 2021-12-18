@@ -12,6 +12,7 @@ import { MessageList } from './components/message-list/message-list';
 import { ChatEmptyMsg } from './components/chat-empty-msg/chat-empty-msg';
 import { SendMsgInput } from './components/send-msg-input/send-msg-input';
 import { SendMsgButton } from './components/send-msg-button/send-msg-button';
+import { ContentUploadButton } from './components/content-upload-button/content-upload-button';
 import { BtnMenuChat } from './components/btn-menu-chat/btn-menu-chat';
 import { AddUserButton } from './components/add-user-button/add-user-button';
 import { inputValidation, formValidation } from '../../utils/validator';
@@ -74,6 +75,10 @@ function handleAllPopupClose() {
   parentAddUserEl?.classList.remove('popup_opened');
 }
 
+function handleContentUploadButtonClick() {
+  console.log('handleContentUploadButtonClick');
+}
+
 const chatCardList = new ChatCardList();
 const chatUserList = new ChatUserList();
 
@@ -94,8 +99,14 @@ const message = new SendMsgInput({
   },
 });
 
+const contentUploadButton = new ContentUploadButton({
+  settings: { withInternalID: true },
+  events: {
+    click: handleContentUploadButtonClick,
+  },
+});
+
 const sendButton = new SendMsgButton({
-  text: '&#10003;',
   settings: { withInternalID: true },
   events: {
     click: formValidation,
@@ -192,6 +203,7 @@ export class Chat extends Block {
       chatEmptyMsg,
       message,
       sendButton,
+      contentUploadButton,
       openPopupNewChatBtn,
       backToProfileBtn,
       addUserButton,
@@ -219,6 +231,7 @@ export class Chat extends Block {
         : this.props.chatEmptyMsg.getContentAsString(),
       message: this.props.message.getContentAsString(),
       sendButton: this.props.sendButton.getContentAsString(),
+      contentUploadButton: this.props.contentUploadButton.getContentAsString(),
       openPopupNewChatBtn: this.props.openPopupNewChatBtn.getContentAsString(),
       backToProfileBtn: this.props.backToProfileBtn.getContentAsString(),
       addUserButton: appStore.currentChat

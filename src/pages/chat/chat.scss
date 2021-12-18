@@ -129,37 +129,3 @@
   column-gap: 10px;
   grid-template-areas: 'upload-btn msg-input msg-btn';
 }
-
-.content-upload-btn {
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  grid-area: upload-btn;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  font-family: $font-sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 28px;
-  color: $dark-blue;
-  cursor: pointer;
-}
-
-.send-msg-btn {
-  width: 32px;
-  height: 32px;
-  align-self: flex-end;
-  grid-area: msg-btn;
-  border: 0;
-  border-radius: 50%;
-  background: $orange;
-  font-family: $font-sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 16px;
-  color: $white;
-  cursor: pointer;
-}

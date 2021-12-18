@@ -9,12 +9,14 @@ const initialState: State = {
   chats: [],
   currentChatUsers: [],
   currentChat: null,
+  token: null,
 };
 
 export class Store {
   static EVENTS = {
     FLOW_LOGIN_DU: 'flow:login-did-update',
     FLOW_CHATS_DU: 'flow:chats-did-update',
+    FLOW_TOKEN_DU: 'flow:token-did-update',
   };
 
   static __instance: Store;
@@ -39,6 +41,9 @@ export class Store {
     }
     if (action === 'CHATS') {
       this.eventBus().on(Store.EVENTS.FLOW_CHATS_DU, listener.bind(this));
+    }
+    if (action === 'TOKEN') {
+      this.eventBus().on(Store.EVENTS.FLOW_TOKEN_DU, listener.bind(this));
     }
   }
 
@@ -74,6 +79,9 @@ export class Store {
         }
         if (prop === 'currentChat') {
           self.eventBus().emit(Store.EVENTS.FLOW_CHATS_DU);
+        }
+        if (prop === 'token') {
+          self.eventBus().emit(Store.EVENTS.FLOW_TOKEN_DU);
         }
         return true;
       },

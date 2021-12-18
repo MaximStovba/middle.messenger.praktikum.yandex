@@ -31,7 +31,7 @@ export const chatTempl = `
       <form class="chat-send-msg">
         <hr class="chat-separator" />
         <div class="send-msg-element">
-          <button class="content-upload-btn">+</button>
+          {{contentUploadButton}}
           {{message}}
           {{sendButton}}
         </div>

@@ -18,6 +18,8 @@ function handleChatCardClick(event: Event | any) {
   console.log('id выбранного чата = ' + chatId);
   store.setState({ currentChat: chatId });
   chats.getChatsUsers(chatId);
+
+  chats.getChatToken(chatId);
 }
 
 function handleDeleteChatButtonClick(event: Event | any) {
@@ -39,6 +41,7 @@ export class ChatCardList extends Block {
   }
 
   render() {
+    const appStore = store.getState();
     const chats = this.props.chats;
 
     let chatsList: any = [];
@@ -53,6 +56,7 @@ export class ChatCardList extends Block {
         });
         const chatCard = new ChatCard({
           ...chat,
+          isChatActive: Number(chat.id) === Number(appStore.currentChat),
           chatDeleteButton,
           settings: { withInternalID: true },
           events: {

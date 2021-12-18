@@ -1,6 +1,7 @@
 import './chat-card.scss';
 import { chatCardTempl } from './chat-card.tmpl';
 import profileWithoutPhoto from '../../../../../static/img/chat-without-pfoto.svg';
+import profileWithoutPhotoActive from '../../../../../static/img/chat-without-pfoto-active.svg';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
@@ -18,7 +19,9 @@ export class ChatCard extends Block {
       lastMsg: this.props.last_message ? this.props.last_message.content : '',
       msgTime: this.props.last_message ? this.props.last_message.time : '',
       msgNum: this.props.unread_count,
-      urlAvatar: profileWithoutPhoto,
+      urlAvatar: this.props.isChatActive
+        ? profileWithoutPhotoActive
+        : profileWithoutPhoto,
       delChatButton: this.props.chatDeleteButton.getContentAsString(),
     });
     return str;

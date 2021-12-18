@@ -1,13 +1,14 @@
 @import '../../../../pages/vars';
 @import '../../../../pages/type';
 
-.send-msg-btn {
+.content-upload-btn {
   width: 32px;
   height: 32px;
   align-self: flex-end;
-  grid-area: msg-btn;
+  grid-area: upload-btn;
   border: 0;
   border-radius: 50%;
-  background-image: url(../../../../../static/img/send-msg-button.svg);
+  background: transparent;
+  background-image: url(../../../../../static/img/upload-button.svg);
   cursor: pointer;
 }

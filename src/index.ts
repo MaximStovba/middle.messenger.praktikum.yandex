@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   store.setListener(startRouter, 'LOGIN');
   store.setListener(startRouter, 'CHATS');
+  store.setListener(wsStart, 'TOKEN');
 
   function startRouter() {
     if (appStore.isLogin === true) {
@@ -52,5 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
       router.go('/');
     }
     router.start();
+  }
+
+  function wsStart() {
+    console.log(
+      `wsStart <USER_ID> ${appStore.user.id}, <CHAT_ID> ${appStore.currentChat}, <TOKEN_VALUE> ${appStore.token}`
+    );
   }
 });

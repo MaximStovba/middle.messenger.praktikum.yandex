@@ -6,6 +6,7 @@ import { DeleteChatAPI } from '../api/chats/delete-chat-api';
 import { AddUserToChatAPI } from '../api/chats/add-user-to-chat-api';
 import { DeleteUserFromChatAPI } from '../api/chats/delete-user-from-chat-api';
 import { GetChatsUsersAPI } from '../api/chats/get-chats-users-api';
+import { GetChatTokenAPI } from '../api/chats/get-chat-token-api';
 import { formValidation } from '../utils/validator';
 import { Store } from '../utils/store';
 
@@ -16,6 +17,7 @@ const deleteChatApi = new DeleteChatAPI();
 const addUserToChatApi = new AddUserToChatAPI();
 const deleteUserFromChatApi = new DeleteUserFromChatAPI();
 const getChatsUsersApi = new GetChatsUsersAPI();
+const getChatTokenApi = new GetChatTokenAPI();
 
 export class ChatsController {
   public async getChats() {
@@ -74,7 +76,7 @@ export class ChatsController {
             const response = JSON.parse(res.response);
             console.log(response.result.id);
             this.getChats();
-            store.setState({ currentChat: null, currentChatUsers: [] });
+            store.setState({ currentChat: null, currentChatUsers: [], token: null });
           }
         })
         .catch((error) => {
@@ -127,6 +129,25 @@ export class ChatsController {
           if (res.status === 200) {
             const currentChatUsers = JSON.parse(res.response);
             store.setState({ currentChatUsers });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getChatToken(chatId: number) {
+    try {
+      getChatTokenApi
+        .request(chatId)
+        .then((res) => {
+          if (res.status === 200) {
+            const response = JSON.parse(res.response);
+            console.log(`Токен чата ${chatId} - ${response.token}`);
+            store.setState({ token: response.token});
           }
         })
         .catch((error) => {
