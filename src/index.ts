@@ -58,7 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function wsStart() {
     if (appStore.token) {
-      new WebSocketApp(appStore.user, appStore.currentChat, appStore.token);
+      const ws = new WebSocketApp(
+        appStore.user,
+        appStore.currentChat,
+        appStore.token
+      );
+      store.setState({ ws });
     }
   }
 });

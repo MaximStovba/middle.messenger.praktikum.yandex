@@ -54,7 +54,6 @@ export class WebSocketApp {
       console.log('Соединение установлено...');
 
       this.send(`${this.userName} в чате!`, WS_TYPE.MESSAGE);
-      this.send('0', WS_TYPE.GET_OLD);
 
       this.ping();
     });
@@ -76,6 +75,7 @@ export class WebSocketApp {
 
       if (data.type === 'message') {
         console.log('Получен message', data.content);
+        this.send('0', WS_TYPE.GET_OLD);
         chats.getChats();
       }
       if (data.type === 'pong') {

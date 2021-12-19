@@ -19,6 +19,7 @@ import { inputValidation, formValidation } from '../../utils/validator';
 import { ChatsController } from '../../controllers/chats';
 import { UserController } from '../../controllers/user';
 import { Store } from '../../utils/store';
+import { WS_TYPE } from '../../utils/ws';
 
 const router = new Router('.root');
 const chats = new ChatsController();
@@ -75,6 +76,15 @@ function handleAllPopupClose() {
   parentAddUserEl?.classList.remove('popup_opened');
 }
 
+function handleSendMsgButtonClick(event: Event) {
+  const validateData = formValidation(event);
+  const ws = appStore.ws;
+  if (validateData.isFormValid && ws) {
+    const message = validateData.inputsValue.message;
+    ws.send(message, WS_TYPE.MESSAGE);
+  }
+}
+
 function handleContentUploadButtonClick() {
   console.log('handleContentUploadButtonClick');
 }
@@ -109,7 +119,7 @@ const contentUploadButton = new ContentUploadButton({
 const sendButton = new SendMsgButton({
   settings: { withInternalID: true },
   events: {
-    click: formValidation,
+    click: handleSendMsgButtonClick,
   },
 });
 
