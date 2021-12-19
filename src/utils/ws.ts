@@ -1,8 +1,10 @@
 // ws.ts
 import { ChatsController } from '../controllers/chats';
+import { Store } from './store';
 
 const baseWSUrl = 'wss://ya-praktikum.tech/ws/chats';
 const chats = new ChatsController();
+const store: Store = new Store();
 
 export enum WS_TYPE {
   MESSAGE = 'message',
@@ -81,6 +83,7 @@ export class WebSocketApp {
       }
       if (Array.isArray(data)) {
         console.log('Получен массив последних сообщений', data);
+        store.setState({ chatMessages: data });
       }
     });
 

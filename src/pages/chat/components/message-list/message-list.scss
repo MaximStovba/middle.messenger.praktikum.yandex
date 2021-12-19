@@ -1,6 +1,19 @@
 // message-list.scss
 
-.chat-pablic-area {
+.chat-pablic-area-msg {
   grid-area: pablic-area;
   align-self: end;
+  position: relative;
+  height: calc(100vh - 120px);
+}
+
+.chat-pablic-area__container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
 }

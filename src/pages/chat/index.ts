@@ -240,6 +240,7 @@ export class Chat extends Block {
       popupAddChat: this.props.popupAddChat.getContentAsString(),
       popupAddUser: this.props.popupAddUser.getContentAsString(),
     });
+
     return str.firstChild;
   }
 }

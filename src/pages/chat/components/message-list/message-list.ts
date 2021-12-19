@@ -4,16 +4,27 @@ import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 import { MessageLeft } from '../message-left/message-left';
 import { MessageRight } from '../message-right/message-right';
+import { Store } from '../../../../utils/store';
+
+const store: Store = new Store();
+const appStore = store.getState();
 
 export class MessageList extends Block {
   constructor() {
     super(
       'div',
       {
-        messages: [{ myMsg: true }, { myMsg: false }],
+        messages: [],
       },
-      'chat-pablic-area'
+      'chat-pablic-area-msg'
     );
+
+    store.setListener(this.componentDidMount.bind(this), 'CHATS');
+    store.setListener(this.componentDidMount.bind(this), 'MESSAGES');
+  }
+
+  componentDidMount() {
+    this.setProps({ messages: appStore.chatMessages });
   }
 
   render() {
@@ -21,18 +32,14 @@ export class MessageList extends Block {
 
     let msgList: any = [];
 
-    if (messages.length > 0) {
+    if (messages.length > 0 && appStore.user) {
       msgList = messages.reduce(
         (acc: string[], message: any, index: number) => {
-          if (message.myMsg) {
-            const msgCardR = new MessageRight({
-              message,
-            });
+          if (appStore.user.id !== message.user_id) {
+            const msgCardR = new MessageRight(message);
             acc[index] = msgCardR.getContentAsString();
           } else {
-            const msgCardL = new MessageLeft({
-              message,
-            });
+            const msgCardL = new MessageLeft(message);
             acc[index] = msgCardL.getContentAsString();
           }
 
