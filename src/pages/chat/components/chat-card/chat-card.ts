@@ -5,6 +5,7 @@ import profileWithoutPhotoActive from '../../../../../static/img/chat-without-pf
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { timeFormat } from '../../../../utils/time';
 
 export class ChatCard extends Block {
   constructor(props: Record<string, any>) {
@@ -12,6 +13,10 @@ export class ChatCard extends Block {
   }
 
   render() {
+    if (this.props.last_message) {
+      timeFormat(this.props.last_message.time);
+    }
+
     const tmpl = new Templator(chatCardTempl);
     const str = tmpl.compile({
       cardId: this.props.id,

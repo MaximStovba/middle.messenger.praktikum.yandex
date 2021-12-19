@@ -17,7 +17,7 @@ const deleteChatApi = new DeleteChatAPI();
 const addUserToChatApi = new AddUserToChatAPI();
 const deleteUserFromChatApi = new DeleteUserFromChatAPI();
 const getChatsUsersApi = new GetChatsUsersAPI();
-const getChatTokenApi = new GetChatTokenAPI();
+const getChatsTokenApi = new GetChatTokenAPI();
 
 export class ChatsController {
   public async getChats() {
@@ -76,7 +76,11 @@ export class ChatsController {
             const response = JSON.parse(res.response);
             console.log(response.result.id);
             this.getChats();
-            store.setState({ currentChat: null, currentChatUsers: [], token: null });
+            store.setState({
+              currentChat: null,
+              currentChatUsers: [],
+              token: null,
+            });
           }
         })
         .catch((error) => {
@@ -141,13 +145,12 @@ export class ChatsController {
 
   public async getChatToken(chatId: number) {
     try {
-      getChatTokenApi
+      getChatsTokenApi
         .request(chatId)
         .then((res) => {
           if (res.status === 200) {
             const response = JSON.parse(res.response);
-            console.log(`Токен чата ${chatId} - ${response.token}`);
-            store.setState({ token: response.token});
+            store.setState({ token: response.token });
           }
         })
         .catch((error) => {

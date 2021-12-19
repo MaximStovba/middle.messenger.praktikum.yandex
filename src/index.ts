@@ -16,6 +16,7 @@ import { Err500 } from './pages/500';
 import { AuthController } from './controllers/auth';
 import { ChatsController } from './controllers/chats';
 import { Store } from './utils/store';
+import { WebSocketApp } from './utils/ws';
 
 document.addEventListener('DOMContentLoaded', () => {
   const auth = new AuthController();
@@ -56,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function wsStart() {
-    console.log(
-      `wsStart <USER_ID> ${appStore.user.id}, <CHAT_ID> ${appStore.currentChat}, <TOKEN_VALUE> ${appStore.token}`
-    );
+    if (appStore.token) {
+      new WebSocketApp(appStore.user, appStore.currentChat, appStore.token);
+    }
   }
 });

@@ -15,7 +15,6 @@ function handleChatCardClick(event: Event | any) {
   const targetEl = el?.querySelector('.user-card__avatar');
   const chatId = targetEl.getAttribute('data-id');
 
-  console.log('id выбранного чата = ' + chatId);
   store.setState({ currentChat: chatId });
   chats.getChatsUsers(chatId);
 
