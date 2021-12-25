@@ -1,5 +1,9 @@
 import { Block } from './block';
 import { Route } from './route';
+import { Store } from './store';
+
+const store = new Store();
+const appStore = store.getState();
 
 export class Router {
   routes: Route[];
@@ -34,11 +38,22 @@ export class Router {
       this._onRoute(event.currentTarget.location.pathname);
     }).bind(this);
 
-    this._onRoute(window.location.pathname);
+    if (!appStore.isLogin) {
+      if (window.location.pathname === '/') {
+        this._onRoute(window.location.pathname);
+      } else if (window.location.pathname === '/sign-up') {
+        this._onRoute(window.location.pathname);
+      } else {
+        this._onRoute('/');
+      }
+    } else {
+      this._onRoute(window.location.pathname);
+    }
   }
 
   _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
+
     if (!route) {
       this.go('/404');
       return;
@@ -54,7 +69,17 @@ export class Router {
 
   go(pathname: string) {
     this.history.pushState({}, '', pathname);
-    this._onRoute(pathname);
+    if (!appStore.isLogin) {
+      if (pathname === '/') {
+        this._onRoute(pathname);
+      } else if (pathname === '/sign-up') {
+        this._onRoute(pathname);
+      } else {
+        this._onRoute('/');
+      }
+    } else {
+      this._onRoute(pathname);
+    }
   }
 
   back() {

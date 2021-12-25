@@ -26,7 +26,6 @@ export class AuthController {
           if (res.status === 200) {
             const user = JSON.parse(res.response);
             store.setState({ isLogin: true, user });
-            //console.log(user);
           }
         })
         .catch((error) => {
@@ -51,8 +50,11 @@ export class AuthController {
         .request({ login, password })
         .then((res) => {
           if (res.status === 200) {
-            this.getUser();
-            chats.getChats();
+            this.getUser().then(() => {
+              chats.getChats().then(() => {
+                router.go('/messenger');
+              });
+            });
           }
         })
         .catch((error) => {
@@ -82,9 +84,9 @@ export class AuthController {
         .request({ first_name, second_name, login, email, password, phone })
         .then((res) => {
           if (res.status === 200) {
-            const userId = res.response;
-            console.log(userId);
-            router.go('/');
+            this.logout().then(() => {
+              router.go('/');
+            });
           }
         })
         .catch((error) => {
@@ -100,7 +102,15 @@ export class AuthController {
       logoutApi
         .request()
         .then(() => {
-          store.setState({ isLogin: false, user: {} });
+          store.setState({
+            isLogin: false,
+            user: {},
+            chats: [],
+            currentChatUsers: [],
+            currentChat: null,
+            token: null,
+            chatMessages: [],
+          });
         })
         .catch((error) => {
           console.log(error);

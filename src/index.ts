@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startRouter() {
     if (appStore.isLogin === true) {
-      if (location.pathname === '/') {
+      if (location.pathname === '/' || location.pathname === '/sign-up') {
         router.go('/messenger');
       }
     } else {
