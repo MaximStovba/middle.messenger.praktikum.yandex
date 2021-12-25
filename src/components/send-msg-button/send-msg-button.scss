@@ -1,0 +1,16 @@
+@import "../../pages/vars";
+@import "../../pages/type";
+
+.send-msg-btn {
+  grid-area: msg-btn;
+  border: 0;
+  border-radius: 50%;
+  background: $orange;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 16px;
+  color: $white;
+  cursor: pointer;
+}

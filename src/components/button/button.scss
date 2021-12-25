@@ -1,19 +1,17 @@
 @import "../../pages/vars";
 @import "../../pages/type";
 
-.popup__btn-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .popup__btn {
+  align-items: center;
   margin: 30px auto 0;
   padding: 16px 20px;
   border-width: 0;
   width: 288px;
   background: $dark-blue;
   border-radius: 4px;
+
   @include button-text;
+
   color: $white;
   text-align: center;
   height: 48px;
@@ -26,7 +24,7 @@
 }
 
 .popup__btn-error {
-  margin: 1px 51px 0px;
+  margin: 1px 51px 0;
   font-family: $font-sans;
   font-style: normal;
   font-weight: normal;
@@ -34,7 +32,6 @@
   line-height: 16px;
   text-align: center;
   color: $red;
-  text-align: center;
   visibility: visible;
 }
 

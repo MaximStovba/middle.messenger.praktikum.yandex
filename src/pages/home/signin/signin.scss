@@ -16,12 +16,13 @@
   justify-content: flex-start;
   width: 340px;
   background: $white;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
 
 .signin__title {
   @include heading-4;
+
   margin: 20px 0 20px;
   color: $dark-blue;
   text-align: center;
@@ -29,9 +30,16 @@
 
 .signin__link {
   color: $dark-blue;
+
   @include text-link-1;
+
   margin: 20px 0 25px;
   text-align: center;
+}
+
+.popup__btn-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .popup__btn {

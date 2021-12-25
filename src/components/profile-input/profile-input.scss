@@ -1,4 +1,11 @@
 @import "../../pages/vars";
+@import "../../pages/type";
+
+.profile__input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
 
 .profile__input-title {
   margin: 0;
@@ -14,12 +21,6 @@
   position: absolute;
   left: 0;
   top: 0;
-}
-
-.profile__input {
-  position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
 .profile__text {
@@ -39,9 +40,11 @@
   color: $dark;
   outline: none;
 }
+
 .profile__text::-moz-placeholder {
   color: $dark-grey;
 }
+
 .profile__text::-webkit-input-placeholder {
   color: $dark-grey;
 }
@@ -57,6 +60,6 @@
   opacity: 0;
 }
 
-.profile__text-error_active {
+.popup__text-error_active {
   opacity: 1;
 }
