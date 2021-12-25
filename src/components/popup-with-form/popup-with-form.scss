@@ -27,7 +27,7 @@
 }
 
 .popup-form {
-  background: #eff2f7; /* Светло-голубой */
+  background: $light-blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,21 +41,19 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 340px;
-  background: #fff; /* Белый */
+  background: $white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
 
 .popup-form__title {
   /* Heading 4 */
-  margin: 0;
-  font-family: 'Open Sans';
+  font-family: $font-sans;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   line-height: 24px;
-
   margin: 20px 0 20px;
-  color: #09293a; /* Темно-синий */
+  color: $dark-blue;
   text-align: center;
 }
