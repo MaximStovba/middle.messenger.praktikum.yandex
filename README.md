@@ -18,4 +18,4 @@
 - `npm run start` — запуск версии для разработчика,
 - `npm run build` — сборка
 
-* [Ссылка на pull request](https://github.com/MaximStovba/middle.messenger.praktikum.yandex/pull/3#issue-1039974602)
+* [Ссылка на pull request sprint_3](https://github.com/MaximStovba/middle.messenger.praktikum.yandex/pull/4#issue-1088626830)
