@@ -10,7 +10,9 @@
     "start": "parcel -p 3000 --no-cache",
     "dev": "parcel",
     "build": "parcel build",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r jsdom-global/register --require ts-node/register --require ignore-styles 'src/**/*.spec.ts'"
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r jsdom-global/register --require ts-node/register --require ignore-styles 'src/**/*.spec.ts'",
+    "stylelint": "stylelint '**/*{.css,.scss}'",
+    "eslint": "eslint ./ --ext .ts"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.0-rc.0",
