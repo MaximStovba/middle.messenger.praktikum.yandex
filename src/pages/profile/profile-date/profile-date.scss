@@ -1,5 +1,5 @@
-@import "../../vars";
-@import "../../type";
+@import '../../vars';
+@import '../../type';
 @import '../../../components/profile-input/profile-input.scss';
 @import '../../../components/button/button.scss';
 
@@ -35,15 +35,7 @@
   background: $white;
 }
 
-.profile_btn-back {
-  width: 28px;
-  height: 28px;
-  border: 0;
-  border-radius: 50px;
-  background: $orange;
-}
-
-.profile__photo {
+.profile__avatar {
   align-self: center;
 }
 
@@ -57,6 +49,95 @@
 
 .profile_name {
   @include heading-5;
+
+  margin: 20px 0 20px;
+  color: $dark-blue;
+  text-align: center;
+}
+
+.profile__avatar-container {
+  position: relative;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile__avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__avatar-container:hover .profile__avatar-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.profile__avatar-container:hover .profile__patchavatar-btn {
+  visibility: visible;
+}
+
+.profile__avatar-img {
+  grid-area: avatar;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.profile__change {
+  margin-top: 50px;
+}
+
+.popup {
+  margin: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup-form {
+  background: $light-blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.popup-form__modal {
+  margin: 0 auto;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 340px;
+  background: $white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+
+.popup-form__title {
+  @include heading-4;
 
   margin: 20px 0 20px;
   color: $dark-blue;

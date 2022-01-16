@@ -1,0 +1,48 @@
+@import "../../../../pages/vars";
+@import "../../../../pages/type";
+
+.send-msg-input-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.send-msg__text-error {
+  grid-area: err-upload;
+  margin: 0;
+  text-align: center;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  line-height: 8px;
+  color: $red;
+  opacity: 0;
+}
+
+.popup__text-error_active {
+  opacity: 1;
+}
+
+.send-msg-input {
+  grid-area: msg-input;
+  border: 0;
+  outline: none;
+  padding: 0 20px;
+  background: #eff2f7;
+  border-radius: 30px;
+  font-family: $font-sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 32px;
+  color: $dark;
+}
+
+.send-msg-input::-moz-placeholder {
+  color: $dark-grey;
+}
+
+.send-msg-input::-webkit-input-placeholder {
+  color: $dark-grey;
+}

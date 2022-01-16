@@ -3,13 +3,18 @@
 export const profileTempl = `
 <section class="profile">
   <div class="profile__block-left">
-    <a href="/"><button type='button' class='profile_btn-back'>&lt;</button></a>
+    {{backButton}}
   </div>
   <div class="profile__block-right">
     <form class="profile__container">
-      <div class="profile__photo">
-        <button type='button' class='profile_btn-avatar'></button>
-        <p class='profile_name'>Иван</p>
+      <div class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src={{urlAvatar}} alt="Аватар" class="profile__avatar-img" />
+          <div class="profile__avatar-overlay">
+            {{patchavatarButton}}
+          </div>
+        </div>
+        <p class="profile_name">{{nameAvatar}}</p>
       </div>
       <div class="profile__about">
         {{email}}
@@ -26,5 +31,8 @@ export const profileTempl = `
       </div>
     </form>
   </div>
+
+  {{popupAddAvatar}}
+
 </section>
 `;

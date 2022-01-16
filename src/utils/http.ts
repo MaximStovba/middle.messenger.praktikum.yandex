@@ -7,7 +7,9 @@ enum METHOD {
 
 type Options = {
   method: METHOD;
+  headers?: Record<string, string>;
   data?: any;
+  isFormData?: boolean;
 };
 
 type OptionsWithoutMethod = Omit<Options, 'method'>;
@@ -56,7 +58,7 @@ export class HTTPTransport {
     url: string,
     options: Options = { method: METHOD.GET }
   ): Promise<XMLHttpRequest> {
-    const { method, data } = options;
+    const { headers = {}, method, data, isFormData = false } = options;
 
     return new Promise(function (resolve, reject) {
       if (!method) {
@@ -65,9 +67,15 @@ export class HTTPTransport {
       }
 
       const xhr = new XMLHttpRequest();
+
       const isGet = method === METHOD.GET;
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+      xhr.withCredentials = true;
+
+      Object.keys(headers).forEach((key) => {
+        xhr.setRequestHeader(key, headers[key]);
+      });
 
       xhr.onload = function () {
         resolve(xhr);
@@ -80,7 +88,7 @@ export class HTTPTransport {
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(isFormData ? data : JSON.stringify(data));
       }
     });
   }

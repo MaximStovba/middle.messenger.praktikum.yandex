@@ -1,0 +1,13 @@
+@import '../../../../pages/vars';
+@import '../../../../pages/type';
+
+.header-menu-btn {
+  margin: 15px 0;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  background-image: url(../../../../../static/img/add_person.svg);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
