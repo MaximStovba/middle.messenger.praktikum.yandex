@@ -1,4 +1,5 @@
 import './password.scss';
+import { IPasswordProps } from './types';
 import { Router } from '../../../utils/router';
 import { Templator } from '../../../utils/templator';
 import { passwordTempl } from './password.tmpl';
@@ -73,7 +74,7 @@ const appStore = store.getState();
 const nameAvatar = '';
 const urlAvatar = '';
 
-export class EditPassword extends Block {
+export class EditPassword extends Block<IPasswordProps> {
   constructor() {
     super('div', {
       oldPassword,
@@ -101,10 +102,10 @@ export class EditPassword extends Block {
   render() {
     const tmpl = new Templator(passwordTempl);
     const str = tmpl.compile({
-      oldPassword: this.props.oldPassword.getContentAsString(),
-      newPassword: this.props.newPassword.getContentAsString(),
-      saveButton: this.props.saveButton.getContentAsString(),
-      backButton: this.props.backButton.getContentAsString(),
+      oldPassword: this.props.oldPassword?.getContentAsString(),
+      newPassword: this.props.newPassword?.getContentAsString(),
+      saveButton: this.props.saveButton?.getContentAsString(),
+      backButton: this.props.backButton?.getContentAsString(),
       nameAvatar: this.props.nameAvatar,
       urlAvatar: this.props.urlAvatar,
     });

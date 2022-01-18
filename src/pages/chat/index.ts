@@ -20,6 +20,7 @@ import { ChatsController } from '../../controllers/chats';
 import { UserController } from '../../controllers/user';
 import { Store } from '../../utils/store';
 import { WS_TYPE } from '../../utils/ws';
+import { IChatProps } from './types';
 
 const router = new Router('.root');
 const chats = new ChatsController();
@@ -59,7 +60,7 @@ function handleAddNewUserButtonClick(event: Event) {
       const usersId = users.map((user: any) => user.id);
       const chatId = appStore.currentChat;
 
-      chats.addUserToChat(usersId, chatId);
+      chatId && chats.addUserToChat(usersId, chatId);
     }
   });
 
@@ -204,7 +205,7 @@ const popupAddUser = new PopupWithForm({
   },
 });
 
-export class Chat extends Block {
+export class Chat extends Block<IChatProps> {
   constructor() {
     super('div', {
       chatCardList,
@@ -225,10 +226,12 @@ export class Chat extends Block {
   }
 
   componentDidMount() {
-    this.props.chatCardList.setProps({ chats: appStore.chats });
-    this.props.chatUserList.setProps({
-      users: appStore.currentChatUsers,
-    });
+    appStore.chats &&
+      this.props.chatCardList.setProps({ chats: appStore.chats });
+    appStore.currentChatUsers &&
+      this.props.chatUserList.setProps({
+        users: appStore.currentChatUsers,
+      });
   }
 
   render() {

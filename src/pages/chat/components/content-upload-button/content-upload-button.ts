@@ -3,9 +3,10 @@ import { contentUploadBtnTempl } from './content-upload-button.tmpl';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { IContentUploadBtnProps } from './types';
 
-export class ContentUploadButton extends Block {
-  constructor(props: Record<string, any>) {
+export class ContentUploadButton extends Block<IContentUploadBtnProps> {
+  constructor(props: IContentUploadBtnProps) {
     super('button', props, 'content-upload-btn');
   }
 

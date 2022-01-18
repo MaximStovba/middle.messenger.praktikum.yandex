@@ -1,12 +1,13 @@
-import "./profile-input.scss";
-import { profileInputTempl } from "./profile-input.tmpl";
+import './profile-input.scss';
+import { IProfileInputProps } from './types';
+import { profileInputTempl } from './profile-input.tmpl';
 
-import { Templator } from "../../utils/templator";
-import { Block } from "../../utils/block";
+import { Templator } from '../../utils/templator';
+import { Block } from '../../utils/block';
 
-export class ProfileInput extends Block {
-  constructor(props: Record<string, any>) {
-    super("div", props, "profile__input");
+export class ProfileInput extends Block<IProfileInputProps> {
+  constructor(props: IProfileInputProps) {
+    super('div', props, 'profile__input');
   }
 
   render() {
@@ -20,7 +21,7 @@ export class ProfileInput extends Block {
       id: this.props.id,
       type: this.props.type,
       placeholder: this.props.placeholder,
-      validationMsg: this.props.validationMsg
+      validationMsg: this.props.validationMsg,
     });
     return str;
   }

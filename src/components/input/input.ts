@@ -1,11 +1,12 @@
 import './input.scss';
+import { IInputProps } from './types';
 import { inputTempl } from './input.tmpl';
 
 import { Templator } from '../../utils/templator';
 import { Block } from '../../utils/block';
 
-export class Input extends Block {
-  constructor(props: Record<string, any>) {
+export class Input extends Block<IInputProps> {
+  constructor(props: IInputProps) {
     super('div', props, 'popup__input');
   }
 

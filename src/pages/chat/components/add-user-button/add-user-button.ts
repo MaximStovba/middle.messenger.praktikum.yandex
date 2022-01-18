@@ -3,9 +3,10 @@ import { addUserButtonTempl } from './add-user-button.tmpl';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { IAddUserButtonProps } from './types';
 
-export class AddUserButton extends Block {
-  constructor(props: Record<string, any>) {
+export class AddUserButton extends Block<IAddUserButtonProps> {
+  constructor(props: IAddUserButtonProps) {
     super('button', props, 'header-menu-btn');
   }
 

@@ -4,9 +4,10 @@ import { messageRightTempl } from './message-right.tmpl';
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 import { dateHoursMinutesFormat } from '../../../../utils/time';
+import { IMessageRightProps } from './types';
 
-export class MessageRight extends Block {
-  constructor(props: Record<string, any>) {
+export class MessageRight extends Block<IMessageRightProps> {
+  constructor(props: IMessageRightProps) {
     super('div', props, 'message-right');
   }
 

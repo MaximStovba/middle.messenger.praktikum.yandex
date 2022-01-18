@@ -1,4 +1,5 @@
 import './signin.scss';
+import { ISigninProps } from './types';
 import { Templator } from '../../../utils/templator';
 import { signinTempl } from './signin.tmpl';
 import { Block } from '../../../utils/block';
@@ -49,7 +50,7 @@ const button = new Button({
   },
 });
 
-export class Signin extends Block {
+export class Signin extends Block<ISigninProps> {
   constructor() {
     super(
       'section',

@@ -1,13 +1,14 @@
 import { Block } from './block';
 import { render } from './render';
 import { isEqual } from './isEqual';
+import { IProps } from '../types';
 
 type Property = Record<string, any>;
 
 export class Route {
   private _pathname: string;
   private _blockClass: typeof Block;
-  private _block: Block | null;
+  private _block: Block<IProps> | null;
   private _props: Property;
 
   constructor(pathname: string, view: typeof Block, props: Property) {

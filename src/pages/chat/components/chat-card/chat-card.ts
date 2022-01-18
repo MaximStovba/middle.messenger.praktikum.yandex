@@ -6,9 +6,10 @@ import profileWithoutPhotoActive from '../../../../../static/img/chat-without-pf
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 import { dateHoursMinutesFormat } from '../../../../utils/time';
+import { IChatCardProps } from './types';
 
-export class ChatCard extends Block {
-  constructor(props: Record<string, any>) {
+export class ChatCard extends Block<IChatCardProps> {
+  constructor(props: IChatCardProps) {
     super('div', props, 'chat-user-card');
   }
 

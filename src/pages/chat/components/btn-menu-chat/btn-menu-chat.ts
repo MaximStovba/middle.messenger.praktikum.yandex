@@ -3,9 +3,10 @@ import { btnMenuChatTempl } from './btn-menu-chat.tmpl';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { IBtnMenuChatProps } from './types';
 
-export class BtnMenuChat extends Block {
-  constructor(props: Record<string, any>) {
+export class BtnMenuChat extends Block<IBtnMenuChatProps> {
+  constructor(props: IBtnMenuChatProps) {
     super('button', props, 'btn-menu-chat');
   }
 

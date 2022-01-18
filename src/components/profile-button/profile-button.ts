@@ -1,11 +1,12 @@
 import "./profile-button.scss";
+import { IProfileButtonProps } from './types';
 import { profileBtnTempl } from "./profile-button.tmpl";
 
 import { Templator } from "../../utils/templator";
 import { Block } from "../../utils/block";
 
-export class ProfileButton extends Block {
-  constructor(props: Record<string, any>) {
+export class ProfileButton extends Block<IProfileButtonProps> {
+  constructor(props: IProfileButtonProps) {
     super("button", props, "profile__btn");
   }
 

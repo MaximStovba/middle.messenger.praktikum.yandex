@@ -1,15 +1,9 @@
 import { EventBus } from './event-bus';
 import { v4 as makeUUID } from 'uuid';
+import { IProps } from '../types';
 
-export type Property = Record<string, any>;
 
-export type TMeta = {
-  tagName: string;
-  props: Property;
-  className?: string;
-};
-
-export class Block {
+export class Block<Property extends IProps> {
   static hide() {
     throw new Error('Method not implemented.');
   }
@@ -22,15 +16,19 @@ export class Block {
 
   private _element: HTMLElement;
 
-  private _meta: TMeta;
+  private _meta: {
+    tagName: string;
+    props: Property;
+    className?: string;
+  };
 
   _id: string;
 
-  protected props: any;
+  props: Property;
 
   private eventBus: () => EventBus;
 
-  constructor(tagName = 'div', props = {}, className?: string) {
+  constructor(tagName = 'div', props: Property, className?: string) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
@@ -159,7 +157,7 @@ export class Block {
     return this.element;
   }
 
-  getContentAsString() {
+  getContentAsString(): string {
     return this.element.outerHTML;
   }
 
@@ -180,6 +178,8 @@ export class Block {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop: string, value: unknown) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         target[prop] = value;
 
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);

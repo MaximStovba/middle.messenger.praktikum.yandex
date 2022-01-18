@@ -4,9 +4,10 @@ import profileWithoutPhoto from '../../../../../static/img/profile-without-photo
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { IChatUserBoxProps } from './types';
 
-export class ChatUserBox extends Block {
-  constructor(props: Record<string, any>) {
+export class ChatUserBox extends Block<IChatUserBoxProps> {
+  constructor(props: IChatUserBoxProps) {
     super('li', props, 'chat-user-box');
   }
 

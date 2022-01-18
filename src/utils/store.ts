@@ -1,7 +1,24 @@
 import { EventBus } from './event-bus';
+import { WebSocketApp } from './ws';
 
 interface State {
-  [key: string]: any;
+  [key: string]: unknown;
+  ws?: WebSocketApp;
+  isLogin?: boolean;
+  chats?: [];
+  chatMessages?: [];
+  currentChatUsers?: [];
+  currentChat?: number | null;
+  user?: {
+    first_name?: string;
+    avatar?: string;
+    email?: string;
+    login?: string;
+    second_name?: string;
+    display_name?: string;
+    phone?: string;
+    id?: number;
+  };
 }
 
 const initialState: State = {

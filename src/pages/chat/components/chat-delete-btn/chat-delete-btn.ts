@@ -3,9 +3,10 @@ import { chatDeleteBtnTempl } from './chat-delete-btn.tmpl';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { IChatDeleteBtnProps } from './types';
 
-export class ChatDeleteButton extends Block {
-  constructor(props: Record<string, any>) {
+export class ChatDeleteButton extends Block<IChatDeleteBtnProps> {
+  constructor(props: IChatDeleteBtnProps) {
     super('button', props, 'chat-delete-btn');
   }
 
