@@ -23,10 +23,10 @@ Router.__instance = null;
 
 const router = new Router('.roots');
 router
-  .use('/', Signin)
-  .use('/sign-up', Signup)
-  .use('/404', Err404)
-  .use('/500', Err500);
+  .use('/', <any>Signin)
+  .use('/sign-up', <any>Signup)
+  .use('/404', <any>Err404)
+  .use('/500', <any>Err500);
 router.start();
 
 describe('Test router', () => {

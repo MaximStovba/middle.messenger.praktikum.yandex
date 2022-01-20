@@ -1,5 +1,6 @@
 // ws.ts
 import { ChatsController } from '../controllers/chats';
+import { IEvent, IUser, WSDataType } from '../types';
 import { Store } from './store';
 
 const baseWSUrl = 'wss://ya-praktikum.tech/ws/chats';
@@ -14,11 +15,11 @@ export enum WS_TYPE {
 
 export class WebSocketApp {
   socket: WebSocket;
-  private pingTimerId: any;
+  private pingTimerId: NodeJS.Timer;
   userId: number;
   userName: string;
 
-  constructor(user: any, chatId: number, tokenValue: string) {
+  constructor(user: IUser, chatId: number, tokenValue: string) {
     const url = `${baseWSUrl}/${user.id}/${chatId}/${tokenValue}`;
     this.socket = new WebSocket(url);
     this.userId = user.id;
@@ -71,7 +72,7 @@ export class WebSocketApp {
     });
 
     this.socket.addEventListener('message', (event) => {
-      const data = JSON.parse(event.data);
+      const data: WSDataType & [] = JSON.parse(event.data);
 
       if (data.type === 'message') {
         console.log('Получен message', data.content);
@@ -88,7 +89,7 @@ export class WebSocketApp {
     });
 
     this.socket.addEventListener('error', (event) => {
-      console.log('Ошибка', (<Event | any>event).message);
+      console.log('Ошибка', (<IEvent><unknown>event).message);
     });
   }
 }

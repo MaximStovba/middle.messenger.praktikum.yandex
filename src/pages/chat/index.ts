@@ -21,6 +21,7 @@ import { UserController } from '../../controllers/user';
 import { Store } from '../../utils/store';
 import { WS_TYPE } from '../../utils/ws';
 import { IChatProps } from './types';
+import { IUser } from '../../types';
 
 const router = new Router('.root');
 const chats = new ChatsController();
@@ -57,7 +58,7 @@ function handleAddNewUserButtonClick(event: Event) {
   users.findUser(event).then((res) => {
     if (res?.status === 200) {
       const users = JSON.parse(res.response);
-      const usersId = users.map((user: any) => user.id);
+      const usersId = users.map((user: IUser) => user.id);
       const chatId = appStore.currentChat;
 
       chatId && chats.addUserToChat(usersId, chatId);

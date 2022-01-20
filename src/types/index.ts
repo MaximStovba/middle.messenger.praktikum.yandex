@@ -7,3 +7,17 @@ export interface IProps {
   events?: evtType;
   settings?: Record<string, boolean>;
 }
+
+export type WSDataType = {
+  type: string;
+  content: string;
+};
+
+export interface IEvent {
+  message: string;
+}
+
+export interface IUser {
+  id: number;
+  first_name?: string;
+}

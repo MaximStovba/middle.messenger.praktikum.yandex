@@ -37,13 +37,13 @@ export class Route {
 
   render(route?: Route, _pathname?: string) {
     if (route) {
-      this._block = new route._blockClass();
+      this._block = new route._blockClass('div', {});
       render(route._props.rootQuery, this._block);
       return;
     }
 
     if (!this._block) {
-      this._block = new this._blockClass();
+      this._block = new this._blockClass('div', {});
       render(this._props.rootQuery, this._block);
       return;
     }
