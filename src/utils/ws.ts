@@ -22,8 +22,8 @@ export class WebSocketApp {
   constructor(user: IUser, chatId: number, tokenValue: string) {
     const url = `${baseWSUrl}/${user.id}/${chatId}/${tokenValue}`;
     this.socket = new WebSocket(url);
-    this.userId = user.id;
-    this.userName = user.first_name;
+    this.userId = user.id ? user.id : 0;
+    this.userName = user.first_name ? user.first_name : '';
     this.startListeners();
   }
 
@@ -89,7 +89,7 @@ export class WebSocketApp {
     });
 
     this.socket.addEventListener('error', (event) => {
-      console.log('Ошибка', (<IEvent><unknown>event).message);
+      console.log('Ошибка', (<IEvent>(<unknown>event)).message);
     });
   }
 }

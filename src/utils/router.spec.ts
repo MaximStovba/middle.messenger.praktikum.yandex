@@ -6,6 +6,7 @@ import { Err404 } from '../pages/404';
 import { Err500 } from '../pages/500';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
+import { Block } from './block';
 
 const { window } = new JSDOM(
   `<!doctype html>
@@ -23,10 +24,10 @@ Router.__instance = null;
 
 const router = new Router('.roots');
 router
-  .use('/', <any>Signin)
-  .use('/sign-up', <any>Signup)
-  .use('/404', <any>Err404)
-  .use('/500', <any>Err500);
+  .use('/', <typeof Block>Signin)
+  .use('/sign-up', <typeof Block>Signup)
+  .use('/404', <typeof Block>Err404)
+  .use('/500', <typeof Block>Err500);
 router.start();
 
 describe('Test router', () => {

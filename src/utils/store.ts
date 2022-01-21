@@ -5,6 +5,7 @@ interface State {
   [key: string]: unknown;
   ws?: WebSocketApp;
   isLogin?: boolean;
+  token?: string | null;
   chats?: [];
   chatMessages?: [];
   currentChatUsers?: [];

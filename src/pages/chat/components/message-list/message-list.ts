@@ -26,6 +26,7 @@ export class MessageList extends Block<IMessageListProps> {
   }
 
   componentDidMount() {
+    appStore.chatMessages &&
     this.setProps({ messages: appStore.chatMessages });
   }
 
