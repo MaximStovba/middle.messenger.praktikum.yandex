@@ -1,12 +1,14 @@
 import './chat-card.scss';
 import { chatCardTempl } from './chat-card.tmpl';
-import profileWithoutPhoto from '../../../../../static/img/chat-without-pfoto.svg';
-import profileWithoutPhotoActive from '../../../../../static/img/chat-without-pfoto-active.svg';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
 import { dateHoursMinutesFormat } from '../../../../utils/time';
 import { IChatCardProps } from './types';
+
+const imgUrl =
+  'https://www.pinclipart.com/picdir/big/408-4088995_communication-icon-transparent-transparent-communication-clipart-png-download.png';
+
 
 export class ChatCard extends Block<IChatCardProps> {
   constructor(props: IChatCardProps) {
@@ -24,8 +26,8 @@ export class ChatCard extends Block<IChatCardProps> {
         : '',
       msgNum: this.props.unread_count,
       urlAvatar: this.props.isChatActive
-        ? profileWithoutPhotoActive
-        : profileWithoutPhoto,
+        ? imgUrl
+        : imgUrl,
       delChatButton: this.props.chatDeleteButton.getContentAsString(),
     });
     return str;

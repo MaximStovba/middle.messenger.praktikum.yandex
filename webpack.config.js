@@ -65,7 +65,7 @@ module.exports = {
       filename: 'style-[chunkhash].css',
     }),
     new HtmlWebpackPlugin({
-      template: './static/index.html',
+      template: './src/index.html',
     }),
     new CleanWebpackPlugin(),
   ],
