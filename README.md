@@ -47,4 +47,4 @@ _фото или видео, файлы, сообщать о локации._
 - пользователь добавляется в чат по кнопке в верхнем правом углу чата,
 - пользователь удаляется из чата при клике на аватар пользователя в шапке чата
 
-* [Ссылка на pull request sprint_3](https://github.com/MaximStovba/middle.messenger.praktikum.yandex/pull/4#issue-1088626830)
+* [Ссылка на pull request sprint_4](https://github.com/MaximStovba/middle.messenger.praktikum.yandex/pull/5#issue-1111588463)
