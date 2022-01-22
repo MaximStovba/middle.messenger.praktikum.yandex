@@ -9,4 +9,4 @@ RUN apt-get -y install nodejs
 RUN npm install
 COPY . .
 EXPOSE 3000
-CMD npm run server
+CMD npm install typescript && npm run start

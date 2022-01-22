@@ -8,8 +8,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
-    "server": "nodemon -r esm server.js",
-    "start": "node server.js",
+    "server": "node -r esm server.js",
+    "start": "npm run build && npm run server",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r jsdom-global/register --require ts-node/register --require ignore-styles 'src/**/*.spec.ts'",
     "stylelint": "stylelint '**/*{.css,.scss}'",
     "eslint": "eslint ./ --ext .ts",
