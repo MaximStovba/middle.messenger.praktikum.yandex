@@ -2,9 +2,19 @@
   "extends": "stylelint-config-standard",
   "rules": {
     "color-hex-case": "lower",
-    "at-rule-no-unknown": null
+    "at-rule-no-unknown": null,
+    "selector-no-vendor-prefix": null,
+    "selector-class-pattern": null,
+    "function-url-quotes": null,
+    "alpha-value-notation": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "property-no-vendor-prefix": null,
+    "declaration-colon-newline-after": null,
+    "string-quotes": null,
+    "color-function-notation": null,
+    "shorthand-property-no-redundant-values": null,
+    "font-family-name-quotes": null,
+    "indentation": null
   },
-  "ignoreFiles": [
-    "dist/*"
-  ]
+  "ignoreFiles": ["dist/*"]
 }
