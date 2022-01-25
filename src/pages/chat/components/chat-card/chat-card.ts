@@ -6,9 +6,8 @@ import { Block } from '../../../../utils/block';
 import { dateHoursMinutesFormat } from '../../../../utils/time';
 import { IChatCardProps } from './types';
 
-const imgUrl =
+const profilePhotoUrl =
   'https://www.pinclipart.com/picdir/big/408-4088995_communication-icon-transparent-transparent-communication-clipart-png-download.png';
-
 
 export class ChatCard extends Block<IChatCardProps> {
   constructor(props: IChatCardProps) {
@@ -25,9 +24,7 @@ export class ChatCard extends Block<IChatCardProps> {
         ? dateHoursMinutesFormat(this.props.last_message.time)
         : '',
       msgNum: this.props.unread_count,
-      urlAvatar: this.props.isChatActive
-        ? imgUrl
-        : imgUrl,
+      urlAvatar: this.props.isChatActive ? profilePhotoUrl : profilePhotoUrl,
       delChatButton: this.props.chatDeleteButton.getContentAsString(),
     });
     return str;
