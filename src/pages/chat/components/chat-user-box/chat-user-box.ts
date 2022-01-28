@@ -1,12 +1,16 @@
 import './chat-user-box.scss';
 import { chatUserBoxTempl } from './chat-user-box.tmpl';
-import profileWithoutPhoto from '../../../../../static/img/profile-without-photo.svg';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { IChatUserBoxProps } from './types';
 
-export class ChatUserBox extends Block {
-  constructor(props: Record<string, any>) {
+const profilePhotoUrl =
+  'https://www.pinclipart.com/picdir/big/408-4088995_communication-icon-transparent-transparent-communication-clipart-png-download.png';
+
+
+export class ChatUserBox extends Block<IChatUserBoxProps> {
+  constructor(props: IChatUserBoxProps) {
     super('li', props, 'chat-user-box');
   }
 
@@ -17,7 +21,7 @@ export class ChatUserBox extends Block {
       name: this.props.first_name,
       urlAvatar: this.props.avatar
         ? `https://ya-praktikum.tech/api/v2/resources${this.props.avatar}`
-        : profileWithoutPhoto,
+        : profilePhotoUrl,
       userDeleteButton: this.props.userDeleteButton.getContentAsString(),
     });
     return str;

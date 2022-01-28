@@ -17,6 +17,7 @@ import { AuthController } from './controllers/auth';
 import { ChatsController } from './controllers/chats';
 import { Store } from './utils/store';
 import { WebSocketApp } from './utils/ws';
+import { Block } from './utils/block';
 
 document.addEventListener('DOMContentLoaded', () => {
   const auth = new AuthController();
@@ -28,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
   auth.getUser().then(() => {
     chats.getChats().then(() => {
       router
-        .use('/', Signin)
-        .use('/sign-up', Signup)
-        .use('/settings', Profile)
-        .use('/edit-profile', EditProfile)
-        .use('/edit-password', EditPassword)
-        .use('/messenger', Chat)
-        .use('/404', Err404)
-        .use('/500', Err500);
+        .use('/', <typeof Block>Signin)
+        .use('/sign-up', <typeof Block>Signup)
+        .use('/settings', <typeof Block>Profile)
+        .use('/edit-profile', <typeof Block>EditProfile)
+        .use('/edit-password', <typeof Block>EditPassword)
+        .use('/messenger', <typeof Block>Chat)
+        .use('/404', <typeof Block>Err404)
+        .use('/500', <typeof Block>Err500);
 
       router.start();
     });
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function wsStart() {
-    if (appStore.token) {
+    if (appStore.token && appStore.currentChat && appStore.token && appStore.user) {
       const ws = new WebSocketApp(
         appStore.user,
         appStore.currentChat,

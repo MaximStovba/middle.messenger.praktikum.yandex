@@ -1,4 +1,5 @@
 import './profile-date.scss';
+import { IProfileDateProps } from './types';
 import { Router } from '../../../utils/router';
 import { Templator } from '../../../utils/templator';
 import { profileDateTempl } from './profile-date.tmpl';
@@ -191,7 +192,7 @@ const appStore = store.getState();
 const nameAvatar = '';
 const urlAvatar = '';
 
-export class EditProfile extends Block {
+export class EditProfile extends Block<IProfileDateProps> {
   constructor() {
     super('div', {
       email,
@@ -243,18 +244,18 @@ export class EditProfile extends Block {
   render() {
     const tmpl = new Templator(profileDateTempl);
     const str = tmpl.compile({
-      email: this.props.email.getContentAsString(),
-      login: this.props.login.getContentAsString(),
-      firstName: this.props.firstName.getContentAsString(),
-      secondName: this.props.secondName.getContentAsString(),
-      nickName: this.props.nickName.getContentAsString(),
-      phone: this.props.phone.getContentAsString(),
-      saveButton: this.props.saveButton.getContentAsString(),
-      backButton: this.props.backButton.getContentAsString(),
-      patchavatarButton: this.props.patchavatarButton.getContentAsString(),
+      email: this.props.email?.getContentAsString(),
+      login: this.props.login?.getContentAsString(),
+      firstName: this.props.firstName?.getContentAsString(),
+      secondName: this.props.secondName?.getContentAsString(),
+      nickName: this.props.nickName?.getContentAsString(),
+      phone: this.props.phone?.getContentAsString(),
+      saveButton: this.props.saveButton?.getContentAsString(),
+      backButton: this.props.backButton?.getContentAsString(),
+      patchavatarButton: this.props.patchavatarButton?.getContentAsString(),
       nameAvatar: this.props.nameAvatar,
       urlAvatar: this.props.urlAvatar,
-      popupAddAvatar: this.props.popupAddAvatar.getContentAsString(),
+      popupAddAvatar: this.props.popupAddAvatar?.getContentAsString(),
     });
     return str.firstChild;
   }

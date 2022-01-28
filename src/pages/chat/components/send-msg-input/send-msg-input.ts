@@ -3,9 +3,10 @@ import { sendMsgInputTempl } from './send-msg-input.tmpl';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { ISendMsgInputProps } from './types';
 
-export class SendMsgInput extends Block {
-  constructor(props: Record<string, any>) {
+export class SendMsgInput extends Block<ISendMsgInputProps> {
+  constructor(props: ISendMsgInputProps) {
     super('div', props, 'send-msg-input-block');
   }
 

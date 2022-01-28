@@ -6,6 +6,8 @@ import { ChatsController } from '../../../../controllers/chats';
 import { ChatCard } from '../chat-card/chat-card';
 import { ChatDeleteButton } from '../../../chat/components/chat-delete-btn/chat-delete-btn';
 import { Store } from '../../../../utils/store';
+import { IChatCardListProps } from './types';
+import { IChatCardProps } from '../chat-card/types';
 
 const chats = new ChatsController();
 const store: Store = new Store();
@@ -32,7 +34,7 @@ function handleDeleteChatButtonClick(event: Event | any) {
   });
 }
 
-export class ChatCardList extends Block {
+export class ChatCardList extends Block<IChatCardListProps> {
   constructor() {
     super('div', {
       chats: [],
@@ -43,29 +45,32 @@ export class ChatCardList extends Block {
     const appStore = store.getState();
     const chats = this.props.chats;
 
-    let chatsList: any = [];
+    let chatsList: string[] = [];
 
     if (chats.length > 0) {
-      chatsList = chats.reduce((acc: string[], chat: any, index: number) => {
-        const chatDeleteButton = new ChatDeleteButton({
-          settings: { withInternalID: true },
-          events: {
-            click: handleDeleteChatButtonClick,
-          },
-        });
-        const chatCard = new ChatCard({
-          ...chat,
-          isChatActive: Number(chat.id) === Number(appStore.currentChat),
-          chatDeleteButton,
-          settings: { withInternalID: true },
-          events: {
-            click: handleChatCardClick,
-          },
-        });
-        acc[index] =
-          chatCard.getContentAsString() + '<hr class="chat-separator" />';
-        return acc;
-      }, []);
+      chatsList = chats.reduce(
+        (acc: string[], chat: IChatCardProps, index: number) => {
+          const chatDeleteButton = new ChatDeleteButton({
+            settings: { withInternalID: true },
+            events: {
+              click: handleDeleteChatButtonClick,
+            },
+          });
+          const chatCard = new ChatCard({
+            ...chat,
+            isChatActive: Number(chat.id) === Number(appStore.currentChat),
+            chatDeleteButton,
+            settings: { withInternalID: true },
+            events: {
+              click: handleChatCardClick,
+            },
+          });
+          acc[index] =
+            chatCard.getContentAsString() + '<hr class="chat-separator" />';
+          return acc;
+        },
+        []
+      );
     }
 
     const tmpl = new Templator(chatCardListTempl);

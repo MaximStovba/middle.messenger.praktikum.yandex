@@ -43,8 +43,8 @@ export class AuthController {
       if (!validateData.isFormValid) {
         throw new Error('Ошибка валидации');
       }
-      const login = validateData.inputsValue.login;
-      const password = validateData.inputsValue.password;
+
+      const { login, password } = validateData.inputsValue;
 
       signInApi
         .request({ login, password })
@@ -73,12 +73,8 @@ export class AuthController {
         throw new Error('Ошибка валидации');
       }
 
-      const first_name = validateData.inputsValue.first_name;
-      const second_name = validateData.inputsValue.second_name;
-      const login = validateData.inputsValue.login;
-      const email = validateData.inputsValue.email;
-      const password = validateData.inputsValue.password;
-      const phone = validateData.inputsValue.phone;
+      const { first_name, second_name, login, email, password, phone } =
+        validateData.inputsValue;
 
       signUpApi
         .request({ first_name, second_name, login, email, password, phone })

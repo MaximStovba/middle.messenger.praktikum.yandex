@@ -1,4 +1,5 @@
 import './profile.scss';
+import { IProfileProps } from './types';
 import { Router } from '../../utils/router';
 import { Templator } from '../../utils/templator';
 import { profileTempl } from './profile.tmpl';
@@ -215,7 +216,7 @@ const appStore = store.getState();
 const nameAvatar = '';
 const urlAvatar = '';
 
-export class Profile extends Block {
+export class Profile extends Block<IProfileProps> {
   constructor() {
     super('div', {
       email,
@@ -269,20 +270,20 @@ export class Profile extends Block {
   render() {
     const tmpl = new Templator(profileTempl);
     const str = tmpl.compile({
-      email: this.props.email.getContentAsString(),
-      login: this.props.login.getContentAsString(),
-      firstName: this.props.firstName.getContentAsString(),
-      secondName: this.props.secondName.getContentAsString(),
-      nickName: this.props.nickName.getContentAsString(),
-      phone: this.props.phone.getContentAsString(),
-      editDataButton: this.props.editDataButton.getContentAsString(),
-      editPasswordButton: this.props.editPasswordButton.getContentAsString(),
-      exitButton: this.props.exitButton.getContentAsString(),
-      backButton: this.props.backButton.getContentAsString(),
-      patchavatarButton: this.props.patchavatarButton.getContentAsString(),
+      email: this.props.email?.getContentAsString(),
+      login: this.props.login?.getContentAsString(),
+      firstName: this.props.firstName?.getContentAsString(),
+      secondName: this.props.secondName?.getContentAsString(),
+      nickName: this.props.nickName?.getContentAsString(),
+      phone: this.props.phone?.getContentAsString(),
+      editDataButton: this.props.editDataButton?.getContentAsString(),
+      editPasswordButton: this.props.editPasswordButton?.getContentAsString(),
+      exitButton: this.props.exitButton?.getContentAsString(),
+      backButton: this.props.backButton?.getContentAsString(),
+      patchavatarButton: this.props.patchavatarButton?.getContentAsString(),
       nameAvatar: this.props.nameAvatar,
       urlAvatar: this.props.urlAvatar,
-      popupAddAvatar: this.props.popupAddAvatar.getContentAsString(),
+      popupAddAvatar: this.props.popupAddAvatar?.getContentAsString(),
     });
     return str.firstChild;
   }

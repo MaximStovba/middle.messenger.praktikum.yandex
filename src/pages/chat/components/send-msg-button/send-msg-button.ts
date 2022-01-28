@@ -3,9 +3,10 @@ import { sendMsgBtnTempl } from './send-msg-button.tmpl';
 
 import { Templator } from '../../../../utils/templator';
 import { Block } from '../../../../utils/block';
+import { ISendMsgBtnProps } from './types';
 
-export class SendMsgButton extends Block {
-  constructor(props: Record<string, any>) {
+export class SendMsgButton extends Block<ISendMsgBtnProps> {
+  constructor(props: ISendMsgBtnProps) {
     super('button', props, 'send-msg-btn');
   }
 

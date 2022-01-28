@@ -1,4 +1,5 @@
 import './signup.scss';
+import { ISignupProps } from './types';
 import { Templator } from '../../../utils/templator';
 import { signupTempl } from './signup.tmpl';
 import { Block } from '../../../utils/block';
@@ -105,7 +106,7 @@ const button = new Button({
   },
 });
 
-export class Signup extends Block {
+export class Signup extends Block<ISignupProps> {
   constructor() {
     super(
       'section',

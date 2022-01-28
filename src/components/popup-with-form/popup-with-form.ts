@@ -1,11 +1,12 @@
 import './popup-with-form.scss';
+import { IPopupWithFormProps } from './types';
 import { popupWithFormTempl } from './popup-with-form.tmpl';
 
 import { Templator } from '../../utils/templator';
 import { Block } from '../../utils/block';
 
-export class PopupWithForm extends Block {
-  constructor(props: Record<string, any>) {
+export class PopupWithForm extends Block<IPopupWithFormProps> {
+  constructor(props: IPopupWithFormProps) {
     super('div', props, 'popup');
   }
 

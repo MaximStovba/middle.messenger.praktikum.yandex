@@ -6,6 +6,8 @@ import { ChatUserBox } from '../chat-user-box/chat-user-box';
 import { ChatDeleteButton } from '../../../chat/components/chat-delete-btn/chat-delete-btn';
 import { ChatsController } from '../../../../controllers/chats';
 import { Store } from '../../../../utils/store';
+import { IChatUserListProps } from './types';
+import { IChatUserBoxProps } from '../chat-user-box/types';
 
 const chats = new ChatsController();
 const store: Store = new Store();
@@ -18,16 +20,16 @@ function handleDeleteUserButtonClick(event: Event | any) {
   const chatId = appStore.currentChat;
   const userId = [];
 
-  if (Number(dataId) === Number(appStore.user.id)) {
+  if (Number(dataId) === Number(appStore.user?.id)) {
     console.log('Нельзя удалять себя из чата!');
   } else {
     userId.push(Number(dataId));
 
-    chats.deleteUserFromChat(userId, chatId);
+    chatId && chats.deleteUserFromChat(userId, chatId);
   }
 }
 
-export class ChatUserList extends Block {
+export class ChatUserList extends Block<IChatUserListProps> {
   constructor() {
     super(
       'ul',
@@ -41,23 +43,26 @@ export class ChatUserList extends Block {
   render() {
     const users = this.props.users;
 
-    let usersList: any = [];
+    let usersList: string[] = [];
 
     if (users.length > 0) {
-      usersList = users.reduce((acc: string[], user: any, index: number) => {
-        const userDeleteButton = new ChatDeleteButton({
-          settings: { withInternalID: true },
-          events: {
-            click: handleDeleteUserButtonClick,
-          },
-        });
-        const userCard = new ChatUserBox({
-          ...user,
-          userDeleteButton,
-        });
-        acc[index] = userCard.getContentAsString();
-        return acc;
-      }, []);
+      usersList = users.reduce(
+        (acc: string[], user: IChatUserBoxProps, index: number) => {
+          const userDeleteButton = new ChatDeleteButton({
+            settings: { withInternalID: true },
+            events: {
+              click: handleDeleteUserButtonClick,
+            },
+          });
+          const userCard = new ChatUserBox({
+            ...user,
+            userDeleteButton,
+          });
+          acc[index] = userCard.getContentAsString();
+          return acc;
+        },
+        []
+      );
     }
 
     const tmpl = new Templator(chatUserListTempl);

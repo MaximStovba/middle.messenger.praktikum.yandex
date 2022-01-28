@@ -5,11 +5,13 @@ import { Block } from '../../../../utils/block';
 import { MessageLeft } from '../message-left/message-left';
 import { MessageRight } from '../message-right/message-right';
 import { Store } from '../../../../utils/store';
+import { IMessageListProps } from './types';
+import { IMessageRightProps } from '../message-right/types';
 
 const store: Store = new Store();
 const appStore = store.getState();
 
-export class MessageList extends Block {
+export class MessageList extends Block<IMessageListProps> {
   constructor() {
     super(
       'div',
@@ -24,18 +26,19 @@ export class MessageList extends Block {
   }
 
   componentDidMount() {
+    appStore.chatMessages &&
     this.setProps({ messages: appStore.chatMessages });
   }
 
   render() {
     const messages = this.props.messages;
 
-    let msgList: any = [];
+    let msgList: string[] | [] = [];
 
     if (messages.length > 0 && appStore.user) {
       msgList = messages.reduce(
-        (acc: string[], message: any, index: number) => {
-          if (appStore.user.id !== message.user_id) {
+        (acc: string[], message: IMessageRightProps, index: number) => {
+          if (appStore.user?.id !== message.user_id) {
             const msgCardR = new MessageRight(message);
             acc[index] = msgCardR.getContentAsString();
           } else {
